@@ -1,4 +1,4 @@
-"use client";
+export const dynamicParams = true;
 
 import Model from "@/components/model-viewer/Model";
 
@@ -10,4 +10,8 @@ export default function ModelViewer({ params }: { params: { id: string } }) {
       <Model glbSrc={`/assets/${id}.glb`} />
     </div>
   );
+}
+
+export function generateStaticParams() {
+  return [{ id: "scene-1" }, { id: "scene-2" }];
 }
