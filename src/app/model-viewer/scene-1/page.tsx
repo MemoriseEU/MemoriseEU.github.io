@@ -1,4 +1,8 @@
-import Model from "@/components/model-viewer/Model";
+import dynamic from "next/dynamic";
+
+const Model = dynamic(() => import("@/components/model-viewer/Model"), {
+  loading: () => <p>Loading...</p>,
+});
 
 export default function ModelViewer({ params }: { params: { id: string } }) {
   return (
