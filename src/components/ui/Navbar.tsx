@@ -1,11 +1,16 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function Navbar(): JSX.Element {
   return (
     <nav className="flex items-center justify-between flex-wrap p-2">
       <Link href="/">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
-          <img className="w-auto h-12" src="/cropped-logoOctober-1.png" />
+          <Image
+            alt="Memorise Logo"
+            className="w-auto h-12"
+            src="/cropped-logoOctober-1.png"
+          />
         </div>
       </Link>
       <div className="block lg:hidden">
