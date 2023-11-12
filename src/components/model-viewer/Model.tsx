@@ -1,14 +1,20 @@
 "use client";
 
 import "@google/model-viewer/lib/model-viewer";
-import React, { ReactElement, createRef, useState } from "react";
+import React, {
+  JSXElementConstructor,
+  ReactElement,
+  RefObject,
+  createRef,
+  useMemo,
+  useState,
+} from "react";
 import { Annotations } from "./Annotations";
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "model-viewer": ModelViewerJSX &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+      "model-viewer": ModelViewerJSX;
     }
   }
 }
@@ -28,10 +34,13 @@ interface ModelViewerJSX {
   autoRotate?: boolean;
   cameraControls?: boolean;
   cameraOrbit?: string;
+  cameraTarget?: string;
+  fieldOfView?: string;
   alt?: string;
   sx?: any;
   class?: string;
-  ref?: (HTMLDivElement & React.LegacyRef<HTMLElement>) | undefined;
+  ref?: RefObject<ModelViewerJSX>;
+  children?: ReactElement<any, string | JSXElementConstructor<any>>[];
 }
 
 interface ModelProps {
@@ -53,13 +62,13 @@ const Model = (props: ModelProps) => {
   const annotationClicked = (annotationIndex: number) => {
     let dataset = (hotspotAnnotations[annotationIndex] as ReactElement).props;
     if (ref.current) {
-      ref.current.setAttribute("cameraTarget", dataset["data-target"]);
-      ref.current.setAttribute("cameraOrbit", dataset["data-orbit"]);
-      ref.current.setAttribute("fieldOfView", "45deg");
+      ref.current.cameraTarget = dataset["data-target"];
+      ref.current.cameraOrbit = dataset["data-orbit"];
+      ref.current.fieldOfView = "45deg";
     }
   };
 
-  const ref = createRef<HTMLDivElement>();
+  const ref = createRef<ModelViewerJSX>();
 
   const selectAnnotations = (newValue: number) => {
     let val = newValue % hotspotAnnotations.length;
@@ -70,7 +79,7 @@ const Model = (props: ModelProps) => {
   return (
     <div style={{ width: "100%", height: "100%", position: "relative" }}>
       <model-viewer
-        ref={ref as (HTMLDivElement & React.LegacyRef<HTMLElement>) | undefined}
+        ref={ref}
         src={glbSrc}
         seamless-poster
         environment-image="neutral"

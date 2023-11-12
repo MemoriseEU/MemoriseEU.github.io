@@ -16,7 +16,7 @@ export const Annotations = (props: AnnotationsProps) => {
 
   return (
     <div className="flex justify-center items-center absolute bottom-2 w-full">
-      <div className="flex justify-between w-72">
+      <div className="flex justify-between w-72 bg-gray-200 rounded-full opacity-50">
         <button
           className="rounded-full bg-gray-300 text-white p-1 hover:bg-gray-500"
           onClick={() => {
