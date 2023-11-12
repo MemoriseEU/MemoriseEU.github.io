@@ -9,6 +9,8 @@ export function Navbar(): JSX.Element {
           <Image
             alt="Memorise Logo"
             className="w-auto h-12"
+            width={50}
+            height={50}
             src="/cropped-logoOctober-1.png"
           />
         </div>
@@ -29,9 +31,15 @@ export function Navbar(): JSX.Element {
         <div className="text-sm lg:flex-grow">
           <Link
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-black mr-4"
-            href="model-viewer"
+            href="/model-viewer/scene-1"
           >
-            Model Viewer
+            Scene 1
+          </Link>
+          <Link
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-black mr-4"
+            href="/model-viewer/scene-2"
+          >
+            Scene 2
           </Link>
           {/*  <a
             href="#responsive-header"
