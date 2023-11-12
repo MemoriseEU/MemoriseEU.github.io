@@ -103,20 +103,26 @@ const Model = (props: ModelProps) => {
           });
         })}
       </model-viewer>
-      <Annotations
-        selectedAnnotation={selectedAnnotation}
-        setSelectedAnnotation={selectAnnotations}
-      >
-        {React.cloneElement(
-          React.Children.toArray(children)[selectedAnnotation] as ReactElement,
-          {
-            onClick: () => {
-              annotationClicked(selectedAnnotation);
-            },
-            className: "",
-          }
-        )}
-      </Annotations>
+      {children != null ? (
+        <Annotations
+          selectedAnnotation={selectedAnnotation}
+          setSelectedAnnotation={selectAnnotations}
+        >
+          {React.cloneElement(
+            React.Children.toArray(children)[
+              selectedAnnotation
+            ] as ReactElement,
+            {
+              onClick: () => {
+                annotationClicked(selectedAnnotation);
+              },
+              className: "",
+            }
+          )}
+        </Annotations>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
