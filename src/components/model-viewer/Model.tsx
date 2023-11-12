@@ -1,17 +1,7 @@
 "use client";
 
-import React, {
-  Ref,
-  forwardRef,
-  useRef,
-  createRef,
-  useEffect,
-  useState,
-  ReactElement,
-  ReactNode,
-  ReactHTMLElement,
-} from "react";
 import "@google/model-viewer/lib/model-viewer";
+import React, { ReactElement, createRef, useState } from "react";
 import { Annotations } from "./Annotations";
 
 declare global {
@@ -60,19 +50,21 @@ const Model = (props: ModelProps) => {
 
   const [selectedAnnotation, setSelectedAnnotation] = useState<number>(0);
 
-  useEffect(() => {
-    annotationClicked(selectedAnnotation);
-  }, [selectedAnnotation]);
-
-  console.log(hotspotAnnotations);
+  const annotationClicked = (annotationIndex: number) => {
+    let dataset = (hotspotAnnotations[annotationIndex] as ReactElement).props;
+    if (ref.current) {
+      ref.current.setAttribute("cameraTarget", dataset["data-target"]);
+      ref.current.setAttribute("cameraOrbit", dataset["data-orbit"]);
+      ref.current.setAttribute("fieldOfView", "45deg");
+    }
+  };
 
   const ref = createRef<HTMLDivElement>();
 
-  const annotationClicked = (annotationIndex: number) => {
-    /* let dataset = hotspotAnnotations[annotationIndex].dataset;
-    ref.current.cameraTarget = dataset.target;
-    ref.current.cameraOrbit = dataset.orbit;
-    ref.current.fieldOfView = "45deg"; */
+  const selectAnnotations = (newValue: number) => {
+    let val = newValue % hotspotAnnotations.length;
+    annotationClicked(val);
+    setSelectedAnnotation(val);
   };
 
   return (
@@ -94,12 +86,28 @@ const Model = (props: ModelProps) => {
         alt="3D model"
         class="w-full h-full"
       >
-        {children}
+        {React.Children.toArray(children).map((child, i) => {
+          return React.cloneElement(child as ReactElement, {
+            onClick: () => {
+              annotationClicked(i);
+            },
+          });
+        })}
       </model-viewer>
       <Annotations
         selectedAnnotation={selectedAnnotation}
-        setSelectedAnnotation={setSelectedAnnotation}
-      />
+        setSelectedAnnotation={selectAnnotations}
+      >
+        {React.cloneElement(
+          React.Children.toArray(children)[selectedAnnotation] as ReactElement,
+          {
+            onClick: () => {
+              annotationClicked(selectedAnnotation);
+            },
+            className: "",
+          }
+        )}
+      </Annotations>
     </div>
   );
 };
