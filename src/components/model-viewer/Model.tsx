@@ -66,6 +66,7 @@ const Model = (props: ModelProps) => {
       ref.current.cameraOrbit = dataset["data-orbit"];
       ref.current.fieldOfView = "45deg";
     }
+    setSelectedAnnotation(annotationIndex);
   };
 
   const ref = createRef<ModelViewerJSX>();
@@ -73,7 +74,6 @@ const Model = (props: ModelProps) => {
   const selectAnnotations = (newValue: number) => {
     let val = newValue % hotspotAnnotations.length;
     annotationClicked(val);
-    setSelectedAnnotation(val);
   };
 
   return (
@@ -100,6 +100,7 @@ const Model = (props: ModelProps) => {
             onClick: () => {
               annotationClicked(i);
             },
+            className: `Hotspot ${i === selectedAnnotation ? "active" : ""}`,
           });
         })}
       </model-viewer>
@@ -120,6 +121,23 @@ const Model = (props: ModelProps) => {
             }
           )}
         </Annotations>
+      ) : (
+        <></>
+      )}
+      {children != null ? (
+        <div className="absolute top-14 right-8 annotationPanel rounded-2xl bg-slate-50 p-5">
+          {React.cloneElement(
+            React.Children.toArray(children)[
+              selectedAnnotation
+            ] as ReactElement,
+            {
+              onClick: () => {
+                annotationClicked(selectedAnnotation);
+              },
+              className: "active",
+            }
+          )}
+        </div>
       ) : (
         <></>
       )}

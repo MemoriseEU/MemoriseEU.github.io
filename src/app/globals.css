@@ -54,3 +54,26 @@ main {
   height: max-content;
   transform: translate3d(-50%, -50%, 0);
 }
+
+.hotspotContent {
+  display: none;
+  font-weight: 100;
+}
+
+.active > .hotspotContent {
+  display: block !important;
+}
+
+.annotationPanel {
+  width: 500px;
+}
+
+.annotationPanel {
+  & img {
+    width: 100%;
+  }
+
+  & .HotspotAnnotation {
+    font-weight: bolder;
+  }
+}
