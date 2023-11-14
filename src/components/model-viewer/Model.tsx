@@ -125,7 +125,7 @@ const Model = (props: ModelProps) => {
         <></>
       )}
       {children != null ? (
-        <div className="absolute top-14 right-8 annotationPanel rounded-2xl bg-slate-50 p-5">
+        <div className="absolute top-2 text-sm right-8 annotationPanel rounded-2xl bg-slate-50 p-5">
           {React.cloneElement(
             React.Children.toArray(children)[
               selectedAnnotation
@@ -134,7 +134,7 @@ const Model = (props: ModelProps) => {
               onClick: () => {
                 annotationClicked(selectedAnnotation);
               },
-              className: "active",
+              className: "active Hotspot",
             }
           )}
         </div>

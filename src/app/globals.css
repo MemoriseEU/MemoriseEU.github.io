@@ -65,15 +65,17 @@ main {
 }
 
 .annotationPanel {
-  width: 500px;
+  width: 25%;
 }
 
 .annotationPanel {
+  & .Hotspot {
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    position: relative;
+  }
   & img {
     width: 100%;
-  }
-
-  & .HotspotAnnotation {
-    font-weight: bolder;
   }
 }
