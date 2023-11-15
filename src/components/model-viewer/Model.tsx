@@ -85,13 +85,15 @@ const Model = (props: ModelProps) => {
         environment-image="neutral"
         exposure="1.0"
         //interaction-prompt-threshold="0"
+        interaction-prompt="none"
         shadow-intensity="1"
+        min-camera-orbit="auto auto 0m"
         //ar
         autoplay
         //ar-modes="webxr scene-viewer quick-look"
         //auto-rotate
         camera-controls
-        //camera-orbit="0deg 90deg 0deg 8.37364m"
+        camera-orbit="0deg 90deg 0deg 8.37364m"
         alt="3D model"
         class="w-full h-full"
       >
