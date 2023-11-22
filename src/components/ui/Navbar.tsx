@@ -41,6 +41,12 @@ export function Navbar(): JSX.Element {
           >
             Scene 2
           </Link>
+          <Link
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-black mr-4"
+            href="/model-viewer/scene-3"
+          >
+            Scene 3
+          </Link>
           {/*  <a
             href="#responsive-header"
             className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"

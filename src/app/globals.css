@@ -69,10 +69,6 @@ main {
 }
 
 .annotationPanel {
-  width: 25%;
-}
-
-.annotationPanel {
   & .Hotspot {
     width: 100%;
     max-width: 100%;
