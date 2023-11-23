@@ -152,7 +152,7 @@ const Model = (props: ModelProps) => {
                 }
               )}
             </div>
-            <div className="">
+            <div className="absolute bottom-8 w-full">
               <Annotations
                 selectedAnnotation={selectedAnnotation}
                 setSelectedAnnotation={selectAnnotations}
