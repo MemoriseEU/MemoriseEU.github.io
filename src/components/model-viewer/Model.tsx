@@ -10,6 +10,7 @@ import React, {
   useState,
 } from "react";
 import { Annotations } from "./Annotations";
+import { ThreeJSModel } from "./ThreeJSModel";
 
 declare global {
   namespace JSX {
@@ -32,6 +33,7 @@ interface ModelViewerJSX {
   ar?: boolean;
   arModes?: string;
   autoRotate?: boolean;
+  inputSensitivity?: number;
   cameraControls?: boolean;
   cameraOrbit?: string;
   cameraTarget?: string;
@@ -47,26 +49,19 @@ interface ModelProps {
   glbSrc: string;
   children?: React.ReactNode;
   layout?: "split" | null;
+  annotations?: Array<Record<string, any>>;
 }
 
 const Model = (props: ModelProps) => {
-  const { glbSrc, children, layout } = props;
+  const { glbSrc, children, layout, annotations } = props;
 
-  const hotspotAnnotations = React.Children.toArray(children).filter(
-    (child, i) => {
-      return (child as ReactElement).props.className === "Hotspot";
-    }
-  );
+  const [editor, setEditor] = useState(false);
+
+  const hotspotAnnotations = annotations ?? [];
 
   const [selectedAnnotation, setSelectedAnnotation] = useState<number>(0);
 
   const annotationClicked = (annotationIndex: number) => {
-    let dataset = (hotspotAnnotations[annotationIndex] as ReactElement).props;
-    if (ref.current) {
-      ref.current.cameraTarget = dataset["data-target"];
-      ref.current.cameraOrbit = dataset["data-orbit"];
-      ref.current.fieldOfView = "45deg";
-    }
     setSelectedAnnotation(annotationIndex);
   };
 
@@ -74,9 +69,13 @@ const Model = (props: ModelProps) => {
 
   const selectAnnotations = (newValue: number) => {
     let val = newValue % hotspotAnnotations.length;
+
+    if (val < 0) {
+      val = hotspotAnnotations.length + val;
+    }
+
     annotationClicked(val);
   };
-  console.log(layout);
 
   return (
     <div
@@ -85,96 +84,77 @@ const Model = (props: ModelProps) => {
       }`}
     >
       <div style={{ width: "100%", height: "100%", position: "relative" }}>
-        <model-viewer
-          ref={ref}
-          src={glbSrc}
-          seamless-poster
-          environment-image="neutral"
-          exposure="1.0"
-          //interaction-prompt-threshold="0"
-          interaction-prompt="none"
-          shadow-intensity="1"
-          min-camera-orbit="auto auto 0m"
-          //ar
-          autoplay
-          //ar-modes="webxr scene-viewer quick-look"
-          //auto-rotate
-          camera-controls
-          camera-orbit="0deg 90deg 0deg 8.37364m"
-          alt="3D model"
-          class="w-full h-full"
-        >
-          {React.Children.toArray(children).map((child, i) => {
-            return React.cloneElement(child as ReactElement, {
-              onClick: () => {
-                annotationClicked(i);
-              },
-              className: `Hotspot ${i === selectedAnnotation ? "active" : ""}`,
-            });
-          })}
-        </model-viewer>
-        {children != null && layout !== "split" ? (
+        <ThreeJSModel
+          glbSrc={glbSrc}
+          editor={editor}
+          annotations={hotspotAnnotations}
+          selectedAnnotation={selectedAnnotation}
+        />
+        {hotspotAnnotations != null &&
+        hotspotAnnotations[selectedAnnotation] != null &&
+        layout !== "split" ? (
           <div className="absolute bottom-6 w-full">
             <Annotations
               selectedAnnotation={selectedAnnotation}
               setSelectedAnnotation={selectAnnotations}
             >
-              {React.cloneElement(
-                React.Children.toArray(children)[
-                  selectedAnnotation
-                ] as ReactElement,
-                {
-                  onClick: () => {
-                    annotationClicked(selectedAnnotation);
-                  },
-                  className: "",
-                }
-              )}
+              <div
+                onClick={() => {
+                  annotationClicked(selectedAnnotation);
+                }}
+                key={`Annotation${selectedAnnotation}`}
+              >
+                {hotspotAnnotations[selectedAnnotation].title}
+              </div>
             </Annotations>
           </div>
         ) : (
           <></>
         )}
       </div>
-      <div className="h-full relative pl-5 pr-5">
-        {children != null ? (
-          <>
-            <div className="w-full text-sm right-8 annotationPanel">
-              {React.cloneElement(
-                React.Children.toArray(children)[
-                  selectedAnnotation
-                ] as ReactElement,
-                {
-                  onClick: () => {
-                    annotationClicked(selectedAnnotation);
-                  },
-                  className: "active Hotspot",
-                }
-              )}
-            </div>
-            <div className="">
-              <Annotations
-                selectedAnnotation={selectedAnnotation}
-                setSelectedAnnotation={selectAnnotations}
-              >
-                {React.cloneElement(
-                  React.Children.toArray(children)[
-                    selectedAnnotation
-                  ] as ReactElement,
-                  {
-                    onClick: () => {
+      {layout === "split" && (
+        <div className="h-full relative pl-5 pr-5">
+          <label>Editor</label>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={editor}
+              onChange={(e) => setEditor(!editor)}
+            />
+            <span className="slider round"></span>
+          </label>
+          {hotspotAnnotations != null &&
+          hotspotAnnotations[selectedAnnotation] != null ? (
+            <>
+              <div className="w-full text-sm right-8 annotationPanel">
+                <div className="active Hotspot">
+                  <div>{hotspotAnnotations[selectedAnnotation].title}</div>
+                  <div>
+                    {hotspotAnnotations[selectedAnnotation].description}
+                  </div>
+                </div>
+              </div>
+              <div className="absolute bottom-8 w-full">
+                <Annotations
+                  selectedAnnotation={selectedAnnotation}
+                  setSelectedAnnotation={selectAnnotations}
+                >
+                  <div
+                    onClick={() => {
                       annotationClicked(selectedAnnotation);
-                    },
-                    className: "",
-                  }
-                )}
-              </Annotations>
-            </div>
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
+                    }}
+                    key={`Annotation${selectedAnnotation}`}
+                  >
+                    {hotspotAnnotations[selectedAnnotation].title}
+                  </div>
+                </Annotations>
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+      )}
     </div>
   );
 };

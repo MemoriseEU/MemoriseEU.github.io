@@ -28,7 +28,7 @@ export default function ModelViewer() {
           data-position="0.02610224m 0.01458751m -0.004978945m"
           data-normal="-0.602551m 0.2856147m -0.1405055m"
           data-orbit="-78.89725deg 30.17752deg 0.08451112m"
-          data-target="0.02610223m 0.4145875m -0.004978945m"
+          data-target="0.02610223m 1.4145875m -0.004978945m"
         >
           Treasure
         </button>
