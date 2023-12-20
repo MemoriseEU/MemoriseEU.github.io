@@ -57,12 +57,20 @@ const Model = (props: ModelProps) => {
 
   const [editor, setEditor] = useState(false);
 
-  const hotspotAnnotations = annotations ?? [];
+  const [hotspotAnnotations, setHotspotAnnotations] = useState(
+    annotations ?? []
+  );
 
   const [selectedAnnotation, setSelectedAnnotation] = useState<number>(0);
 
   const annotationClicked = (annotationIndex: number) => {
     setSelectedAnnotation(annotationIndex);
+  };
+
+  const createAnnotation = (annotation: Record<string, any>) => {
+    const newAnnotations = hotspotAnnotations ? [...hotspotAnnotations] : [];
+    newAnnotations.push(annotation);
+    setHotspotAnnotations(newAnnotations);
   };
 
   const ref = createRef<ModelViewerJSX>();
@@ -79,16 +87,17 @@ const Model = (props: ModelProps) => {
 
   return (
     <div
-      className={`h-full w-full ${
-        layout === "split" ? "grid grid-cols-[70%_30%]" : ""
+      className={`w-full max-h-full ${
+        layout === "split" ? "grid grid-cols-[70%_30%] overflow-hidden" : ""
       }`}
     >
-      <div style={{ width: "100%", height: "100%", position: "relative" }}>
+      <div style={{ width: "100%", position: "relative" }}>
         <ThreeJSModel
           glbSrc={glbSrc}
           editor={editor}
           annotations={hotspotAnnotations}
           selectedAnnotation={selectedAnnotation}
+          createAnnotation={createAnnotation}
         />
         {hotspotAnnotations != null &&
         hotspotAnnotations[selectedAnnotation] != null &&
@@ -113,7 +122,7 @@ const Model = (props: ModelProps) => {
         )}
       </div>
       {layout === "split" && (
-        <div className="h-full relative pl-5 pr-5">
+        <div className="relative pl-5 pr-5 overflow-hidden h-full max-h-full min-h-full">
           <label>Editor</label>
           <label className="switch">
             <input
@@ -123,6 +132,21 @@ const Model = (props: ModelProps) => {
             />
             <span className="slider round"></span>
           </label>
+          {editor && (
+            <div
+              style={{
+                width: "100%",
+                maxHeight: "50%",
+                overflow: "hidden",
+                overflowY: "scroll",
+                backgroundColor: "white",
+                padding: "9px",
+                border: "1px solid gray",
+              }}
+            >
+              {JSON.stringify(hotspotAnnotations, null, 2)}
+            </div>
+          )}
           {hotspotAnnotations != null &&
           hotspotAnnotations[selectedAnnotation] != null ? (
             <>

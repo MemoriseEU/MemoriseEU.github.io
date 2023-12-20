@@ -13,30 +13,19 @@ import useKeyboard from "../../utils/useKeyboard";
 import { FPVControls } from "./FirstPersonControls";
 import { Easing, Tween } from "three/examples/jsm/libs/tween.module.js";
 import { Vector3 } from "three/src/Three.js";
-import { AnnotationPrimitive } from "./AnnotationContext";
+import { AnnotationPrimitive } from "./AnnotationPrimitive";
 
 interface ThreeJSModelProps {
   glbSrc: string;
   editor: boolean;
   annotations?: Record<string, any>[];
   selectedAnnotation?: number;
+  createAnnotation?: (annotation: any) => void;
 }
 
 export const ThreeJSModel = (props: ThreeJSModelProps) => {
-  const {
-    glbSrc,
-    editor,
-    annotations: i_annotations,
-    selectedAnnotation,
-  } = props;
-
-  const [annotations, setAnnotations] = useState(i_annotations);
-
-  const createAnnotation = (annotation: Record<string, any>) => {
-    const newAnnotations = annotations ? [...annotations] : [];
-    newAnnotations.push(annotation);
-    setAnnotations(newAnnotations);
-  };
+  const { glbSrc, editor, annotations, selectedAnnotation, createAnnotation } =
+    props;
 
   const controlRef = useRef();
 

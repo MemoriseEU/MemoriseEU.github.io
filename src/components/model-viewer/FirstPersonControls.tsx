@@ -8,6 +8,7 @@ import {
   MeshBasicMaterial,
   BoxGeometry,
   Mesh,
+  SphereGeometry,
 } from "three";
 import { create } from "domain";
 import { distance } from "three/examples/jsm/nodes/Nodes.js";
@@ -32,10 +33,10 @@ export const FPVControls = (props: FPVControlsProps) => {
   const [moveForward, setMoveForward] = useState<boolean>(false);
   const [printPosition, setPrintPosition] = useState<boolean>(false);
 
-  const geometry = new BoxGeometry(1, 1, 1);
-  const material = new MeshBasicMaterial({ color: 0x00ff00 });
+  const geometry = new SphereGeometry(1, 32, 32);
+  const material = new MeshBasicMaterial({ color: 0xffffff });
   const cube = new Mesh(geometry, material);
-  cube.name = "PointerCube";
+  cube.name = "PointerSphere";
   scene.add(cube);
 
   useFrame((_, delta) => {
@@ -58,7 +59,7 @@ export const FPVControls = (props: FPVControlsProps) => {
     const raycaster = new Raycaster(camera.position, vector);
 
     const intersects = raycaster.intersectObjects(
-      scene.children.filter((e) => e.name !== "PointerCube")
+      scene.children.filter((e) => e.name !== "PointerSphere")
     );
 
     let distance = 99999;
