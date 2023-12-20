@@ -1,20 +1,17 @@
-import { useFrame, useThree } from "@react-three/fiber";
-import useKeyboard from "../../utils/useKeyboard";
 import { PointerLockControls } from "@react-three/drei";
-import { RefObject, createRef, useRef, useState } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { RefObject, useState } from "react";
 import {
-  Raycaster,
-  Vector3,
-  MeshBasicMaterial,
-  BoxGeometry,
   Mesh,
+  MeshBasicMaterial,
+  Raycaster,
   SphereGeometry,
+  Vector3,
 } from "three";
-import { create } from "domain";
-import { distance } from "three/examples/jsm/nodes/Nodes.js";
+import useKeyboard from "../../utils/useKeyboard";
 
 interface FPVControlsProps {
-  controlRef: RefObject<unknown>;
+  controlRef: RefObject<any>;
   editor?: boolean;
 }
 
@@ -46,10 +43,15 @@ export const FPVControls = (props: FPVControlsProps) => {
       moveBackward,
       createAnnotation = false;
 
+    // @ts-ignore: type
     keyMap["KeyD"] ? (moveRight = true) : (moveRight = false);
+    // @ts-ignore: type
     keyMap["KeyA"] ? (moveLeft = true) : (moveLeft = false);
+    // @ts-ignore: type
     keyMap["KeyW"] ? (moveForward = true) : (moveForward = false);
+    // @ts-ignore: type
     keyMap["KeyS"] ? (moveBackward = true) : (moveBackward = false);
+    // @ts-ignore: type
     keyMap["KeyP"] ? (createAnnotation = true) : (createAnnotation = false);
 
     let vector = new Vector3(0, 0, -1);

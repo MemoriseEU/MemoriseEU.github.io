@@ -20,12 +20,13 @@ interface ThreeJSModelProps {
   editor: boolean;
   annotations?: Record<string, any>[];
   selectedAnnotation?: number;
-  createAnnotation?: (annotation: any) => void;
+  createAnnotation: (annotation: Record<string, any>) => void;
 }
 
 export const ThreeJSModel = (props: ThreeJSModelProps) => {
-  const { glbSrc, editor, annotations, selectedAnnotation, createAnnotation } =
-    props;
+  const { glbSrc, editor, selectedAnnotation, createAnnotation } = props;
+
+  const annotations = props.annotations ?? [];
 
   const controlRef = useRef();
 
@@ -36,6 +37,7 @@ export const ThreeJSModel = (props: ThreeJSModelProps) => {
         {editor ? (
           <FPVControls controlRef={controlRef} editor={editor} />
         ) : (
+          // @ts-ignore:
           <OrbitControls ref={controlRef} />
         )}
         <AnnotationPrimitive

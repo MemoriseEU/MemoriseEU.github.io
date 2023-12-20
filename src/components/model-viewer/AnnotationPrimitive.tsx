@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { RefObject, Suspense, useEffect, useRef, useState } from "react";
 import { Canvas, extend, useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useGLTF, Html } from "@react-three/drei";
@@ -6,17 +6,22 @@ import { useGLTF, Html } from "@react-three/drei";
 import useKeyboard from "../../utils/useKeyboard";
 import { FPVControls } from "./FirstPersonControls";
 import { Vector3 } from "three/src/Three.js";
+// @ts-ignore:
 import TWEEN from "@tweenjs/tween.js";
 
-export const AnnotationPrimitive = (props) => {
-  const {
-    glbSrc,
-    addAnnotation,
-    annotations,
-    controlRef,
-    editor,
-    selectedAnnotation,
-  } = props;
+interface AnnotationPrimitiveProps {
+  glbSrc: string;
+  addAnnotation: (obj: Record<string, any>) => void;
+  annotations: Record<string, any>[];
+  controlRef: RefObject<any>;
+  editor?: boolean;
+  selectedAnnotation?: number;
+}
+
+export const AnnotationPrimitive = (props: AnnotationPrimitiveProps) => {
+  const { glbSrc, addAnnotation, annotations, controlRef, editor } = props;
+
+  const selectedAnnotation = props.selectedAnnotation ?? 0;
 
   const gltf = useGLTF(glbSrc, true);
 
@@ -95,11 +100,11 @@ export const AnnotationPrimitive = (props) => {
     <primitive
       object={gltf.scene}
       dispose={null}
-      onClick={(e) => {
+      onClick={(e: any) => {
         if (editor) {
           if (e.intersections.length > 0) {
             let sorted = e.intersections.sort(
-              (a, b) => a.distance - b.distance
+              (a: any, b: any) => a.distance - b.distance
             );
             createAnnotation(e.camera.position, sorted[0].point);
           }
@@ -147,7 +152,10 @@ export const AnnotationPrimitive = (props) => {
           </Html>
         );
       })}
-      <Tween />
+      {
+        // @ts-ignore:
+        <Tween />
+      }
     </primitive>
   );
 };

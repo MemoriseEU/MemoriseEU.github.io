@@ -1,7 +1,4 @@
-import { Annotation } from "@/components/model-viewer/Annotation";
 import dynamic from "next/dynamic";
-import Image from "next/image";
-import Link from "next/link";
 
 const Model = dynamic(() => import("@/components/model-viewer/Model"), {
   loading: () => <p>Loading...</p>,
