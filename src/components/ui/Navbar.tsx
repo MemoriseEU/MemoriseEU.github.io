@@ -29,7 +29,7 @@ export function Navbar(): JSX.Element {
       </div> */}
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="text-sm lg:flex-grow">
-          <Link
+          {/* <Link
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-black mr-4"
             href="/model-viewer/scene-1"
           >
@@ -40,18 +40,18 @@ export function Navbar(): JSX.Element {
             href="/model-viewer/scene-2"
           >
             Scene 2
-          </Link>
+          </Link> */}
           <Link
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-black mr-4"
             href="/model-viewer/scene-3"
           >
-            Scene 3
+            Barack 56
           </Link>
           <Link
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-black mr-4"
             href="/model-viewer/scene-4"
           >
-            Scene 4
+            Bernburg
           </Link>
           {/*  <a
             href="#responsive-header"

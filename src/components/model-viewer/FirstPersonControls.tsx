@@ -125,7 +125,11 @@ export const FPVControls = (props: FPVControlsProps) => {
 
   return (
     <>
-      <PointerLockControls ref={controlRef} />
+      <PointerLockControls
+        ref={controlRef}
+        domElement={gl.domElement}
+        selector="#editorCanvas"
+      />
     </>
   );
 };

@@ -1,4 +1,13 @@
-import React, { RefObject, Suspense, useEffect, useRef, useState } from "react";
+import React, {
+  ElementRef,
+  Ref,
+  RefObject,
+  Suspense,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Canvas, extend, useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useGLTF, Html } from "@react-three/drei";
@@ -8,18 +17,30 @@ import { FPVControls } from "./FirstPersonControls";
 import { Vector3 } from "three/src/Three.js";
 // @ts-ignore:
 import TWEEN from "@tweenjs/tween.js";
+import { add } from "three/examples/jsm/libs/tween.module.js";
 
 interface AnnotationPrimitiveProps {
   glbSrc: string;
-  addAnnotation: (obj: Record<string, any>) => void;
+  addAnnotation?: (obj: Record<string, any>) => void;
   annotations: Record<string, any>[];
   controlRef: RefObject<any>;
   editor?: boolean;
   selectedAnnotation?: number;
+  setSelectedAnnotation?: (index: number) => void;
 }
 
-export const AnnotationPrimitive = (props: AnnotationPrimitiveProps) => {
-  const { glbSrc, addAnnotation, annotations, controlRef, editor } = props;
+export const AnnotationPrimitive = forwardRef<
+  ElementRef<any>,
+  AnnotationPrimitiveProps
+>(function AnnotationPrimitive(props, forwardedRef): JSX.Element {
+  const {
+    glbSrc,
+    addAnnotation,
+    annotations,
+    controlRef,
+    editor,
+    setSelectedAnnotation,
+  } = props;
 
   const selectedAnnotation = props.selectedAnnotation ?? 0;
 
@@ -31,16 +52,22 @@ export const AnnotationPrimitive = (props: AnnotationPrimitiveProps) => {
     cameraPosition: Vector3,
     cameraDirection: Vector3
   ) => {
-    addAnnotation({
-      title: "Title",
-      description: "Test",
-      camPos: { x: cameraPosition.x, y: cameraPosition.y, z: cameraPosition.z },
-      lookAt: {
-        x: cameraDirection.x,
-        y: cameraDirection.y,
-        z: cameraDirection.z,
-      },
-    });
+    if (addAnnotation) {
+      addAnnotation({
+        title: "Title",
+        description: "Test",
+        camPos: {
+          x: cameraPosition.x,
+          y: cameraPosition.y,
+          z: cameraPosition.z,
+        },
+        lookAt: {
+          x: cameraDirection.x,
+          y: cameraDirection.y,
+          z: cameraDirection.z,
+        },
+      });
+    }
   };
 
   useEffect(() => {
@@ -55,7 +82,9 @@ export const AnnotationPrimitive = (props: AnnotationPrimitiveProps) => {
     })(selectedAnnotation);
   }, [selectedAnnotation, annotations, camera.position, controlRef]);
 
-  console.log(annotations);
+  useEffect(() => {
+    gl.render(scene, camera);
+  }, [annotations, scene, camera, gl]);
 
   const zoomToPoint = (
     i_camera: Vector3,
@@ -98,14 +127,16 @@ export const AnnotationPrimitive = (props: AnnotationPrimitiveProps) => {
 
   return (
     <primitive
+      ref={forwardedRef}
       object={gltf.scene}
       dispose={null}
       onClick={(e: any) => {
-        if (editor) {
+        if (controlRef.current && editor && controlRef.current.isLocked) {
           if (e.intersections.length > 0) {
             let sorted = e.intersections.sort(
               (a: any, b: any) => a.distance - b.distance
             );
+
             createAnnotation(e.camera.position, sorted[0].point);
           }
         }
@@ -113,7 +144,10 @@ export const AnnotationPrimitive = (props: AnnotationPrimitiveProps) => {
     >
       {annotations.map((a, i) => {
         return (
-          <Html key={i} position={[a.lookAt.x, a.lookAt.y, a.lookAt.z]}>
+          <Html
+            key={`annotation${i}${a.title.replace(" ", "_")}`}
+            position={[a.lookAt.x, a.lookAt.y, a.lookAt.z]}
+          >
             <svg
               height="34"
               width="34"
@@ -129,6 +163,7 @@ export const AnnotationPrimitive = (props: AnnotationPrimitiveProps) => {
                 fill="rgba(0,0,0,.66)"
                 onPointerUp={() => {
                   zoomToPoint(camera.position, controlRef.current.target, a);
+                  if (setSelectedAnnotation) setSelectedAnnotation(i);
                 }}
               />
               <text
@@ -146,7 +181,7 @@ export const AnnotationPrimitive = (props: AnnotationPrimitiveProps) => {
               <div
                 id={"desc_" + i}
                 className="annotationDescription"
-                dangerouslySetInnerHTML={{ __html: a.description }}
+                dangerouslySetInnerHTML={{ __html: a.title }}
               />
             )}
           </Html>
@@ -158,4 +193,4 @@ export const AnnotationPrimitive = (props: AnnotationPrimitiveProps) => {
       }
     </primitive>
   );
-};
+});
