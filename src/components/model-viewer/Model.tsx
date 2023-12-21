@@ -137,6 +137,12 @@ const Model = (props: ModelProps) => {
             <span className="slider round"></span>
           </label>
           {editor && (
+            <div>
+              Click into the scene to add more annotations. <br />
+              Fly via WASD keys and look around via mouse
+            </div>
+          )}
+          {editor && (
             <div
               style={{
                 width: "100%",
