@@ -97,12 +97,16 @@ const Model = (props: ModelProps) => {
           editor={editor}
           annotations={hotspotAnnotations}
           selectedAnnotation={selectedAnnotation}
+          setSelectedAnnotation={setSelectedAnnotation}
           createAnnotation={createAnnotation}
         />
         {hotspotAnnotations != null &&
         hotspotAnnotations[selectedAnnotation] != null &&
         layout !== "split" ? (
-          <div className="absolute bottom-6 w-full">
+          <div
+            className="absolute bottom-6 w-full"
+            onClick={(e) => e.preventDefault()}
+          >
             <Annotations
               selectedAnnotation={selectedAnnotation}
               setSelectedAnnotation={selectAnnotations}
@@ -137,6 +141,7 @@ const Model = (props: ModelProps) => {
               style={{
                 width: "100%",
                 maxHeight: "50%",
+                height: "50%",
                 overflow: "hidden",
                 overflowY: "scroll",
                 backgroundColor: "white",
@@ -144,7 +149,14 @@ const Model = (props: ModelProps) => {
                 border: "1px solid gray",
               }}
             >
-              {JSON.stringify(hotspotAnnotations, null, 2)}
+              <textarea
+                onChange={(e) => {
+                  if (JSON.parse(e.target.value))
+                    setHotspotAnnotations(JSON.parse(e.target.value));
+                }}
+                value={JSON.stringify(hotspotAnnotations, null, 2)}
+                className="w-full h-full"
+              />
             </div>
           )}
           {hotspotAnnotations != null &&

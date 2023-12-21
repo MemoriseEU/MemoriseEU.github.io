@@ -1,45 +1,36 @@
-import React, {
-  Suspense,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  createRef,
-} from "react";
-import { Canvas, extend, useThree, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Html } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Suspense, useRef } from "react";
 
-import useKeyboard from "../../utils/useKeyboard";
-import { FPVControls } from "./FirstPersonControls";
-import { Easing, Tween } from "three/examples/jsm/libs/tween.module.js";
-import { Vector3 } from "three/src/Three.js";
 import { AnnotationPrimitive } from "./AnnotationPrimitive";
+import { FPVControls } from "./FirstPersonControls";
 
 interface ThreeJSModelProps {
   glbSrc: string;
   editor: boolean;
   annotations?: Record<string, any>[];
   selectedAnnotation?: number;
-  createAnnotation: (annotation: Record<string, any>) => void;
+  createAnnotation?: (annotation: Record<string, any>) => void;
+  setSelectedAnnotation?: (index: number) => void;
 }
 
 export const ThreeJSModel = (props: ThreeJSModelProps) => {
-  const { glbSrc, editor, selectedAnnotation, createAnnotation } = props;
+  const {
+    glbSrc,
+    editor,
+    selectedAnnotation,
+    createAnnotation,
+    setSelectedAnnotation,
+  } = props;
 
   const annotations = props.annotations ?? [];
 
   const controlRef = useRef();
 
   return (
-    <Canvas>
+    <Canvas id="editorCanvas">
       <Suspense fallback={null}>
         <ambientLight intensity={1.0} />
-        {editor ? (
-          <FPVControls controlRef={controlRef} editor={editor} />
-        ) : (
-          // @ts-ignore:
-          <OrbitControls ref={controlRef} />
-        )}
         <AnnotationPrimitive
           editor={editor}
           glbSrc={glbSrc}
@@ -47,7 +38,14 @@ export const ThreeJSModel = (props: ThreeJSModelProps) => {
           annotations={annotations}
           controlRef={controlRef}
           selectedAnnotation={selectedAnnotation ?? 0}
+          setSelectedAnnotation={setSelectedAnnotation}
         />
+        {editor ? (
+          <FPVControls controlRef={controlRef} editor={editor} />
+        ) : (
+          // @ts-ignore:
+          <OrbitControls ref={controlRef} />
+        )}
       </Suspense>
     </Canvas>
   );
