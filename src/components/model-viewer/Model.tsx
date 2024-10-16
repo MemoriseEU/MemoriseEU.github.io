@@ -1,6 +1,5 @@
 "use client";
 
-import "@google/model-viewer/lib/model-viewer";
 import React, {
   JSXElementConstructor,
   ReactElement,
