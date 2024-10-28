@@ -72,28 +72,23 @@ export default function Painting() {
     requestAnimationFrame(animateStep);
   };
 
-  const clickHandler = useCallback(
-    (element) => {
-      console.log("HERE", paintingContext?.mode);
-    },
-    [paintingContext?.mode, paintingContext]
-  );
-
   useEffect(() => {
     if (svgRef.current) {
       const circleElements = (svgRef.current as SVGSVGElement).querySelectorAll(
         ".cls-1"
       );
 
-      const clickHandler = (e) => {
+      const clickHandler = (e: Event) => {
         e.stopImmediatePropagation();
         if (
           paintingContext!.mode === "exploration" ||
           paintingContext!.mode === "detail"
         ) {
-          zoomToElement(e.target.id);
-          paintingContext?.updateMode("detail");
-          paintingContext?.updateText("Details of the clicked element.");
+          if (e.target != null) {
+            zoomToElement((e.target as HTMLElement).id);
+            paintingContext?.updateMode("detail");
+            paintingContext?.updateText("Details of the clicked element.");
+          }
         } else if (paintingContext?.mode === "default") {
           paintingContext.updateMode("exploration");
         }
