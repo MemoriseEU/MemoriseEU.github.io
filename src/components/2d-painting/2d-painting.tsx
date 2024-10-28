@@ -9,42 +9,57 @@ export default function Painting() {
   const paintingContext = useContext(PaintingContext);
 
   // Zoom function
-  const zoomToElement = (elementId) => {
-    const svg = svgRef.current.querySelector("svg");
-    const element = document.getElementById(elementId);
+  const zoomToElement = (elementId: string) => {
+    if (svgRef.current != null) {
+      const svg = (svgRef.current as SVGGraphicsElement).querySelector("svg");
+      const element = document.getElementById(elementId) as unknown;
 
-    const bbox = element.getBBox();
-    const padding = 10;
+      if (element != null && svg) {
+        const bbox = (element as SVGGraphicsElement).getBBox();
+        const padding = 10;
 
-    const x = bbox.x - padding;
-    const y = bbox.y - padding;
-    const width = bbox.width + 2 * padding;
-    const height = bbox.height + 2 * padding;
+        const x = bbox.x - padding;
+        const y = bbox.y - padding;
+        const width = bbox.width + 2 * padding;
+        const height = bbox.height + 2 * padding;
 
-    animateViewBox(svg, getViewBoxArray(svg), [x, y, width, height], 500);
+        animateViewBox(svg, getViewBoxArray(svg), [x, y, width, height], 500);
+      }
+    }
   };
 
   const resetView = () => {
-    const svg = svgRef.current.querySelector("svg");
-    const width = svg.getBBox().width;
-    const height = svg.getBBox().height;
-
-    animateViewBox(svg, getViewBoxArray(svg), [0, 0, width, height], 500);
+    if (svgRef.current != null) {
+      const svg = (svgRef.current as SVGGraphicsElement).querySelector("svg");
+      if (svg != null) {
+        const width = svg.getBBox().width;
+        const height = svg.getBBox().height;
+        animateViewBox(svg, getViewBoxArray(svg), [0, 0, width, height], 500);
+      }
+    }
   };
 
   // Helper functions for viewBox animation
-  const getViewBoxArray = (svg) =>
-    svg.getAttribute("viewBox").split(" ").map(Number);
+  const getViewBoxArray = (svg: SVGSVGElement) => {
+    if (svg != null) {
+      return svg.getAttribute("viewBox")!.split(" ").map(Number);
+    }
+  };
 
-  const animateViewBox = (svg, startViewBox, endViewBox, duration) => {
-    let startTime = null;
+  const animateViewBox = (
+    svg: SVGSVGElement,
+    startViewBox: any,
+    endViewBox: any,
+    duration: any
+  ) => {
+    let startTime: number | null = null;
 
-    const animateStep = (timestamp) => {
+    const animateStep = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
 
       const currentViewBox = startViewBox.map(
-        (start, i) => start + (endViewBox[i] - start) * progress
+        (start: number, i: number) => start + (endViewBox[i] - start) * progress
       );
 
       svg.setAttribute("viewBox", currentViewBox.join(" "));
@@ -59,8 +74,10 @@ export default function Painting() {
 
   useEffect(() => {
     if (svgRef.current) {
-      if (paintingContext.mode === "exploration") {
-        const circleElements = svgRef.current.querySelectorAll(".cls-1");
+      if (paintingContext!.mode === "exploration") {
+        const circleElements = (
+          svgRef.current as SVGSVGElement
+        ).querySelectorAll(".cls-1");
 
         if (circleElements) {
           circleElements.forEach((element) => {
