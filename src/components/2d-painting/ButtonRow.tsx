@@ -8,7 +8,7 @@ export default function ButtonRow() {
 
   return (
     <div className="flex justify-center">
-      <div className="flex gap-2 p-2 font-bold">
+      <div className="flex gap-2 p-2">
         {paintingContext?.mode !== "default" && (
           <button
             className="border border-gray-700 bg-red-500 p-1"

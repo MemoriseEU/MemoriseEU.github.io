@@ -79,6 +79,14 @@ export default function MenuBandprops() {
           </div>
         </div>
       );
+    } else {
+      return (
+        <div className="items-center flex justify-center relative">
+          <div className="grid grid-rows-2">
+            <div>{paintingContext?.text}</div>
+          </div>
+        </div>
+      );
     }
   }, [links, paintingContext]);
 
