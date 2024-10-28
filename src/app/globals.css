@@ -149,10 +149,35 @@ input:checked + .slider:before {
   cursor: pointer;
   stroke: #4f4f4f;
   stroke-width: 0.5px;
+  transform-origin: center;
 }
 
 .cls-1:hover {
   stroke-width: 1px;
+}
+
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05); /* slightly bigger */
+  }
+  100% {
+    transform: scale(1); /* back to original size */
+  }
+}
+
+@keyframes fillBreathing {
+  0% {
+    fill: rgba(255, 255, 255, 0.4); /* White */
+  }
+  50% {
+    fill: rgba(255, 255, 255, 0.1); /* Transparent */
+  }
+  100% {
+    fill: rgba(255, 255, 255, 0.4); /* White */
+  }
 }
 
 /* Keyframes for moving elements from left to right and back */
@@ -210,11 +235,15 @@ input:checked + .slider:before {
   }
 }
 
-.cls-1 {
+/* .cls-1 {
   animation: moveLeftRightFront 3s ease-in-out infinite;
+} */
+
+.cls-1 {
+  animation: fillBreathing 3s ease-in-out infinite;
 }
 
-.front {
+/* .front {
   animation: moveLeftRightFront 3s ease-in-out infinite;
 }
 
@@ -229,3 +258,4 @@ input:checked + .slider:before {
 #image6 {
   animation: moveLeftRightFront 3s ease-in-out infinite;
 }
+ */
