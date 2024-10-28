@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import MySVG from "../../../public/assets/people.svg";
 import { PaintingContext } from "./painting.context";
 
@@ -72,32 +72,47 @@ export default function Painting() {
     requestAnimationFrame(animateStep);
   };
 
+  const clickHandler = useCallback(
+    (element) => {
+      console.log("HERE", paintingContext?.mode);
+    },
+    [paintingContext?.mode, paintingContext]
+  );
+
   useEffect(() => {
     if (svgRef.current) {
-      if (paintingContext!.mode === "exploration") {
-        const circleElements = (
-          svgRef.current as SVGSVGElement
-        ).querySelectorAll(".cls-1");
+      const circleElements = (svgRef.current as SVGSVGElement).querySelectorAll(
+        ".cls-1"
+      );
 
+      const clickHandler = (e) => {
+        e.stopImmediatePropagation();
+        if (
+          paintingContext!.mode === "exploration" ||
+          paintingContext!.mode === "detail"
+        ) {
+          zoomToElement(e.target.id);
+          paintingContext?.updateMode("detail");
+          paintingContext?.updateText("Details of the clicked element.");
+        } else if (paintingContext?.mode === "default") {
+          paintingContext.updateMode("exploration");
+        }
+      };
+
+      if (circleElements) {
+        circleElements.forEach((element) => {
+          element.addEventListener("click", clickHandler);
+        });
+      }
+
+      // Cleanup listeners on unmount
+      return () => {
         if (circleElements) {
           circleElements.forEach((element) => {
-            element.addEventListener("click", () => {
-              zoomToElement(element.id);
-              paintingContext?.updateMode("detail");
-              paintingContext?.updateText("Details of the clicked element.");
-            });
+            element.removeEventListener("click", clickHandler);
           });
         }
-
-        // Cleanup listeners on unmount
-        return () => {
-          if (circleElements) {
-            circleElements.forEach((element) => {
-              element.removeEventListener("click", () => {});
-            });
-          }
-        };
-      }
+      };
     }
   }, [paintingContext?.mode]);
 
@@ -114,9 +129,12 @@ export default function Painting() {
           paintingContext?.mode === "default"
             ? "cursor-pointer"
             : "cursor-default"
-        }`}
+        } ${paintingContext?.mode === "composition" ? "" : "animated"}`}
         onClick={() => {
-          if (paintingContext?.mode === "default") {
+          if (
+            paintingContext?.mode === "default" ||
+            paintingContext?.mode === "detail"
+          ) {
             paintingContext?.updateMode("exploration");
             paintingContext?.updateText("Exploration Mode");
           }

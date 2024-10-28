@@ -239,7 +239,7 @@ input:checked + .slider:before {
   animation: moveLeftRightFront 3s ease-in-out infinite;
 } */
 
-.cls-1 {
+.animated .cls-1 {
   animation: fillBreathing 3s ease-in-out infinite;
 }
 
