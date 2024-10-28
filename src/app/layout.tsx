@@ -17,10 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html className={lato.className} lang="en">
-      <body className="grid grid-rows-[auto_1fr] min-h-screen max-h-screen">
-        <Navbar />
-        {children}
-      </body>
+      <body className="grid min-h-screen max-h-screen">{children}</body>
     </html>
   );
 }

@@ -142,3 +142,90 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.cls-1 {
+  fill: transparent;
+  fill-rule: evenodd;
+  cursor: pointer;
+  stroke: #4f4f4f;
+  stroke-width: 0.5px;
+}
+
+.cls-1:hover {
+  stroke-width: 1px;
+}
+
+/* Keyframes for moving elements from left to right and back */
+@keyframes moveLeftRightFront {
+  0% {
+    transform: translateX(0px); /* Start at the original position */
+  }
+  25% {
+    transform: translateX(-1px); /* Move right by 10px */
+  }
+  50% {
+    transform: translateX(0px); /* Move right by 10px */
+  }
+  75% {
+    transform: translateX(1px); /* Move right by 10px */
+  }
+  100% {
+    transform: translateX(0px); /* Return to the original position */
+  }
+}
+
+@keyframes moveLeftRightMid {
+  0% {
+    transform: translateX(0px); /* Start at the original position */
+  }
+  25% {
+    transform: translateX(-0.5px); /* Move right by 10px */
+  }
+  50% {
+    transform: translateX(0px); /* Move right by 10px */
+  }
+  75% {
+    transform: translateX(0.5px); /* Move right by 10px */
+  }
+  100% {
+    transform: translateX(0px); /* Return to the original position */
+  }
+}
+
+@keyframes moveLeftRightBack {
+  0% {
+    transform: translateX(0px); /* Start at the original position */
+  }
+  25% {
+    transform: translateX(-0.2px); /* Move right by 10px */
+  }
+  50% {
+    transform: translateX(0px); /* Move right by 10px */
+  }
+  75% {
+    transform: translateX(0.2px); /* Move right by 10px */
+  }
+  100% {
+    transform: translateX(0px); /* Return to the original position */
+  }
+}
+
+.cls-1 {
+  animation: moveLeftRightFront 3s ease-in-out infinite;
+}
+
+.front {
+  animation: moveLeftRightFront 3s ease-in-out infinite;
+}
+
+.mid {
+  animation: moveLeftRightMid 3s ease-in-out infinite;
+}
+
+.back {
+  animation: moveLeftRightBack 3s ease-in-out infinite;
+}
+
+#image6 {
+  animation: moveLeftRightFront 3s ease-in-out infinite;
+}
