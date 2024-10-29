@@ -1,7 +1,43 @@
 "use client";
 
-import { useContext } from "react";
+import { ReactNode, useContext } from "react";
 import { PaintingContext } from "./painting.context";
+import Image from "next/image";
+
+interface ButtonProps {
+  children: ReactNode;
+  onClick: () => void;
+  imageIndex?: number;
+  color?: "orange" | "red";
+}
+
+const buttonImages = [
+  "/assets/orangeStroke.png",
+  "/assets/orangeStroke2.png",
+  "/assets/orangeStroke3.png",
+];
+
+function Button(props: ButtonProps) {
+  const { children, onClick, imageIndex = 0, color = "orange" } = props;
+
+  const colorTrans = { red: "hue-rotate(316deg)", orange: "none" };
+
+  return (
+    <button
+      className="strokeButton p-1 px-4 rounded-md relative text-[#3d322b]"
+      onClick={onClick}
+    >
+      <Image
+        alt="orange brush smudge"
+        src={buttonImages[imageIndex]}
+        fill={true}
+        className="z-[-1] opacity-75"
+        style={{ filter: colorTrans[color] }}
+      />
+      {children}
+    </button>
+  );
+}
 
 export default function ButtonRow() {
   const paintingContext = useContext(PaintingContext);
@@ -10,8 +46,7 @@ export default function ButtonRow() {
     <div className="flex justify-center">
       <div className="flex gap-2 p-2">
         {paintingContext?.mode !== "default" && (
-          <button
-            className="border border-gray-700 bg-red-500 p-1"
+          <Button
             onClick={() => {
               paintingContext?.updateText("");
               if (paintingContext?.mode === "detail") {
@@ -21,36 +56,37 @@ export default function ButtonRow() {
                 paintingContext?.updateMode("default");
               }
             }}
+            color="red"
           >
             Back
-          </button>
+          </Button>
         )}
 
         {paintingContext?.mode === "default" && (
-          <button
-            className="border border-gray-700 bg-orange-400 p-1"
+          <Button
             onClick={() => {
               paintingContext?.updateText("Exploration Mode");
               paintingContext?.updateMode("exploration");
             }}
+            imageIndex={2}
           >
             Exploration
-          </button>
+          </Button>
         )}
         {paintingContext?.mode === "default" && (
-          <button
-            className="border border-gray-700 bg-orange-400 p-1"
+          <Button
             onClick={() => {
               paintingContext?.updateText("Composition Mode");
               paintingContext?.updateMode("composition");
             }}
+            imageIndex={1}
           >
             Composition
-          </button>
+          </Button>
         )}
         {paintingContext?.mode === "default" && (
-          <button
-            className="border border-gray-700 bg-orange-400 p-1"
+          <Button
+            imageIndex={0}
             onClick={() => {
               paintingContext?.updateText(
                 "This is the long long long about text."
@@ -59,9 +95,33 @@ export default function ButtonRow() {
             }}
           >
             About
-          </button>
+          </Button>
         )}
       </div>
+      <svg
+        className="svg-filters hidden"
+        width="0"
+        height="0"
+        viewBox="0 0 0 0"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+      >
+        <defs>
+          <filter id="noise">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.5"
+              numOctaves="1"
+            />
+            <feColorMatrix
+              type="matrix"
+              values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0"
+            />
+            <feBlend in="SourceGraphic" mode="overlay" />
+            <feComposite in2="SourceAlpha" operator="in" />
+          </filter>
+        </defs>
+      </svg>
     </div>
   );
 }

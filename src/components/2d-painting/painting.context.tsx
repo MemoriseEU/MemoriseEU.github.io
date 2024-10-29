@@ -14,7 +14,8 @@ export interface PaintingContextType {
   mode: Mode | null;
   updateMode: (m: Mode | null) => void;
   text: string | null;
-  updateText: (t: string | null) => void;
+  title: string | null;
+  updateText: (t: string | null, title?: string | null) => void;
   image: string | null;
   updateImage: (i: string | null) => void;
 }
@@ -29,6 +30,7 @@ export function PaintingProvider(props: PaintingProviderProps): JSX.Element {
   const { children } = props;
   const [mode, setMode] = useState<Mode | null>("default");
   const [text, setText] = useState<string | null>(null);
+  const [title, setTitle] = useState<string | null>(null);
   const [image, setImage] = useState<string | null>(null);
 
   const value = useMemo(() => {
@@ -36,16 +38,17 @@ export function PaintingProvider(props: PaintingProviderProps): JSX.Element {
       setMode(mode);
     };
 
-    const updateText = (t: string | null) => {
+    const updateText = (t: string | null, title: string | null = null) => {
       setText(t);
+      setTitle(title);
     };
 
     const updateImage = (i: string | null) => {
       setImage(i);
     };
 
-    return { mode, updateMode, text, updateText, image, updateImage };
-  }, [mode, text, image]);
+    return { mode, updateMode, text, updateText, image, updateImage, title };
+  }, [mode, text, image, title]);
 
   return (
     <PaintingContext.Provider value={value}>

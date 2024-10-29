@@ -23,12 +23,18 @@ html {
 body {
   min-height: 100%;
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
+  /* background-color: #e6be68; */
+  box-shadow: 2px 3px 20px black, 0 0 125px #8f5922 inset;
+  background: #e6be68;
+  /* background: #fffef0; */
+  background-image: url("https://www.transparenttextures.com/patterns/textured-paper.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 main {
@@ -259,3 +265,7 @@ input:checked + .slider:before {
   animation: moveLeftRightFront 3s ease-in-out infinite;
 }
  */
+
+.strokeButton:hover > img {
+  opacity: 100%;
+}

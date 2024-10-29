@@ -39,7 +39,7 @@ export default function MenuBandprops() {
         return (
           <div
             key={`${e.id}-link`}
-            className="items-center flex justify-center relative"
+            className="items-center flex justify-center relative opacity-80 hover:opacity-100"
           >
             <Image
               alt={e.name}
@@ -47,11 +47,15 @@ export default function MenuBandprops() {
               width={0}
               height={0}
               sizes="100vw"
-              style={{ width: "auto", height: "100%" }}
+              style={{
+                width: "auto",
+                height: "100%",
+                clipPath: "inset(4px 4px 4px 4px round 0px)",
+              }}
               className="cursor-pointer"
               onClick={() => {
                 paintingContext.updateMode("movie");
-                paintingContext.updateText(e.name);
+                paintingContext.updateText(e.name, e.link);
                 paintingContext.updateImage(e.image);
               }}
             />
@@ -60,7 +64,7 @@ export default function MenuBandprops() {
       });
     } else if (paintingContext?.mode === "movie") {
       return (
-        <div className="items-center flex justify-center relative">
+        <div className="items-center flex justify-center relative px-8 text-center">
           <div className="grid grid-flow-row grid-cols-2">
             {paintingContext.image && (
               <Image
@@ -72,17 +76,18 @@ export default function MenuBandprops() {
                 style={{ width: "auto", height: "100%" }}
               />
             )}
-            <div className="grid grid-rows-2">
-              <div>{paintingContext.text}</div>
-              <div>This is a longer text explaining the video.</div>
+            <div className="grid grid-rows-[min_content_auto] w-1/2">
+              <div className="mb-3 font-bold">{paintingContext?.title}</div>
+              <div>{paintingContext?.text}</div>
             </div>
           </div>
         </div>
       );
     } else {
       return (
-        <div className="items-center flex justify-center relative">
-          <div className="grid grid-rows-2">
+        <div className="items-center flex justify-center relative px-8 text-center">
+          <div className="grid grid-rows-[min_content_auto] w-1/2">
+            <div className="mb-3 font-bold">{paintingContext?.title}</div>
             <div>{paintingContext?.text}</div>
           </div>
         </div>

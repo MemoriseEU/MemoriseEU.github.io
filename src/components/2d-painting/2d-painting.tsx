@@ -1,8 +1,30 @@
 "use client";
 
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import MySVG from "../../../public/assets/people.svg";
+import explorationData from "./explorationData";
 import { PaintingContext } from "./painting.context";
+
+const pathMapping = [
+  "path34",
+  "path32",
+  "path30",
+  "path14",
+  "path22",
+  "path24",
+  "path26",
+  "path18",
+  "path20",
+  "path16",
+  "path36",
+  "path46",
+  "path40",
+  "path44",
+  "path42",
+  "path38",
+  "path12",
+  "path10",
+];
 
 export default function Painting() {
   const svgRef = useRef(null);
@@ -85,9 +107,16 @@ export default function Painting() {
           paintingContext!.mode === "detail"
         ) {
           if (e.target != null) {
-            zoomToElement((e.target as HTMLElement).id);
+            const clickedID = (e.target as HTMLElement).id;
+            zoomToElement(clickedID);
             paintingContext?.updateMode("detail");
-            paintingContext?.updateText("Details of the clicked element.");
+
+            if (pathMapping.includes(clickedID)) {
+              paintingContext?.updateText(
+                explorationData["inmates"].text,
+                explorationData["inmates"].title
+              );
+            }
           }
         } else if (paintingContext?.mode === "default") {
           paintingContext.updateMode("exploration");
