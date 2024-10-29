@@ -1,7 +1,8 @@
 import { Navbar } from "@/components/ui/Navbar";
 import Image from "next/image";
-import { useContext, useMemo } from "react";
+import { RefObject, useContext, useMemo } from "react";
 import { PaintingContext } from "./painting.context";
+import SplitSvg from "./split-svg";
 
 export default function MenuBandprops() {
   const paintingContext = useContext(PaintingContext);
@@ -39,7 +40,7 @@ export default function MenuBandprops() {
         return (
           <div
             key={`${e.id}-link`}
-            className="items-center flex justify-center relative opacity-80 hover:opacity-100"
+            className="items-center flex justify-center relative"
           >
             <Image
               alt={e.name}
@@ -52,7 +53,7 @@ export default function MenuBandprops() {
                 height: "100%",
                 clipPath: "inset(4px 4px 4px 4px round 0px)",
               }}
-              className="cursor-pointer"
+              className="cursor-pointer opacity-80 hover:opacity-100"
               onClick={() => {
                 paintingContext.updateMode("movie");
                 paintingContext.updateText(e.name, e.link);
@@ -83,6 +84,36 @@ export default function MenuBandprops() {
           </div>
         </div>
       );
+    } else if (paintingContext?.mode === "composition") {
+      const layers = paintingContext.compositionLayers;
+      return Object.keys(layers).map((k, i) => {
+        const element = layers[k];
+        return (
+          <div
+            className={"flex justify-center h-full overflow-hidden"}
+            key={`splittedSVG-${i}-wrapper`}
+            onClick={(e) => {
+              const newLayers = { ...layers };
+              newLayers[k] = { ...element, visible: !element.visible };
+              paintingContext.updateCompositionLayers(newLayers);
+            }}
+          >
+            <div
+              className={`w-fit cursor-pointer ${
+                element.visible ? "opacity-100" : "opacity-50"
+              }`}
+            >
+              <SplitSvg
+                key={`splittedSVG-${i}`}
+                svgContainerRef={
+                  paintingContext.svgRef as RefObject<HTMLDivElement>
+                }
+                layerID={element.element}
+              />
+            </div>
+          </div>
+        );
+      });
     } else {
       return (
         <div className="items-center flex justify-center relative px-8 text-center">

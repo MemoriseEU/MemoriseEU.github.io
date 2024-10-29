@@ -1,16 +1,32 @@
 "use client";
 
 import Painting from "@/components/2d-painting/2d-painting";
-import { useContext } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import MovieViewer from "./MovieViewer";
 import { PaintingContext } from "./painting.context";
+import CompositionPainting from "./CompositionPainting";
 
 export default function MainContent() {
   const paintingContext = useContext(PaintingContext);
 
-  return (
-    <div className="size-full">
-      {paintingContext?.mode === "movie" ? <MovieViewer /> : <Painting />}
-    </div>
-  );
+  useEffect(() => {
+    if (paintingContext?.mode === "default") {
+      paintingContext.updateCompositionLayers({});
+    }
+  }, [paintingContext?.mode]);
+
+  const content = useMemo(() => {
+    switch (paintingContext?.mode) {
+      case "movie":
+        return <MovieViewer />;
+      case "exploration":
+        return <Painting />;
+      case "composition":
+        return <CompositionPainting />;
+      default:
+        return <Painting />;
+    }
+  }, [paintingContext?.mode]);
+
+  return <div className="size-full">{content}</div>;
 }

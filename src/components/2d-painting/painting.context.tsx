@@ -1,5 +1,5 @@
 import { assert } from "@stefanprobst/assert";
-import type { ReactNode } from "react";
+import type { ReactNode, Ref } from "react";
 import { createContext, useContext, useMemo, useState } from "react";
 
 export type Mode =
@@ -18,6 +18,10 @@ export interface PaintingContextType {
   updateText: (t: string | null, title?: string | null) => void;
   image: string | null;
   updateImage: (i: string | null) => void;
+  compositionLayers: Record<string, any>;
+  updateCompositionLayers: (cL: Record<string, any>) => void;
+  svgRef: Ref<HTMLElement>;
+  updateSVGRef: (ref: Ref<HTMLElement>) => void;
 }
 
 interface PaintingProviderProps {
@@ -32,6 +36,10 @@ export function PaintingProvider(props: PaintingProviderProps): JSX.Element {
   const [text, setText] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [image, setImage] = useState<string | null>(null);
+  const [svgRef, setSVGRef] = useState<Ref<HTMLElement> | null>(null);
+  const [compositionLayers, setCompositionLayers] = useState<
+    Record<string, any>
+  >({});
 
   const value = useMemo(() => {
     const updateMode = (mode: Mode | null) => {
@@ -47,8 +55,28 @@ export function PaintingProvider(props: PaintingProviderProps): JSX.Element {
       setImage(i);
     };
 
-    return { mode, updateMode, text, updateText, image, updateImage, title };
-  }, [mode, text, image, title]);
+    const updateSVGRef = (ref: Ref<HTMLElement> | null) => {
+      setSVGRef(ref);
+    };
+
+    const updateCompositionLayers = (cL: Record<string, any>) => {
+      setCompositionLayers(cL);
+    };
+
+    return {
+      mode,
+      updateMode,
+      text,
+      updateText,
+      image,
+      updateImage,
+      title,
+      compositionLayers,
+      updateCompositionLayers,
+      svgRef,
+      updateSVGRef,
+    };
+  }, [mode, text, image, title, compositionLayers, svgRef]);
 
   return (
     <PaintingContext.Provider value={value}>
