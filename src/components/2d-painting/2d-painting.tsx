@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef } from "react";
 import MySVG from "../../../public/assets/people.svg";
 import explorationData from "./explorationData";
 import { PaintingContext } from "./painting.context";
+import shortid from "shortid";
 
 const pathMapping = [
   "path34",
@@ -38,7 +39,7 @@ export default function Painting() {
 
       if (element != null && svg) {
         const bbox = (element as SVGGraphicsElement).getBBox();
-        const padding = 10;
+        const padding = 35;
 
         const x = bbox.x - padding;
         const y = bbox.y - padding;
@@ -146,8 +147,13 @@ export default function Painting() {
     }
   }, [paintingContext?.mode]);
 
+  const getId = () => {
+    const id = shortid.generate();
+    return id;
+  };
+
   return (
-    <div ref={svgRef} className="size-full flex justify-center p-2">
+    <div ref={svgRef} className="size-full flex p-2 justify-center resize-none">
       <MySVG
         className={`h-full w-auto ${
           paintingContext?.mode === "default"
@@ -160,10 +166,19 @@ export default function Painting() {
             paintingContext?.mode === "detail"
           ) {
             paintingContext?.updateMode("exploration");
-            paintingContext?.updateText("Exploration Mode");
+            paintingContext?.updateText(
+              "Click on one of the shining elements in the painting to find out more about them!",
+              "Exploration Mode"
+            );
           }
         }}
       />
+      {paintingContext?.mode === "detail" && (
+        <div
+          key={`pointer-${getId()}`}
+          className="absolute h-[2px] w-1/2 top-1/2 z-50 translate-x-[200%] reveal"
+        ></div>
+      )}
     </div>
   );
 }

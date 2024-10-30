@@ -24,14 +24,14 @@ function Button(props: ButtonProps) {
 
   return (
     <button
-      className="strokeButton p-1 px-4 rounded-md relative text-[#3d322b]"
+      className="strokeButton p-1 px-4 rounded-md relative text-[#3d322b] stroke-animation"
       onClick={onClick}
     >
       <Image
         alt="orange brush smudge"
         src={buttonImages[imageIndex]}
         fill={true}
-        className="z-[-1] opacity-75"
+        className="z-[-1]"
         style={{ filter: colorTrans[color] }}
       />
       {children}
@@ -43,15 +43,18 @@ export default function ButtonRow() {
   const paintingContext = useContext(PaintingContext);
 
   return (
-    <div className="flex justify-center">
-      <div className="flex gap-2 p-2">
+    <div className="flex justify-center items-center h-full w-full">
+      <div className="flex gap-2 p-2 flex-row">
         {paintingContext?.mode !== "default" && (
           <Button
             onClick={() => {
               paintingContext?.updateText("");
               if (paintingContext?.mode === "detail") {
                 paintingContext?.updateMode("exploration");
-                paintingContext?.updateText("Exploration Mode");
+                paintingContext?.updateText(
+                  "Click on one of the shining elements in the painting to find out more about them!",
+                  "Exploration Mode"
+                );
               } else {
                 paintingContext?.updateMode("default");
               }
@@ -65,7 +68,10 @@ export default function ButtonRow() {
         {paintingContext?.mode === "default" && (
           <Button
             onClick={() => {
-              paintingContext?.updateText("Exploration Mode");
+              paintingContext?.updateText(
+                "Click on one of the shining elements in the painting to find out more about them!",
+                "Exploration Mode"
+              );
               paintingContext?.updateMode("exploration");
             }}
             imageIndex={2}
@@ -76,7 +82,10 @@ export default function ButtonRow() {
         {paintingContext?.mode === "default" && (
           <Button
             onClick={() => {
-              paintingContext?.updateText("Composition Mode");
+              paintingContext?.updateText(
+                "Click on the different layers of the painting to hide or show them and experience how they effect the painting!",
+                "Composition Mode"
+              );
               paintingContext?.updateMode("composition");
             }}
             imageIndex={1}

@@ -35,15 +35,18 @@ export default function CompositionPainting() {
           const contextLayers = paintingContext?.compositionLayers ?? {};
           layers.forEach((l) => {
             if (Object.keys(contextLayers).includes(l.id)) {
-              l.setAttribute(
+              /* l.setAttribute(
                 "visibility",
                 contextLayers[l.id].visible ? "visible" : "hidden"
-              );
+              ); */
+              if (contextLayers[l.id].visible) {
+                l.classList.remove("m-fadeOut");
+                l.classList.add("m-fadeIn");
+              } else {
+                l.classList.remove("m-fadeIn");
+                l.classList.add("m-fadeOut");
+              }
             }
-            /* paintingLayers[l.id as string] = {
-              element: l.id,
-              visible: false,
-            }; */
           });
         }
       }
@@ -51,7 +54,7 @@ export default function CompositionPainting() {
   }, [paintingContext?.mode, paintingContext?.compositionLayers]);
 
   return (
-    <div ref={svgRef} className="size-full flex justify-center p-2">
+    <div ref={svgRef} className="size-full flex p-2 justify-center m-fadeIn">
       <MySVG className={`h-full w-auto`} />
       {/* <SplitSvg /> */}
     </div>

@@ -269,3 +269,133 @@ input:checked + .slider:before {
 .strokeButton:hover > img {
   opacity: 100%;
 }
+
+.stroke-animation {
+  /* -webkit-animation: brush 2s 1 forwards;
+  animation: brush 2s 1 forwards; */
+  /* -webkit-animation: brushAnim 6s 0s 1 backwards reverse;
+  -moz-animation: brushAnim 6s 0s 1 backwards reverse;
+  -o-animation: brushAnim 6s 0s 1 backwards reverse;
+  animation: brushAnim 6s 0s 1 backwards reverse; */
+
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: grow-left cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.5s forwards;
+  animation-delay: 0s;
+
+  /* opacity: 0;
+  animation: fade-in-right ease 1.5s forwards; */
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes grow-left {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@-webkit-keyframes brushAnim {
+  0% {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  100% {
+    -webkit-mask-position: 295px 0px;
+    mask-position: 295px 0px;
+  }
+}
+
+@keyframes brushAnim {
+  0% {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  100% {
+    -webkit-mask-position: 295px 0px;
+    mask-position: 295px 0px;
+  }
+}
+
+@-webkit-keyframes mystroke {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes mystroke {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.reveal {
+  -webkit-animation: dude 1.5s 1 forwards;
+  animation: dude 1.5s 1 forwards;
+  background: rgb(224, 160, 67);
+  background: linear-gradient(
+    90deg,
+    rgba(8, 8, 9, 0) 0%,
+    rgba(223, 164, 76, 1) 11%,
+    rgba(223, 164, 76, 1) 100%
+  );
+}
+
+.border-myorange {
+  border: 2px solid;
+  border-image-slice: 1;
+  border-width: 2px;
+  border-right: 0;
+  border-image-source: linear-gradient(
+    180deg,
+    rgba(8, 8, 9, 0) 0%,
+    rgb(223, 164, 76) 11%,
+    rgba(223, 164, 76, 1) 89%,
+    rgba(224, 160, 67, 0) 100%
+  );
+}
+
+@-webkit-keyframes dude {
+  0% {
+    transform: translateX(200%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+@keyframes dude {
+  0% {
+    transform: translateX(200%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+.m-fadeOut {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 700ms, opacity 700ms;
+}
+.m-fadeIn {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 700ms;
+}

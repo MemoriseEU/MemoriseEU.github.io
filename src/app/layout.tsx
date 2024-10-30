@@ -17,7 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html className={lato.className} lang="en">
-      <body className="grid min-h-screen max-h-screen">{children}</body>
+      <body className="grid min-h-screen max-h-screen max-w-screen min-w-screen">
+        {children}
+      </body>
     </html>
   );
 }

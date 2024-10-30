@@ -64,7 +64,7 @@ const SplitSvg = (props: SplitSVGProps) => {
     const svgMarkup = new XMLSerializer().serializeToString(newSvg);
     return (
       <div
-        className="h-full w-fit bg-white"
+        className="h-full w-fit bg-[#ffffff17]"
         key={index}
         dangerouslySetInnerHTML={{ __html: svgMarkup }}
       />

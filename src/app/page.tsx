@@ -7,12 +7,14 @@ import { PaintingProvider } from "@/components/2d-painting/painting.context";
 
 export default function Home() {
   return (
-    <div className="size-full grid grid-rows-[1fr_50px_200px] max-h-full">
-      <PaintingProvider>
-        <MainContent />
-        <ButtonRow />
+    <PaintingProvider>
+      <div className="grid h-full w-full grid-flow-col grid-cols-[75%,25%] p-5">
+        <div className="h-full grid grid-rows-[60px_1fr] relative overflow-hidden">
+          <ButtonRow />
+          <MainContent />
+        </div>
         <MenuBand />
-      </PaintingProvider>
-    </div>
+      </div>
+    </PaintingProvider>
   );
 }

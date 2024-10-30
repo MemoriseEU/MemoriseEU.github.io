@@ -28,5 +28,5 @@ export default function MainContent() {
     }
   }, [paintingContext?.mode]);
 
-  return <div className="size-full">{content}</div>;
+  return <div className="h-full">{content}</div>;
 }
