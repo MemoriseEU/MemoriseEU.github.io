@@ -27,6 +27,16 @@ const pathMapping = [
   "path10",
 ];
 
+const pathStoryMapping = {
+  kitchen: "path30",
+  fences: "path14",
+  food: "path10",
+  watchtower: "path38",
+  guards: "path20",
+  barracks: "path34",
+  inmates: "path26",
+} as Record<string, string>;
+
 export default function Painting() {
   const svgRef = useRef(null);
   const paintingContext = useContext(PaintingContext);
@@ -144,8 +154,13 @@ export default function Painting() {
   useEffect(() => {
     if (paintingContext?.mode === "exploration") {
       resetView();
+    } else if (
+      paintingContext?.mode === "story" &&
+      paintingContext?.storyElement != null
+    ) {
+      zoomToElement(pathStoryMapping[paintingContext?.storyElement as string]);
     }
-  }, [paintingContext?.mode]);
+  }, [paintingContext?.storyElement, paintingContext?.mode]);
 
   const getId = () => {
     const id = shortid.generate();
@@ -173,12 +188,14 @@ export default function Painting() {
           }
         }}
       />
-      {paintingContext?.mode === "detail" && (
-        <div
-          key={`pointer-${getId()}`}
-          className="absolute h-[2px] w-1/2 top-1/2 z-50 translate-x-[200%] reveal"
-        ></div>
-      )}
+      {paintingContext?.mode === "detail" ||
+        (paintingContext?.mode === "story" &&
+          paintingContext?.storyElement != null && (
+            <div
+              key={`pointer-${getId()}`}
+              className="absolute h-[2px] w-1/2 top-1/2 z-50 translate-x-[200%] reveal"
+            ></div>
+          ))}
     </div>
   );
 }

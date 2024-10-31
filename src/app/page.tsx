@@ -8,7 +8,7 @@ import { PaintingProvider } from "@/components/2d-painting/painting.context";
 export default function Home() {
   return (
     <PaintingProvider>
-      <div className="grid h-full w-full grid-flow-col grid-cols-[75%,25%] p-5">
+      <div className="grid h-full max-h-full w-full grid-flow-col grid-cols-[75%,25%] grid-rows-[1fr]">
         <div className="h-full grid grid-rows-[60px_1fr] relative overflow-hidden">
           <ButtonRow />
           <MainContent />

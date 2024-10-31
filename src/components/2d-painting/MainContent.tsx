@@ -20,6 +20,7 @@ export default function MainContent() {
       case "movie":
         return <MovieViewer />;
       case "exploration":
+      case "story":
         return <Painting />;
       case "composition":
         return <CompositionPainting />;

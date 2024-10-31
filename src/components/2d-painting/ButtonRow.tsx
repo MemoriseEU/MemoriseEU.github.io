@@ -4,23 +4,27 @@ import { ReactNode, useContext } from "react";
 import { PaintingContext } from "./painting.context";
 import Image from "next/image";
 
-interface ButtonProps {
+export interface ButtonProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   imageIndex?: number;
-  color?: "orange" | "red";
+  color?: "orange" | "red" | "blue";
 }
 
-const buttonImages = [
+export const buttonImages = [
   "/assets/orangeStroke.png",
   "/assets/orangeStroke2.png",
   "/assets/orangeStroke3.png",
 ];
 
-function Button(props: ButtonProps) {
+export function Button(props: ButtonProps) {
   const { children, onClick, imageIndex = 0, color = "orange" } = props;
 
-  const colorTrans = { red: "hue-rotate(316deg)", orange: "none" };
+  const colorTrans = {
+    red: "hue-rotate(316deg)",
+    orange: "none",
+    blue: "hue-rotate(180deg)",
+  };
 
   return (
     <button
@@ -44,7 +48,7 @@ export default function ButtonRow() {
 
   return (
     <div className="flex justify-center items-center h-full w-full">
-      <div className="flex gap-2 p-2 flex-row">
+      <div className="flex gap-6 p-2 flex-row">
         {paintingContext?.mode !== "default" && (
           <Button
             onClick={() => {
@@ -95,10 +99,22 @@ export default function ButtonRow() {
         )}
         {paintingContext?.mode === "default" && (
           <Button
+            onClick={() => {
+              paintingContext?.updateText("Scroll!", "Story Mode");
+              paintingContext?.updateMode("story");
+            }}
+            imageIndex={1}
+          >
+            Story
+          </Button>
+        )}
+        {paintingContext?.mode === "default" && (
+          <Button
             imageIndex={0}
             onClick={() => {
               paintingContext?.updateText(
-                "This is the long long long about text."
+                "The interactive prisoner art explorer allows you to inspect details in Ervin Abadi‘s painting Bergen-Belsen View from Afar. You can choose between two modes. The compositional mode enables you to examine the different layers and helps to understand the spatial composition of the painting and the visual elements it contains. In the explorative mode you can touch certain elements of the painting and retrieve related information. Particular figures and objects refer to aspects of everyday life in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive. In addition, short digital videos explain other aspects of life and suffering in the Bergen-Belsen concentration camp in relation to prisoner art. Short digital videos provide a compelling way to communicate history by transforming sources like paintings, diaries, and letters into accessible, engaging content. This approach not only deepens engagement with the past but also ensures that complex narratives are presented in ways that resonate with today’s digitally-driven world, particularly for younger, digital-native generations.",
+                "About"
               );
               paintingContext?.updateMode("about");
             }}

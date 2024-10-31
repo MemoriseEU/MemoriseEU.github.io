@@ -8,6 +8,7 @@ export type Mode =
   | "about"
   | "detail"
   | "default"
+  | "story"
   | "movie";
 
 export interface PaintingContextType {
@@ -22,6 +23,8 @@ export interface PaintingContextType {
   updateCompositionLayers: (cL: Record<string, any>) => void;
   svgRef: Ref<HTMLElement>;
   updateSVGRef: (ref: Ref<HTMLElement>) => void;
+  storyElement: string | null;
+  updateStoryElement: (el: string | null) => void;
 }
 
 interface PaintingProviderProps {
@@ -36,6 +39,7 @@ export function PaintingProvider(props: PaintingProviderProps): JSX.Element {
   const [text, setText] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [image, setImage] = useState<string | null>(null);
+  const [storyElement, setStoryElement] = useState<string | null>(null);
   const [svgRef, setSVGRef] = useState<Ref<HTMLElement> | null>(null);
   const [compositionLayers, setCompositionLayers] = useState<
     Record<string, any>
@@ -59,6 +63,10 @@ export function PaintingProvider(props: PaintingProviderProps): JSX.Element {
       setSVGRef(ref);
     };
 
+    const updateStoryElement = (el: string | null) => {
+      setStoryElement(el);
+    };
+
     const updateCompositionLayers = (cL: Record<string, any>) => {
       setCompositionLayers(cL);
     };
@@ -75,8 +83,10 @@ export function PaintingProvider(props: PaintingProviderProps): JSX.Element {
       updateCompositionLayers,
       svgRef,
       updateSVGRef,
+      storyElement,
+      updateStoryElement,
     };
-  }, [mode, text, image, title, compositionLayers, svgRef]);
+  }, [mode, text, image, title, compositionLayers, svgRef, storyElement]);
 
   return (
     <PaintingContext.Provider value={value}>
