@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useMemo, useRef } from "react";
 import MySVG from "../../../public/assets/people.svg";
 import explorationData from "./explorationData";
 import { PaintingContext } from "./painting.context";
@@ -167,6 +167,23 @@ export default function Painting() {
     return id;
   };
 
+  const pointerLine = useMemo(() => {
+    if (
+      paintingContext?.mode === "detail" ||
+      (paintingContext?.mode === "story" &&
+        paintingContext?.storyElement != null)
+    ) {
+      return (
+        <div
+          key={`pointer-${getId()}`}
+          className="absolute h-[2px] w-1/2 top-1/2 z-50 translate-x-[200%] reveal"
+        ></div>
+      );
+    } else {
+      return <></>;
+    }
+  }, [paintingContext?.mode, paintingContext?.storyElement]);
+
   return (
     <div ref={svgRef} className="size-full flex p-2 justify-center resize-none">
       <MySVG
@@ -182,20 +199,13 @@ export default function Painting() {
           ) {
             paintingContext?.updateMode("exploration");
             paintingContext?.updateText(
-              "Click on one of the shining elements in the painting to find out more about them!",
+              "You are using the explorative mode of the 2D Prisoner Painting Explorer. You can touch the pulsating elements of the painting and retrieve related information. Particular figures and objects refer to aspects of everyday life in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive.",
               "Exploration Mode"
             );
           }
         }}
       />
-      {paintingContext?.mode === "detail" ||
-        (paintingContext?.mode === "story" &&
-          paintingContext?.storyElement != null && (
-            <div
-              key={`pointer-${getId()}`}
-              className="absolute h-[2px] w-1/2 top-1/2 z-50 translate-x-[200%] reveal"
-            ></div>
-          ))}
+      {pointerLine}
     </div>
   );
 }

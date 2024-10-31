@@ -56,7 +56,7 @@ export default function ButtonRow() {
               if (paintingContext?.mode === "detail") {
                 paintingContext?.updateMode("exploration");
                 paintingContext?.updateText(
-                  "Click on one of the shining elements in the painting to find out more about them!",
+                  "You are using the explorative mode of the 2D Prisoner Painting Explorer. You can touch the pulsating elements of the painting and retrieve related information. Particular figures and objects refer to aspects of everyday life in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive.",
                   "Exploration Mode"
                 );
               } else {
@@ -73,7 +73,7 @@ export default function ButtonRow() {
           <Button
             onClick={() => {
               paintingContext?.updateText(
-                "Click on one of the shining elements in the painting to find out more about them!",
+                "You are using the explorative mode of the 2D Prisoner Painting Explorer. You can touch the pulsating elements of the painting and retrieve related information. Particular figures and objects refer to aspects of everyday life in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive.",
                 "Exploration Mode"
               );
               paintingContext?.updateMode("exploration");
