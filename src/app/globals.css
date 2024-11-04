@@ -150,6 +150,10 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.painting path {
+  fill: transparent;
+}
+
 .cls-1 {
   fill: transparent;
   fill-rule: evenodd;
@@ -161,6 +165,24 @@ input:checked + .slider:before {
 
 .cls-1:hover {
   stroke-width: 1px;
+}
+
+.cls-1 > path {
+  fill: transparent;
+  fill-rule: evenodd;
+  cursor: pointer;
+  stroke: #4f4f4f;
+  stroke-width: 0.5px;
+  transform-origin: center;
+}
+
+.cls-1:hover > path {
+  stroke-width: 1px;
+}
+
+.layer path {
+  fill: transparent;
+  fill-rule: evenodd;
 }
 
 @keyframes breathing {
@@ -247,6 +269,10 @@ input:checked + .slider:before {
 } */
 
 .animated .cls-1 {
+  animation: fillBreathing 3s ease-in-out infinite;
+}
+
+.animated .cls-1 > path {
   animation: fillBreathing 3s ease-in-out infinite;
 }
 

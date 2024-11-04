@@ -1,7 +1,7 @@
 "use client";
 
 import { cloneElement, useContext, useEffect, useRef } from "react";
-import MySVG from "../../../public/assets/people.svg";
+import MySVG from "../../../public/assets/Ervin Abadi B-B View final2_70dpi.svg";
 import { PaintingContext } from "./painting.context";
 import SplitSvg from "./split-svg";
 
@@ -55,7 +55,7 @@ export default function CompositionPainting() {
 
   return (
     <div ref={svgRef} className="size-full flex p-2 justify-center m-fadeIn">
-      <MySVG className={`h-full w-auto`} />
+      <MySVG className={`h-full w-auto painting`} />
       {/* <SplitSvg /> */}
     </div>
   );

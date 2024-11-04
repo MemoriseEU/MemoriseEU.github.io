@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useEffect, useMemo, useRef } from "react";
-import MySVG from "../../../public/assets/people.svg";
+import MySVG from "../../../public/assets/Ervin Abadi B-B View final2_70dpi.svg";
 import explorationData from "./explorationData";
 import { PaintingContext } from "./painting.context";
 import shortid from "shortid";
@@ -27,14 +27,24 @@ const pathMapping = [
   "path10",
 ];
 
+const storyPathMapping = {
+  kitchen: "path239",
+  fences: "g231",
+  food: "path239",
+  watchtower: "path307",
+  guards: "path331",
+  barracks: "path139",
+  inmates: "g253",
+} as Record<string, string>;
+
 const pathStoryMapping = {
-  kitchen: "path30",
-  fences: "path14",
-  food: "path10",
-  watchtower: "path38",
-  guards: "path20",
-  barracks: "path34",
-  inmates: "path26",
+  path239: "kitchen",
+  g231: "fences",
+  // food: "path10",
+  g790: "watchtower: ",
+  g798: "guards",
+  g151: "barracks",
+  g253: "inmates",
 } as Record<string, string>;
 
 export default function Painting() {
@@ -49,7 +59,8 @@ export default function Painting() {
 
       if (element != null && svg) {
         const bbox = (element as SVGGraphicsElement).getBBox();
-        const padding = 35;
+        const padding =
+          (parseInt(svg.getAttribute("width") as string) / 100) * 15;
 
         const x = bbox.x - padding;
         const y = bbox.y - padding;
@@ -111,6 +122,10 @@ export default function Painting() {
         ".cls-1"
       );
 
+      const images = (svgRef.current as SVGSVGElement).querySelectorAll(
+        "image"
+      );
+
       const clickHandler = (e: Event) => {
         e.stopImmediatePropagation();
         if (
@@ -119,13 +134,24 @@ export default function Painting() {
         ) {
           if (e.target != null) {
             const clickedID = (e.target as HTMLElement).id;
+            const groupID = (
+              (e.target as HTMLElement).parentElement as HTMLElement
+            ).id;
+
             zoomToElement(clickedID);
             paintingContext?.updateMode("detail");
 
-            if (pathMapping.includes(clickedID)) {
+            if (Object.keys(pathStoryMapping).includes(clickedID)) {
               paintingContext?.updateText(
-                explorationData["inmates"].text,
-                explorationData["inmates"].title
+                explorationData[pathStoryMapping[clickedID]].text,
+                explorationData[pathStoryMapping[clickedID]].title
+              );
+            }
+
+            if (Object.keys(pathStoryMapping).includes(groupID)) {
+              paintingContext?.updateText(
+                explorationData[pathStoryMapping[groupID]].text,
+                explorationData[pathStoryMapping[groupID]].title
               );
             }
           }
@@ -158,7 +184,7 @@ export default function Painting() {
       paintingContext?.mode === "story" &&
       paintingContext?.storyElement != null
     ) {
-      zoomToElement(pathStoryMapping[paintingContext?.storyElement as string]);
+      zoomToElement(storyPathMapping[paintingContext?.storyElement as string]);
     }
   }, [paintingContext?.storyElement, paintingContext?.mode]);
 
@@ -187,7 +213,7 @@ export default function Painting() {
   return (
     <div ref={svgRef} className="size-full flex p-2 justify-center resize-none">
       <MySVG
-        className={`h-full w-auto ${
+        className={`h-full w-auto painting ${
           paintingContext?.mode === "default"
             ? "cursor-pointer"
             : "cursor-default"

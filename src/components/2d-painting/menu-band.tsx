@@ -5,6 +5,7 @@ import { PaintingContext } from "./painting.context";
 import SplitSvg from "./split-svg";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import explorationData from "./explorationData";
+import movieData from "./movieData";
 import { InView } from "react-intersection-observer";
 import { Button } from "./ButtonRow";
 
@@ -19,33 +20,6 @@ export default function MenuBandprops() {
     });
   }, []);
 
-  const links = [
-    {
-      id: "link1",
-      name: "Link 1",
-      link: "link-1",
-      image: "/assets/Picture 1.jpg",
-    },
-    {
-      id: "link2",
-      name: "Link 2",
-      link: "link-2",
-      image: "/assets/Picture 2.jpg",
-    },
-    {
-      id: "link3",
-      name: "Link 3",
-      link: "link-3",
-      image: "/assets/Picture 3.jpg",
-    },
-    {
-      id: "link4",
-      name: "Link 4",
-      link: "link-4",
-      image: "/assets/Picture 4.jpg",
-    },
-  ];
-
   const setInView = (inView: boolean, entry: IntersectionObserverEntry) => {
     //console.log(entry, itemRefs);
 
@@ -57,10 +31,10 @@ export default function MenuBandprops() {
 
   const content = useMemo(() => {
     if (paintingContext?.mode === "default") {
-      return links.map((e) => {
+      return movieData.map((e, i) => {
         return (
           <div
-            key={`${e.id}-link`}
+            key={`${i}-movie-link`}
             className="items-center flex justify-center relative w-full"
           >
             <Image
@@ -77,7 +51,7 @@ export default function MenuBandprops() {
               className="cursor-pointer"
               onClick={() => {
                 paintingContext.updateMode("movie");
-                paintingContext.updateText(e.name, e.link);
+                paintingContext.updateText(e.topic, e.title);
                 paintingContext.updateImage(e.image);
               }}
             />
@@ -147,49 +121,55 @@ export default function MenuBandprops() {
     } else if (paintingContext?.mode === "composition") {
       const layers = paintingContext.compositionLayers;
       return (
-        <>
-          <div className="grid grid-rows-[min_content_auto] w-full text-center px-8">
-            <div className="mb-3 text-xl font-bold">
-              <Button color="blue">{paintingContext?.title}</Button>
-            </div>
-            <div className="text-justify">{paintingContext?.text}</div>
-          </div>
-          {Object.keys(layers).map((k, i) => {
-            const element = layers[k];
-            return (
-              <div
-                className={
-                  "flex items-center w-full overflow-hidden justify-center"
-                }
-                key={`splittedSVG-${i}-wrapper`}
-              >
-                <div
-                  onClick={(e) => {
-                    const newLayers = { ...layers };
-                    newLayers[k] = { ...element, visible: !element.visible };
-                    paintingContext.updateCompositionLayers(newLayers);
-                  }}
-                  className={`w-fit cursor-pointer relative ${
-                    element.visible ? "opacity-100" : "opacity-50"
-                  }`}
-                >
-                  <SplitSvg
-                    key={`splittedSVG-${i}`}
-                    svgContainerRef={
-                      paintingContext.svgRef as RefObject<HTMLDivElement>
-                    }
-                    layerID={element.element}
-                  />
-                  {element.visible === false && (
-                    <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
-                      <EyeSlashIcon width={"50%"} height={"50%"} color="gray" />
-                    </div>
-                  )}
-                </div>
+        <div className="grid grid-rows-[1fr] h-full max-h-full w-full overflow-hidden overflow-y-scroll absolute">
+          <div className="relative h-[100vh] py-8 w-full">
+            <div className="grid grid-rows-[min_content_auto] text-center px-8">
+              <div className="mb-3 text-xl font-bold">
+                <Button color="blue">{paintingContext?.title}</Button>
               </div>
-            );
-          })}
-        </>
+              <div className="text-justify">{paintingContext?.text}</div>
+            </div>
+            {Object.keys(layers).map((k, i) => {
+              const element = layers[k];
+              return (
+                <div
+                  className={
+                    "flex items-center w-full overflow-hidden justify-center mt-2"
+                  }
+                  key={`splittedSVG-${i}-wrapper`}
+                >
+                  <div
+                    onClick={(e) => {
+                      const newLayers = { ...layers };
+                      newLayers[k] = { ...element, visible: !element.visible };
+                      paintingContext.updateCompositionLayers(newLayers);
+                    }}
+                    className={`w-fit cursor-pointer relative ${
+                      element.visible ? "opacity-100" : "opacity-50"
+                    }`}
+                  >
+                    <SplitSvg
+                      key={`splittedSVG-${i}`}
+                      svgContainerRef={
+                        paintingContext.svgRef as RefObject<HTMLDivElement>
+                      }
+                      layerID={element.element}
+                    />
+                    {element.visible === false && (
+                      <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+                        <EyeSlashIcon
+                          width={"50%"}
+                          height={"50%"}
+                          color="gray"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       );
     } else {
       return (
@@ -205,7 +185,7 @@ export default function MenuBandprops() {
         </div>
       );
     }
-  }, [links, paintingContext]);
+  }, [movieData, paintingContext]);
 
   return (
     <div className="h-full max-h-full grid grid-cols-1 grid-flow-rows gap-2 p-2 w-full z-[52] relative">
