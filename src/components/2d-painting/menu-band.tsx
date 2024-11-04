@@ -90,6 +90,13 @@ export default function MenuBandprops() {
                 Scroll in this area to discover the story of the painting and
                 it's elements.
               </div>
+              <div className="relative mt-3">
+                <div className="scroll-downs">
+                  <div className="mousey">
+                    <div className="scroller"></div>
+                  </div>
+                </div>
+              </div>
             </div>
             {sortedExplorationKeys.map((e: string, i) => {
               return (
@@ -123,7 +130,7 @@ export default function MenuBandprops() {
       return (
         <div className="grid grid-rows-[1fr] h-full max-h-full w-full overflow-hidden overflow-y-scroll absolute">
           <div className="relative h-[100vh] py-8 w-full">
-            <div className="grid grid-rows-[min_content_auto] text-center px-8">
+            <div className="grid grid-rows-[min_content_auto] text-center px-8 fixed">
               <div className="mb-3 text-xl font-bold">
                 <Button color="blue">{paintingContext?.title}</Button>
               </div>
