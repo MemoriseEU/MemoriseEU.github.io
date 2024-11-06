@@ -24,10 +24,19 @@ export default function MainContent() {
         return <Painting />;
       case "composition":
         return <CompositionPainting />;
+      case "about":
+        return (
+          <div className="flex h-full justify-center">
+            <img
+              className="h-full w-auto"
+              src="assets/CM_1992.193.39_001.jpg"
+            ></img>
+          </div>
+        );
       default:
         return <Painting />;
     }
   }, [paintingContext?.mode]);
 
-  return <div className="h-full">{content}</div>;
+  return <div className="h-full overflow-hidden">{content}</div>;
 }

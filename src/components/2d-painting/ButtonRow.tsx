@@ -14,7 +14,6 @@ export interface ButtonProps {
 export const buttonImages = [
   "/assets/orangeStroke.png",
   "/assets/orangeStroke2.png",
-  "/assets/orangeStroke3.png",
 ];
 
 export function Button(props: ButtonProps) {
@@ -68,60 +67,60 @@ export default function ButtonRow() {
             Back
           </Button>
         )}
-
-        {paintingContext?.mode === "default" && (
-          <Button
-            onClick={() => {
-              paintingContext?.updateText(
-                "You are using the explorative mode of the 2D Prisoner Painting Explorer. You can touch the pulsating elements of the painting and retrieve related information. Particular figures and objects refer to aspects of everyday life in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive.",
-                "Exploration Mode"
-              );
-              paintingContext?.updateMode("exploration");
-            }}
-            imageIndex={2}
-          >
-            Exploration
-          </Button>
-        )}
-        {paintingContext?.mode === "default" && (
-          <Button
-            onClick={() => {
-              paintingContext?.updateText(
-                "Click on the different layers of the painting to hide or show them and experience how they effect the painting!",
-                "Composition Mode"
-              );
-              paintingContext?.updateMode("composition");
-            }}
-            imageIndex={1}
-          >
-            Composition
-          </Button>
-        )}
-        {paintingContext?.mode === "default" && (
-          <Button
-            onClick={() => {
-              paintingContext?.updateText("Scroll!", "Story Mode");
-              paintingContext?.updateMode("story");
-            }}
-            imageIndex={1}
-          >
-            Story
-          </Button>
-        )}
-        {paintingContext?.mode === "default" && (
-          <Button
-            imageIndex={0}
-            onClick={() => {
-              paintingContext?.updateText(
-                "The interactive prisoner art explorer allows you to inspect details in Ervin Abadi‘s painting Bergen-Belsen View from Afar. You can choose between two modes. The compositional mode enables you to examine the different layers and helps to understand the spatial composition of the painting and the visual elements it contains. In the explorative mode you can touch certain elements of the painting and retrieve related information. Particular figures and objects refer to aspects of everyday life in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive. In addition, short digital videos explain other aspects of life and suffering in the Bergen-Belsen concentration camp in relation to prisoner art. Short digital videos provide a compelling way to communicate history by transforming sources like paintings, diaries, and letters into accessible, engaging content. This approach not only deepens engagement with the past but also ensures that complex narratives are presented in ways that resonate with today’s digitally-driven world, particularly for younger, digital-native generations.",
-                "About"
-              );
-              paintingContext?.updateMode("about");
-            }}
-          >
-            About
-          </Button>
-        )}
+        <Button
+          onClick={() => {
+            paintingContext?.updateText(
+              "You are using the explorative mode of the 2D Prisoner Painting Explorer. You can touch the pulsating elements of the painting and retrieve related information. Particular figures and objects refer to aspects of everyday life in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive.",
+              "Exploration Mode"
+            );
+            paintingContext?.updateMode("exploration");
+          }}
+          imageIndex={0}
+          color={
+            paintingContext?.mode === "exploration" ||
+            paintingContext?.mode === "detail"
+              ? "blue"
+              : "orange"
+          }
+        >
+          Exploration
+        </Button>
+        <Button
+          onClick={() => {
+            paintingContext?.updateText(
+              "Click on the different layers of the painting to hide or show them and experience how they effect the painting!",
+              "Composition Mode"
+            );
+            paintingContext?.updateMode("composition");
+          }}
+          imageIndex={1}
+          color={paintingContext?.mode === "composition" ? "blue" : "orange"}
+        >
+          Composition
+        </Button>
+        <Button
+          onClick={() => {
+            paintingContext?.updateText("Scroll!", "Story Mode");
+            paintingContext?.updateMode("story");
+          }}
+          imageIndex={1}
+          color={paintingContext?.mode === "story" ? "blue" : "orange"}
+        >
+          Story
+        </Button>
+        <Button
+          imageIndex={0}
+          color={paintingContext?.mode === "about" ? "blue" : "orange"}
+          onClick={() => {
+            paintingContext?.updateText(
+              "The interactive prisoner art explorer allows you to inspect details in Ervin Abadi‘s painting Bergen-Belsen View from Afar. You can choose between two modes. The compositional mode enables you to examine the different layers and helps to understand the spatial composition of the painting and the visual elements it contains. In the explorative mode you can touch certain elements of the painting and retrieve related information. Particular figures and objects refer to aspects of everyday life in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive. In addition, short digital videos explain other aspects of life and suffering in the Bergen-Belsen concentration camp in relation to prisoner art. Short digital videos provide a compelling way to communicate history by transforming sources like paintings, diaries, and letters into accessible, engaging content. This approach not only deepens engagement with the past but also ensures that complex narratives are presented in ways that resonate with today’s digitally-driven world, particularly for younger, digital-native generations.",
+              "About"
+            );
+            paintingContext?.updateMode("about");
+          }}
+        >
+          About
+        </Button>
       </div>
       <svg
         className="svg-filters hidden"

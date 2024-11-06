@@ -1,6 +1,13 @@
 "use client";
 
-import { useContext, useEffect, useMemo, useRef } from "react";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import MySVG from "../../../public/assets/Ervin Abadi B-B View final2_70dpi.svg";
 import explorationData from "./explorationData";
 import { PaintingContext } from "./painting.context";
@@ -50,6 +57,8 @@ const pathStoryMapping = {
 export default function Painting() {
   const svgRef = useRef(null);
   const paintingContext = useContext(PaintingContext);
+  const [paintingSizeByWidth, setPaintingSizeByWidth] =
+    useState<boolean>(false);
 
   // Zoom function
   const zoomToElement = (elementId: string) => {
@@ -195,14 +204,20 @@ export default function Painting() {
 
   const pointerLine = useMemo(() => {
     if (
-      paintingContext?.mode === "detail" ||
-      (paintingContext?.mode === "story" &&
-        paintingContext?.storyElement != null)
+      paintingContext?.mode === "story" &&
+      paintingContext?.storyElement != null
     ) {
       return (
         <div
-          key={`pointer-${getId()}`}
-          className="absolute h-[2px] w-1/2 top-1/2 z-50 translate-x-[200%] reveal"
+          key={`pointer-${getId()}-story`}
+          className="absolute h-[5px] w-1/2 top-1/2 z-50 translate-x-[200%] reveal"
+        ></div>
+      );
+    } else if (paintingContext?.mode === "detail") {
+      return (
+        <div
+          key={`pointer-${getId()}-detail`}
+          className="absolute h-[5px] w-1/2 top-1/2 z-50 translate-x-[50%] reveal"
         ></div>
       );
     } else {
@@ -210,14 +225,39 @@ export default function Painting() {
     }
   }, [paintingContext?.mode, paintingContext?.storyElement]);
 
+  useEffect(() => {
+    function handleResize() {
+      if (svgRef.current != null) {
+        const htmlEl = svgRef.current as HTMLElement;
+        if (htmlEl.clientWidth > htmlEl.clientHeight) {
+          if (paintingSizeByWidth === true) {
+            setPaintingSizeByWidth(false);
+          }
+        }
+      } else {
+        if (paintingSizeByWidth === false) {
+          setPaintingSizeByWidth(true);
+        }
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [svgRef, paintingSizeByWidth]);
+
   return (
     <div ref={svgRef} className="size-full flex p-2 justify-center resize-none">
       <MySVG
-        className={`h-full w-auto painting ${
+        className={`painting ${
           paintingContext?.mode === "default"
             ? "cursor-pointer"
             : "cursor-default"
-        } ${paintingContext?.mode === "composition" ? "" : "animated"}`}
+        } ${paintingContext?.mode === "composition" ? "" : "animated"} ${
+          paintingSizeByWidth ? "w-full h-auto" : "h-full w-auto"
+        }`}
         onClick={() => {
           if (
             paintingContext?.mode === "default" ||

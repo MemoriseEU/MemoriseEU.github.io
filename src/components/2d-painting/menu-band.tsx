@@ -109,7 +109,7 @@ export default function MenuBandprops() {
                         ref={ref}
                       >
                         <div className="mb-3 text-xl font-bold">
-                          <Button color="blue" imageIndex={i % 3}>
+                          <Button color="blue" imageIndex={i % 2}>
                             {explorationData[e].title}
                           </Button>
                         </div>
