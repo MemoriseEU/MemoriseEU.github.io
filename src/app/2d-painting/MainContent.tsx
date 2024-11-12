@@ -1,11 +1,11 @@
 "use client";
 
 import Painting from "@/app/2d-painting/2d-painting";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
+import { useContext, useEffect, useMemo } from "react";
+import CompositionPainting from "./CompositionPainting";
 import MovieViewer from "./MovieViewer";
 import { PaintingContext } from "./painting.context";
-import CompositionPainting from "./CompositionPainting";
-import Image from "next/image";
 
 export default function MainContent() {
   const paintingContext = useContext(PaintingContext);

@@ -5,6 +5,7 @@ import MainContent from "@/app/2d-painting/MainContent";
 import MenuBand from "@/app/2d-painting/menu-band";
 import { PaintingProvider } from "@/app/2d-painting/painting.context";
 import HomeButton from "@/components/home-button";
+import LanguageSwitcher from "@/components/language-switcher";
 
 export default function PaintingMain() {
   return (
@@ -16,6 +17,7 @@ export default function PaintingMain() {
         </div>
         <MenuBand />
         <HomeButton />
+        <LanguageSwitcher />
       </div>
     </PaintingProvider>
   );

@@ -1,12 +1,8 @@
+"use client";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/ui/Navbar";
-
-export const metadata: Metadata = {
-  title: "Memorise",
-  description: "Memorise",
-};
+import "./i18n";
 
 const lato = Lato({ weight: "400", subsets: ["latin"] });
 

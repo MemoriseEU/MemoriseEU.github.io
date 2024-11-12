@@ -9,9 +9,11 @@ import {
   useState,
 } from "react";
 import MySVG from "../../../public/assets/Ervin Abadi B-B View final2_70dpi.svg";
-import explorationData from "./explorationData";
+import explorationDataEn from "./explorationDataEn";
+import explorationDataDe from "./explorationDataDe";
 import { PaintingContext } from "./painting.context";
 import shortid from "shortid";
+import { useTranslation } from "react-i18next";
 
 const pathMapping = [
   "path34",
@@ -59,6 +61,19 @@ export default function Painting() {
   const paintingContext = useContext(PaintingContext);
   const [paintingSizeByWidth, setPaintingSizeByWidth] =
     useState<boolean>(false);
+
+  const { i18n } = useTranslation();
+
+  const explorationData = useMemo(() => {
+    switch (i18n.language) {
+      case "de":
+        return explorationDataDe;
+      case "en":
+        return explorationDataEn;
+      default:
+        return explorationDataDe;
+    }
+  }, [i18n.language]);
 
   // Zoom function
   const zoomToElement = (elementId: string) => {
@@ -151,17 +166,11 @@ export default function Painting() {
             paintingContext?.updateMode("detail");
 
             if (Object.keys(pathStoryMapping).includes(clickedID)) {
-              paintingContext?.updateText(
-                explorationData[pathStoryMapping[clickedID]].text,
-                explorationData[pathStoryMapping[clickedID]].title
-              );
+              paintingContext!.updateStoryElement(pathStoryMapping[clickedID]);
             }
 
             if (Object.keys(pathStoryMapping).includes(groupID)) {
-              paintingContext?.updateText(
-                explorationData[pathStoryMapping[groupID]].text,
-                explorationData[pathStoryMapping[groupID]].title
-              );
+              paintingContext!.updateStoryElement(pathStoryMapping[groupID]);
             }
           }
         } else if (paintingContext?.mode === "default") {
@@ -184,7 +193,7 @@ export default function Painting() {
         }
       };
     }
-  }, [paintingContext?.mode]);
+  }, [paintingContext?.mode, explorationData]);
 
   useEffect(() => {
     if (paintingContext?.mode === "exploration") {

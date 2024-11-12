@@ -47,6 +47,7 @@ export function PaintingProvider(props: PaintingProviderProps): JSX.Element {
 
   const value = useMemo(() => {
     const updateMode = (mode: Mode | null) => {
+      setStoryElement(null);
       setMode(mode);
     };
 

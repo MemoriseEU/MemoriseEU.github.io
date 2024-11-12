@@ -1,8 +1,7 @@
 "use client";
 
 import HomeButton from "@/components/home-button";
-import Image from "next/image";
-import Link from "next/link";
+import LanguageSwitcher from "@/components/language-switcher";
 
 const cards = [
   {
@@ -24,6 +23,7 @@ export default function Stojka() {
     <>
       <div className="grid h-full max-h-full w-full grid-flow-row grid-rows-[auto,1fr,auto] gap-4 p-10"></div>
       <HomeButton />
+      <LanguageSwitcher />
     </>
   );
 }

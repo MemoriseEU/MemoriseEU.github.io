@@ -4,13 +4,16 @@ import { RefObject, useContext, useMemo, useRef } from "react";
 import { PaintingContext } from "./painting.context";
 import SplitSvg from "./split-svg";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
-import explorationData from "./explorationData";
+import explorationData from "./explorationDataEn";
 import movieData from "./movieData";
 import { InView } from "react-intersection-observer";
 import { Button } from "./ButtonRow";
+import { useTranslation } from "react-i18next";
 
 export default function MenuBandprops() {
   const paintingContext = useContext(PaintingContext);
+
+  const { t } = useTranslation();
 
   const containerRef = useRef<HTMLElement>(null);
 
@@ -84,12 +87,9 @@ export default function MenuBandprops() {
           <div className="relative h-[100vh] py-8">
             <div className="flex justify-center items-center flex-col h-full w-full text-center px-8">
               <div className="mb-3 text-xl font-bold">
-                <Button color="blue">Story Mode</Button>
+                <Button color="blue">{t("story-mode.title")}</Button>
               </div>
-              <div className="text-justify">
-                Scroll in this area to discover the story of the painting and
-                it's elements.
-              </div>
+              <div className="text-justify">{t("story-mode.text")}</div>
               <div className="relative mt-3">
                 <div className="scroll-downs">
                   <div className="mousey">
@@ -110,11 +110,11 @@ export default function MenuBandprops() {
                       >
                         <div className="mb-3 text-xl font-bold">
                           <Button color="blue" imageIndex={i % 2}>
-                            {explorationData[e].title}
+                            {t(`detail-mode.${e}.title`)}
                           </Button>
                         </div>
                         <div className="text-justify">
-                          {explorationData[e].text}
+                          {t(`detail-mode.${e}.text`)}
                         </div>
                       </div>
                     );
@@ -128,71 +128,98 @@ export default function MenuBandprops() {
     } else if (paintingContext?.mode === "composition") {
       const layers = paintingContext.compositionLayers;
       return (
-        <div className="grid grid-rows-[1fr] h-full max-h-full w-full overflow-hidden overflow-y-scroll absolute">
-          <div className="relative h-[100vh] py-8 w-full">
-            <div className="grid grid-rows-[min_content_auto] text-center px-8 fixed">
-              <div className="mb-3 text-xl font-bold">
-                <Button color="blue">{paintingContext?.title}</Button>
-              </div>
-              <div className="text-justify">{paintingContext?.text}</div>
+        <div className="grid grid-rows-[auto_1fr] h-full max-h-full w-full">
+          <div className="grid grid-rows-[min_content_auto] text-center px-8 z-[800]">
+            <div className="mb-3 text-xl font-bold ">
+              <Button color="blue">
+                {t(`${paintingContext?.mode}-mode.title`)}
+              </Button>
             </div>
-            {Object.keys(layers).map((k, i) => {
-              const element = layers[k];
-              return (
-                <div
-                  className={
-                    "flex items-center w-full overflow-hidden justify-center mt-2"
-                  }
-                  key={`splittedSVG-${i}-wrapper`}
-                >
-                  <div
-                    onClick={(e) => {
-                      const newLayers = { ...layers };
-                      newLayers[k] = { ...element, visible: !element.visible };
-                      paintingContext.updateCompositionLayers(newLayers);
-                    }}
-                    className={`w-fit cursor-pointer relative ${
-                      element.visible ? "opacity-100" : "opacity-50"
-                    }`}
-                  >
-                    <SplitSvg
-                      key={`splittedSVG-${i}`}
-                      svgContainerRef={
-                        paintingContext.svgRef as RefObject<HTMLDivElement>
+            <div className="text-justify">
+              {t(`${paintingContext?.mode}-mode.text`)}
+            </div>
+          </div>
+          <div className="size-full">
+            <div className="absolute h-full max-h-full py-8 w-full">
+              <div className="overflow-hidden overflow-y-scroll h-full max-h-full relative">
+                {Object.keys(layers).map((k, i) => {
+                  const element = layers[k];
+                  return (
+                    <div
+                      className={
+                        "flex items-center w-full overflow-hidden justify-center mt-2"
                       }
-                      layerID={element.element}
-                    />
-                    {element.visible === false && (
-                      <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
-                        <EyeSlashIcon
-                          width={"50%"}
-                          height={"50%"}
-                          color="gray"
+                      key={`splittedSVG-${i}-wrapper`}
+                    >
+                      <div
+                        onClick={(e) => {
+                          const newLayers = { ...layers };
+                          newLayers[k] = {
+                            ...element,
+                            visible: !element.visible,
+                          };
+                          paintingContext.updateCompositionLayers(newLayers);
+                        }}
+                        className={`w-fit cursor-pointer relative ${
+                          element.visible ? "opacity-100" : "opacity-50"
+                        }`}
+                      >
+                        <SplitSvg
+                          key={`splittedSVG-${i}`}
+                          svgContainerRef={
+                            paintingContext.svgRef as RefObject<HTMLDivElement>
+                          }
+                          layerID={element.element}
                         />
+                        {element.visible === false && (
+                          <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+                            <EyeSlashIcon
+                              width={"50%"}
+                              height={"50%"}
+                              color="gray"
+                            />
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       );
     } else {
       return (
         <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
-          <div className="relative h-[100vh] py-8">
+          <div className="relative h-full py-8">
             <div className="flex justify-center items-center flex-col h-full w-full text-center px-8">
               <div className="mb-3 text-xl font-bold">
-                <Button color="blue">{paintingContext?.title}</Button>
+                <Button color="blue">
+                  {t(
+                    `${paintingContext?.mode}-mode${
+                      paintingContext?.storyElement != null
+                        ? "." + paintingContext?.storyElement
+                        : ""
+                    }.title`
+                  )}
+                </Button>
               </div>
-              <div className="text-justify">{paintingContext?.text}</div>
+              <div className="text-justify">
+                {t(
+                  `${paintingContext?.mode}-mode${
+                    paintingContext?.storyElement != null
+                      ? "." + paintingContext?.storyElement
+                      : ""
+                  }.text`
+                )}
+              </div>
             </div>
           </div>
         </div>
       );
     }
-  }, [movieData, paintingContext]);
+  }, [movieData, paintingContext, t]);
 
   return (
     <div className="max-h-full grid grid-cols-1 grid-flow-rows gap-2 p-2 w-full z-[52] relative">
