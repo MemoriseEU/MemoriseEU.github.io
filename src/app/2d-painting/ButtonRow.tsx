@@ -64,7 +64,7 @@ export default function ButtonRow() {
             }}
             color="red"
           >
-            Back
+            Reset
           </Button>
         )}
         <Button

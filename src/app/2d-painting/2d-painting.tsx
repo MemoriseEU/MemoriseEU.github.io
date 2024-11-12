@@ -233,10 +233,10 @@ export default function Painting() {
           if (paintingSizeByWidth === true) {
             setPaintingSizeByWidth(false);
           }
-        }
-      } else {
-        if (paintingSizeByWidth === false) {
-          setPaintingSizeByWidth(true);
+        } else {
+          if (paintingSizeByWidth === false) {
+            setPaintingSizeByWidth(true);
+          }
         }
       }
     }
@@ -249,15 +249,18 @@ export default function Painting() {
   }, [svgRef, paintingSizeByWidth]);
 
   return (
-    <div ref={svgRef} className="size-full flex p-2 justify-center resize-none">
+    <div
+      ref={svgRef}
+      className="size-full flex justify-center resize-none relative"
+    >
       <MySVG
-        className={`painting ${
+        className={`absolute painting size-full ${
           paintingContext?.mode === "default"
             ? "cursor-pointer"
             : "cursor-default"
-        } ${paintingContext?.mode === "composition" ? "" : "animated"} ${
-          paintingSizeByWidth ? "w-full h-auto" : "h-full w-auto"
-        }`}
+        } ${
+          paintingContext?.mode === "composition" ? "" : "animated"
+        } object-contain`}
         onClick={() => {
           if (
             paintingContext?.mode === "default" ||

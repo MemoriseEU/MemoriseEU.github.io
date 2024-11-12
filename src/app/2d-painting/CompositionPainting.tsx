@@ -54,8 +54,11 @@ export default function CompositionPainting() {
   }, [paintingContext?.mode, paintingContext?.compositionLayers]);
 
   return (
-    <div ref={svgRef} className="size-full flex p-2 justify-center m-fadeIn">
-      <MySVG className={`h-full w-auto painting`} />
+    <div
+      ref={svgRef}
+      className="size-full flex p-2 justify-center m-fadeIn absolute"
+    >
+      <MySVG className={`size-full painting object-contain`} />
       {/* <SplitSvg /> */}
     </div>
   );

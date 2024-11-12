@@ -180,14 +180,14 @@ export default function MenuBandprops() {
       );
     } else {
       return (
-        <div className="items-center flex justify-center relative px-8 text-center w-full">
-          <div className="grid grid-rows-[min_content_auto] w-full">
-            <div className="mb-3 text-xl font-bold">
-              {paintingContext?.title && (
+        <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
+          <div className="relative h-[100vh] py-8">
+            <div className="flex justify-center items-center flex-col h-full w-full text-center px-8">
+              <div className="mb-3 text-xl font-bold">
                 <Button color="blue">{paintingContext?.title}</Button>
-              )}
+              </div>
+              <div className="text-justify">{paintingContext?.text}</div>
             </div>
-            <div className="text-justify">{paintingContext?.text}</div>
           </div>
         </div>
       );
@@ -195,7 +195,7 @@ export default function MenuBandprops() {
   }, [movieData, paintingContext]);
 
   return (
-    <div className="h-full max-h-full grid grid-cols-1 grid-flow-rows gap-2 p-2 w-full z-[52] relative">
+    <div className="max-h-full grid grid-cols-1 grid-flow-rows gap-2 p-2 w-full z-[52] relative">
       {content}
     </div>
   );
