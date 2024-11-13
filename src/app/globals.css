@@ -35,6 +35,16 @@ body {
   overflow: hidden;
 }
 
+.menu-button {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-start-rgb))
+    )
+    rgb(var(--background-end-rgb));
+}
+
 main {
   height: 100vh;
   max-height: 100vh;

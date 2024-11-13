@@ -9,8 +9,7 @@ import {
   useState,
 } from "react";
 import MySVG from "../../../public/assets/Ervin Abadi B-B View final2_70dpi.svg";
-import explorationDataEn from "./explorationDataEn";
-import explorationDataDe from "./explorationDataDe";
+import explorationDataEn from "../locales/en/translation.json";
 import { PaintingContext } from "./painting.context";
 import shortid from "shortid";
 import { useTranslation } from "react-i18next";
@@ -65,15 +64,8 @@ export default function Painting() {
   const { i18n } = useTranslation();
 
   const explorationData = useMemo(() => {
-    switch (i18n.language) {
-      case "de":
-        return explorationDataDe;
-      case "en":
-        return explorationDataEn;
-      default:
-        return explorationDataDe;
-    }
-  }, [i18n.language]);
+    return explorationDataEn["detail-mode"];
+  }, [explorationDataEn]);
 
   // Zoom function
   const zoomToElement = (elementId: string) => {

@@ -1,20 +1,20 @@
 {
   "about": "About",
   "exploration": "Explore",
-  "composition": "Composition",
+  "composition": "Compose",
   "reset": "Reset",
   "story": "Story",
-  "home": "Menue",
+  "home": "Menu",
   "exploration-mode": {
     "title": "Exploration Mode",
-    "text": "You are using the explorative mode of the 2D Prisoner Painting Explorer. You can touch the pulsating elements of the painting and retrieve related information. Particular figures and objects refer to aspects of everyday life in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive."
+    "text": "You are using the Exploration Mode of the 2D Prisoner Painting Explorer. You can touch the pulsating elements of the painting and retrieve related information. Particular figures and objects refer to aspects of everyday life and suffering in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive."
   },
   "composition-mode": {
     "title": "Composition Mode",
     "text": "Click on the different layers of the painting to hide or show them and experience how they effect the painting!"
   },
   "about-mode": {
-    "text": "The interactive prisoner art explorer allows you to inspect details in Ervin Abadi's painting Bergen-Belsen View from Afar\" to \"The interactive prisoner art explorer allows you to inspect details in the watercolour painting Perspective View of the Bergen-Belsen Camp (1945) by Hungarian-Jewish artist and Holocaust survivor Ervin (Aharon) Abadi (1918-1979). Abadi was imprisoned in Bergen-Belsen and hospitalised after liberation in Farsleben, where he created dozens of paintings capturing daily scenes in the camp and its final days.",
+    "text": "The interactive prisoner art explorer allows you to inspect details in the watercolour painting Perspective View of the Bergen-Belsen Camp (1945) by Hungarian-Jewish artist and Holocaust survivor Ervin (Aharon) Abadi (1918-1979). Abadi was imprisoned in Bergen-Belsen and hospitalised after liberation in Farsleben, where he created dozens of paintings capturing daily scenes in the camp and its final days.\nYou can choose between two modes: The Composition Mode enables you to examine the different layers and helps to understand the spatial composition of the painting and the visual elements it contains. In the Exploration Mode you can touch certain elements of the painting and retrieve related information. Particular figures and objects refer to various aspects of the conditions in Bergen-Belsen that shaped the situation and fate of the prisoners. Please note that not all elements are interactive. The Story Mode offers a walkthrough through the different elements of the painting, highlighting specific parts and providing related background information.\nIn addition, short digital videos explain other aspects of life and suffering in the Bergen-Belsen concentration camp in relation to prisoner art. They provide a compelling way to communicate history by transforming sources like paintings, diaries, and letters into accessible, engaging content particularly for younger, digital-native generations.",
     "title": "About"
   },
   "story-mode": {
@@ -22,20 +22,20 @@
     "text": "Scroll in this area to discover the story of the painting and it's elements."
   },
   "detail-mode": {
-    "inmates": {
+    "painting": {
       "sort": 0,
-      "title": "Work in the camp",
-      "text": "Initially, not all prisoners were sent to working battalions. Only inmates from the Prisoners and Star camps were forced to maintain and expand other camps, while prisoners from the Residence, Neutral and Hungarian camps were spared. Yet with the front situation deteriorating in 1944, this hierarchy faded, as more people were involved in hard labor. By the end of the war, mostly women camps were subjected to the armament production. People had to endure adverse conditions to the point of exhaustion, resulting in a rapid increase in the number of inmates who were incapable of working."
-    },
-    "guards": {
-      "sort": 1,
-      "title": "The SS in the camp",
-      "text": "The number of SS functionaries in Bergen-Belsen varied throughout the camp’s existence. The first commandant was SS-Hauptsturmführer Adolf Haas, replaced in December 1944 by SS-Hauptsturmführer Josef Kramer. With the advance of the Allies, the SS successfully destroyed many documents on its personnel in Bergen-Belsen. Consequently, over two hundred officers of the SS were never prosecuted during the postwar trials."
+      "title": "The painting",
+      "text": "This watercolour painting, Perspective View of the Bergen-Belsen Camp (1945), by Hungarian-Jewish artist and Holocaust survivor Ervin (Aharon) Abadi (1918-1979) depicts a broad view of the concentration camp. Abadi was imprisoned in Bergen-Belsen and hospitalised after liberation in Farsleben, where he created dozens of paintings capturing daily scenes in the camp and its final days. Drawings and paintings by prisoners, such as those by Ervin Abadi, are multifaceted sources: works of art, historical records, heritage objects, and visual testimonies. These personal works offer a subjective and partial view of camp life, and without them, the collective story would be incomplete."
     },
     "barracks": {
-      "sort": 2,
+      "sort": 1,
       "title": "The barracks",
-      "text": "The first barracks for the French and Belgian prisoners of war were built in Bergen-Belsen in 1940. They were replaced by Soviet prisoners in 1941, most of whom did not survive the winter. By April 1943, Bergen-Belsen was increasingly resembling a concentration camp. The number of barracks increased as Jewish, Sinti, Roma, and other groups of inmates were transported to the camp. As the Allies advanced, thousands were evacuated from the other concentration camps to Bergen-Belsen. In April 1945, the prisoners exceeded 60,000. Heavily overcrowded barracks originally intended for 10,000 became a scene of disease outbreaks and mortality. Upon liberation, the British burned the barracks to prevent the spread of typhus."
+      "text": "The first barracks for French and Belgian prisoners of war were built in Bergen-Belsen in 1940. They were replaced by Soviet prisoners in 1941, most of whom did not survive the winter. From April 1943 onwards, Bergen-Belsen began to resemble a concentration camp more and more. The number of barracks increased as Jewish, Sinti, Roma, and other groups of inmates were transported to the camp. As the Allies advanced, thousands were evacuated from other concentration camps. In April 1945, the prisoners exceeded 60,000. Heavily overcrowded barracks originally intended for 10,000 prisoners became a scene of disease outbreaks and mortality. Upon liberation, the British burned the barracks to prevent the spread of typhus."
+    },
+    "guards": {
+      "sort": 2,
+      "title": "The SS in the camp",
+      "text": "The number of SS functionaries in Bergen-Belsen varied throughout the camp’s existence. The first commandant was SS-Hauptsturmführer Adolf Haas, replaced in December 1944 by SS-Hauptsturmführer Josef Kramer. With the advance of the Allies, the SS successfully destroyed many documents on its personnel in Bergen-Belsen. Consequently, over two hundred officers of the SS were never prosecuted during the postwar trials."
     },
     "watchtower": {
       "sort": 3,
@@ -45,17 +45,48 @@
     "fences": {
       "sort": 4,
       "title": "Fences and barbed wire",
-      "text": "Bergen-Belsen consisted of several camps, each surrounded by barbed wire, completely isolating prisoners of different camps: 1) The camp for prisoners (Häftlingslager), such as Jews, Sinti and Roma, homosexuals, and etc. Beginning in March 1944, it included a recovery subcamp (Erholungslager) for the growing numbers of ill inmates; 2) The neutral camp (Neutralenlager) for Jews from Spain, Portugal, Argentina, and Turkey; 3) The special camp (Sonderlager) for Polish Jews, who were later transported to Auschwitz. 4) The Hungarian camp (Ungarnlager); 5) The star camp (Sternlager) for Jews mainly from Westerbork; 6) The tent camp (Zeltlager). 7) Small Women's Camp (Kleines Frauenlager) for Auschwitz prisoners; 8) Large Women's Camp (Großes Frauenlager)."
+      "text": "Bergen-Belsen consisted of several camps, each surrounded by barbed wire, completely isolating prisoners of different camps: 1) The camp for prisoners (Häftlingslager), such as Jews, Sinti and Roma, homosexuals, and others. Beginning in March 1944, it included a recovery subcamp (Erholungslager) for the growing numbers of sick inmates; 2) The neutral camp (Neutralenlager) for Jews from Spain, Portugal, Argentina, and Turkey; 3) The special camp (Sonderlager) for Polish Jews, who were later transported to Auschwitz. 4) The Hungarian camp (Ungarnlager); 5) The star camp (Sternlager) for Jews mainly from Westerbork; 6) The tent camp (Zeltlager). 7) Small Women's Camp (Kleines Frauenlager) for Auschwitz prisoners; 8) Large Women's Camp (Großes Frauenlager)."
+    },
+    "inmates": {
+      "sort": 5,
+      "title": "Work in the camp",
+      "text": "Initially, not all prisoners were sent to working battalions. Only inmates from the Prisoners and Star camps were forced to maintain and expand other camps, while prisoners from the Residence, Neutral and Hungarian camps were spared. Yet with the front situation deteriorating in 1944, this hierarchy faded, as more people were involved in hard labor. By the end of the war, mostly women camps were subjected to the armament production. People had to endure adverse conditions to the point of exhaustion, resulting in a rapid increase in the number of inmates who were incapable of working."
     },
     "food": {
-      "sort": 5,
+      "sort": 6,
       "title": "Food in the camp",
       "text": "“Bergen-Belsen was hell on earth” – testimony Alice Lok Cahana (USHMM) In Bergen-Belsen, food rations were distributed according to the camps. Food was scarcest in the camp for prisoners. There were sharp increases in prisoner numbers in 1944, which led to a decrease in food rations across the camp. In 1945, when the death marches reached Bergen-Belsen, starvation had become widespread. There were also occurrences of cannibalism. Survivors recalled inmates begging for water in agony."
     },
     "kitchen": {
-      "sort": 6,
+      "sort": 7,
       "title": "The camp kitchen",
-      "text": "This camp kitchen consisted of a small barrack with a vegetable cellar and a small pool for fire water. Every day, prisoners waited in long lines for a portion of food, which became increasingly scarce as the war progressed. Dirty food and water contributed to the growing unsanitary conditions at Bergen-Belsen, which led to the outbreak of typhus in 1944-1945."
+      "text": "This camp kitchen consisted of a small barrack with a vegetable cellar and a small pool for fire-extinguishing water. Every day, prisoners waited in long lines for a portion of food, which became increasingly scarce as the war progressed. Dirty food and water contributed to the growing unsanitary conditions at Bergen-Belsen, which led to the outbreak of typhus in 1944-1945."
+    }
+  },
+  "movies": {
+    "0": {
+      "topic": "Children in Bergen Belsen",
+      "image": "/assets/AsscherChildren.jpg",
+      "title": "A Group of Children Sitting in Front of a Barrack",
+      "artist": "Louis Asscher"
+    },
+    "1": {
+      "topic": "Women in Bergen Belsen",
+      "image": "/assets/AbadiFirewood.jpeg",
+      "title": "Women with firewood",
+      "artist": "Ervin Abadi"
+    },
+    "2": {
+      "topic": "Weather in Bergen Belsen",
+      "image": "/assets/MerenyisBook.jpg",
+      "title": "Zsuzsa Merényis: Picture Diary from Bergen-Belsen",
+      "artist": "Zsuzsa Merényis"
+    },
+    "3": {
+      "topic": "Liberation",
+      "image": "/assets/AbadiUntitled.jpg",
+      "title": "untitled",
+      "artist": "Ervin Abadi"
     }
   }
 }

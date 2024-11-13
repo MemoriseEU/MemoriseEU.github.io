@@ -1,61 +1,92 @@
 {
   "about": "Über",
-  "exploration": "Erkunden",
+  "exploration": "Entdecken",
   "composition": "Komposition",
   "reset": "Zurücksetzen",
   "story": "Geschichte",
   "home": "Menü",
   "exploration-mode": {
-    "title": "Erkundungsmodus",
-    "text": "Sie verwenden den Erkundungsmodus des 2D-Gefangenen-Malerei-Explorers. Sie können die pulsierenden Elemente des Gemäldes berühren und relevante Informationen abrufen. Bestimmte Figuren und Objekte beziehen sich auf Aspekte des Alltagslebens in Bergen-Belsen, die die Situation und das Schicksal der Gefangenen prägten. Bitte beachten Sie, dass nicht alle Elemente interaktiv sind."
+    "title": "Entdeckungsmodus",
+    "text": "Sie verwenden den Entdeckungsmodus des 2D-Gefangenen-Malerei-Explorers. Sie können die pulsierenden Elemente des Gemäldes berühren, um verwandte Informationen abzurufen. Bestimmte Figuren und Objekte verweisen auf Aspekte des Alltags und Leidens in Bergen-Belsen, die die Situation und das Schicksal der Gefangenen prägten. Bitte beachten Sie, dass nicht alle Elemente interaktiv sind."
   },
   "composition-mode": {
     "title": "Kompositionsmodus",
-    "text": "Klicken Sie auf die verschiedenen Ebenen des Gemäldes, um sie ein- oder auszublenden und erleben Sie, wie sie das Gemälde beeinflussen!"
+    "text": "Klicken Sie auf die verschiedenen Schichten des Gemäldes, um sie auszublenden oder anzuzeigen und zu erleben, wie sie das Gemälde beeinflussen!"
   },
   "about-mode": {
-    "title": "Über",
-    "text": "Der interaktive Gefangenen-Kunst-Explorer ermöglicht es Ihnen, Details in Ervin Abadis Gemälde 'Bergen-Belsen Ansicht aus der Ferne' zu inspizieren. Sie können zwischen zwei Modi wählen. Der Kompositionsmodus ermöglicht es Ihnen, die verschiedenen Ebenen zu untersuchen und hilft, die räumliche Komposition des Gemäldes und die enthaltenen visuellen Elemente zu verstehen. Im Erkundungsmodus können Sie bestimmte Elemente des Gemäldes berühren und relevante Informationen abrufen. Bestimmte Figuren und Objekte beziehen sich auf Aspekte des Alltagslebens in Bergen-Belsen, die die Situation und das Schicksal der Gefangenen prägten. Bitte beachten Sie, dass nicht alle Elemente interaktiv sind. Zusätzlich erklären kurze digitale Videos weitere Aspekte des Lebens und Leidens im Konzentrationslager Bergen-Belsen in Bezug auf die Gefangenenkunst. Kurze digitale Videos bieten eine überzeugende Möglichkeit, Geschichte zu vermitteln, indem Quellen wie Gemälde, Tagebücher und Briefe in zugängliche, ansprechende Inhalte verwandelt werden. Dieser Ansatz vertieft nicht nur das Engagement mit der Vergangenheit, sondern stellt auch sicher, dass komplexe Erzählungen auf eine Weise präsentiert werden, die mit der digital geprägten Welt von heute, insbesondere für jüngere, digital-affine Generationen, in Resonanz tritt."
+    "text": "Der interaktive Gefangenenkunst-Explorer ermöglicht es Ihnen, Details im Aquarellgemälde 'Perspektivische Ansicht des Bergen-Belsen-Lagers' (1945) des ungarisch-jüdischen Künstlers und Holocaust-Überlebenden Ervin (Aharon) Abadi (1918-1979) zu inspizieren. Abadi wurde in Bergen-Belsen inhaftiert und nach der Befreiung in Farsleben ins Krankenhaus gebracht, wo er Dutzende von Gemälden schuf, die alltägliche Szenen im Lager und dessen letzte Tage festhielten.\nSie können zwischen zwei Modi wählen: Der Kompositionsmodus ermöglicht es Ihnen, die verschiedenen Schichten zu untersuchen und hilft, die räumliche Komposition des Gemäldes und die darin enthaltenen visuellen Elemente zu verstehen. Im Entdeckungsmodus können Sie bestimmte Elemente des Gemäldes berühren und verwandte Informationen abrufen. Bestimmte Figuren und Objekte verweisen auf verschiedene Aspekte der Bedingungen in Bergen-Belsen, die die Situation und das Schicksal der Gefangenen prägten. Bitte beachten Sie, dass nicht alle Elemente interaktiv sind. Der Geschichtsmodus bietet eine Führung durch die verschiedenen Elemente des Gemäldes und hebt spezifische Teile hervor, die Hintergrundinformationen liefern.\nZusätzlich erklären kurze digitale Videos andere Aspekte des Lebens und Leidens im Konzentrationslager Bergen-Belsen in Bezug auf die Kunst der Gefangenen. Sie bieten eine überzeugende Möglichkeit, Geschichte zu vermitteln, indem sie Quellen wie Gemälde, Tagebücher und Briefe in zugängliche, ansprechende Inhalte verwandeln, insbesondere für jüngere, digital-native Generationen.",
+    "title": "Über"
   },
   "story-mode": {
-    "title": "Geschichts Modus",
-    "text": "Wischen Sie in diesem Bereich und entdecken Sie die Geschichte des Gemäldes und seiner Elemente."
+    "title": "Geschichtsmodus",
+    "text": "Scrollen Sie in diesem Bereich, um die Geschichte des Gemäldes und seiner Elemente zu entdecken."
   },
   "detail-mode": {
-    "inmates": {
+    "painting": {
       "sort": 0,
-      "title": "Arbeit im Lager",
-      "text": "Anfangs wurden nicht alle Gefangenen zu Arbeitsbataillonen geschickt. Nur Insassen der Gefangenen- und Sternlager wurden gezwungen, andere Lager zu unterhalten und zu erweitern, während Gefangene aus den Wohn-, Neutral- und Ungarnlagern verschont blieben. Doch mit der Verschlechterung der Frontlage 1944 verblasste diese Hierarchie, und mehr Menschen wurden zur Schwerarbeit herangezogen. Gegen Ende des Krieges wurden vor allem Frauenlager der Rüstungsproduktion unterworfen. Die Menschen mussten widrige Bedingungen bis zur Erschöpfung ertragen, was zu einem raschen Anstieg der Anzahl arbeitsunfähiger Insassen führte."
-    },
-    "guards": {
-      "sort": 1,
-      "title": "Die SS im Lager",
-      "text": "Die Zahl der SS-Funktionäre in Bergen-Belsen variierte im Verlauf des Bestehens des Lagers. Der erste Kommandant war SS-Hauptsturmführer Adolf Haas, der im Dezember 1944 durch SS-Hauptsturmführer Josef Kramer ersetzt wurde. Mit dem Vormarsch der Alliierten vernichtete die SS erfolgreich viele Dokumente über ihr Personal in Bergen-Belsen. Infolgedessen wurden über zweihundert Offiziere der SS während der Nachkriegsprozesse nie zur Rechenschaft gezogen."
+      "title": "Das Gemälde",
+      "text": "Dieses Aquarellgemälde, 'Perspektivische Ansicht des Bergen-Belsen-Lagers' (1945), des ungarisch-jüdischen Künstlers und Holocaust-Überlebenden Ervin (Aharon) Abadi (1918-1979) zeigt eine weite Sicht auf das Konzentrationslager. Abadi wurde in Bergen-Belsen inhaftiert und nach der Befreiung in Farsleben ins Krankenhaus gebracht, wo er Dutzende von Gemälden schuf, die alltägliche Szenen im Lager und dessen letzte Tage festhielten. Zeichnungen und Gemälde von Gefangenen, wie die von Ervin Abadi, sind vielschichtige Quellen: Kunstwerke, historische Dokumente, Kulturgüter und visuelle Zeugnisse. Diese persönlichen Werke bieten eine subjektive und teilweise Ansicht des Lagerlebens, und ohne sie wäre die kollektive Geschichte unvollständig."
     },
     "barracks": {
-      "sort": 2,
+      "sort": 1,
       "title": "Die Baracken",
-      "text": "Die ersten Baracken für die französischen und belgischen Kriegsgefangenen wurden 1940 in Bergen-Belsen errichtet. 1941 wurden diese durch sowjetische Kriegsgefangene ersetzt, von denen die meisten den Winter nicht überlebten. Im April 1943 ähnelte Bergen-Belsen zunehmend einem Konzentrationslager. Die Anzahl der Baracken stieg, als jüdische, Sinti-, Roma- und andere Gruppen von Insassen in das Lager gebracht wurden. Mit dem Vormarsch der Alliierten wurden Tausende aus anderen Konzentrationslagern nach Bergen-Belsen evakuiert. Im April 1945 überschritt die Anzahl der Gefangenen 60.000. Die stark überfüllten Baracken, die ursprünglich für 10.000 Personen vorgesehen waren, wurden zum Schauplatz von Krankheitsausbrüchen und Todesfällen. Nach der Befreiung verbrannten die Briten die Baracken, um die Ausbreitung von Typhus zu verhindern."
+      "text": "Die ersten Baracken für französische und belgische Kriegsgefangene wurden 1940 in Bergen-Belsen errichtet. Sie wurden 1941 durch sowjetische Gefangene ersetzt, von denen die meisten den Winter nicht überlebten. Ab April 1943 begann Bergen-Belsen immer mehr einem Konzentrationslager zu ähneln. Die Anzahl der Baracken stieg, als jüdische, Sinti-, Roma- und andere Häftlingsgruppen ins Lager transportiert wurden. Als die Alliierten vorrückten, wurden Tausende aus anderen Konzentrationslagern evakuiert. Im April 1945 überschritt die Zahl der Gefangenen 60.000. Überfüllte Baracken, die ursprünglich für 10.000 Gefangene vorgesehen waren, wurden zu einem Schauplatz von Krankheitsausbrüchen und hoher Sterblichkeit. Nach der Befreiung verbrannten die Briten die Baracken, um die Ausbreitung des Typhus zu verhindern."
+    },
+    "guards": {
+      "sort": 2,
+      "title": "Die SS im Lager",
+      "text": "Die Anzahl der SS-Funktionäre in Bergen-Belsen variierte im Laufe der Existenz des Lagers. Der erste Kommandant war SS-Hauptsturmführer Adolf Haas, der im Dezember 1944 durch SS-Hauptsturmführer Josef Kramer ersetzt wurde. Mit dem Vormarsch der Alliierten zerstörte die SS viele Dokumente über ihr Personal in Bergen-Belsen. Infolgedessen wurden über zweihundert SS-Offiziere nie in den Nachkriegsprozessen strafrechtlich verfolgt."
     },
     "watchtower": {
       "sort": 3,
-      "title": "Wachtürme und Wächter",
-      "text": "Es gab mindestens 480 Wachen und Mitarbeiter im Hauptquartier, die in Bergen-Belsen arbeiteten. Die Misshandlung von Gefangenen durch Folter, Schläge, Hunger, Vernachlässigung der Gesundheit oder völlige Gleichgültigkeit wurde für die Mehrheit der Wachen zur Routine. Irma Grese und Josef Kramer sind zwei besonders berüchtigte Beispiele für diese Verbrechen gegen die Menschlichkeit."
+      "title": "Wachtürme und Wachen",
+      "text": "Mindestens 480 Wachen und Hauptquartiermitarbeiter waren in Bergen-Belsen tätig. Die Misshandlung von Gefangenen durch Folter, Schläge, Hunger und Vernachlässigung ihrer Gesundheit oder ihres Daseins wurde für die meisten Wachen zur Routinepraxis. Irma Grese und Josef Kramer sind zwei besonders berüchtigte Beispiele für diese Verbrechen gegen die Menschlichkeit."
     },
     "fences": {
       "sort": 4,
       "title": "Zäune und Stacheldraht",
-      "text": "Bergen-Belsen bestand aus mehreren Lagern, die jeweils von Stacheldraht umgeben waren und die Gefangenen der verschiedenen Lager vollständig isolierten: 1) Das Gefangenenlager (Häftlingslager) für Juden, Sinti und Roma, Homosexuelle usw. Ab März 1944 gab es ein Erholungslager für die wachsende Zahl kranker Häftlinge; 2) Das Neutralenlager für Juden aus Spanien, Portugal, Argentinien und der Türkei; 3) Das Sonderlager für polnische Juden, die später nach Auschwitz transportiert wurden; 4) Das Ungarnlager; 5) Das Sternlager für Juden, hauptsächlich aus Westerbork; 6) Das Zeltlager. 7) Kleines Frauenlager für Auschwitz-Gefangene; 8) Großes Frauenlager."
+      "text": "Bergen-Belsen bestand aus mehreren Lagern, die jeweils durch Stacheldraht voneinander isoliert waren und die Gefangenen in den verschiedenen Lagern voneinander trennten: 1) Das Häftlingslager für Gefangene wie Juden, Sinti und Roma, Homosexuelle und andere. Ab März 1944 gab es ein Erholungslager für die zunehmende Zahl kranker Insassen; 2) Das Neutralenlager für Juden aus Spanien, Portugal, Argentinien und der Türkei; 3) Das Sonderlager für polnische Juden, die später nach Auschwitz transportiert wurden; 4) Das Ungarnlager; 5) Das Sternlager für Juden, hauptsächlich aus Westerbork; 6) Das Zeltlager; 7) Das Kleine Frauenlager für Auschwitz-Häftlinge; 8) Das Große Frauenlager."
+    },
+    "inmates": {
+      "sort": 5,
+      "title": "Arbeit im Lager",
+      "text": "Anfangs wurden nicht alle Gefangenen in Arbeitsbataillone geschickt. Nur Häftlinge aus den Häftlings- und Sternlagern mussten andere Lager instand halten und ausbauen, während Häftlinge aus dem Residenz-, Neutralen- und Ungarnlager verschont blieben. Mit der sich 1944 verschlechternden Frontlage verschwand jedoch diese Hierarchie, und immer mehr Menschen mussten harte Arbeit leisten. Gegen Ende des Krieges waren hauptsächlich Frauenlager der Rüstungsproduktion unterworfen. Die Menschen mussten widrige Bedingungen ertragen, die bis zur Erschöpfung führten, was zu einem raschen Anstieg der arbeitsunfähigen Häftlinge führte."
     },
     "food": {
-      "sort": 5,
+      "sort": 6,
       "title": "Essen im Lager",
-      "text": "„Bergen-Belsen war die Hölle auf Erden“ – Aussage von Alice Lok Cahana (USHMM). In Bergen-Belsen wurden die Essensrationen je nach Lager verteilt. Am knappsten war die Nahrung im Gefangenenlager. Im Jahr 1944 stieg die Zahl der Gefangenen stark an, was zu einer Verringerung der Essensrationen im gesamten Lager führte. 1945, als die Todesmärsche Bergen-Belsen erreichten, war der Hunger weit verbreitet. Es gab auch Fälle von Kannibalismus. Überlebende erinnerten sich an Insassen, die verzweifelt nach Wasser bettelten."
+      "text": "„Bergen-Belsen war die Hölle auf Erden“ – Zeugnis von Alice Lok Cahana (USHMM). In Bergen-Belsen wurden die Essensrationen nach den Lagern verteilt. Am knappsten war das Essen im Häftlingslager. Die scharfen Anstiege der Gefangenenzahl im Jahr 1944 führten zu einer Verringerung der Nahrungsrationen im gesamten Lager. 1945, als die Todesmärsche Bergen-Belsen erreichten, war die Hungersnot weit verbreitet. Es kam auch zu Fällen von Kannibalismus. Überlebende berichteten, dass Häftlinge in Qualen um Wasser bettelten."
     },
     "kitchen": {
-      "sort": 6,
+      "sort": 7,
       "title": "Die Lagerküche",
-      "text": "Diese Lagerküche bestand aus einer kleinen Baracke mit einem Gemüsekeller und einem kleinen Wasserbecken für Feuerlöschwasser. Jeden Tag warteten die Häftlinge in langen Schlangen auf eine Portion Nahrung, die mit dem Fortschreiten des Krieges immer knapper wurde. Schmutziges Essen und Wasser trugen zu den zunehmenden unsauberen Bedingungen in Bergen-Belsen bei, was zum Ausbruch von Typhus in den Jahren 1944-1945 führte."
+      "text": "Diese Lagerküche bestand aus einer kleinen Baracke mit einem Gemüsekeller und einem kleinen Becken für Feuerlöschwasser. Jeden Tag warteten die Gefangenen in langen Schlangen auf eine Essensportion, die mit fortschreitendem Krieg immer knapper wurde. Verunreinigtes Essen und Wasser trugen zu den zunehmenden unsauberen Bedingungen in Bergen-Belsen bei, die zum Typhusausbruch 1944-1945 führten."
+    }
+  },
+  "movies": {
+    "0": {
+      "topic": "Kinder in Bergen-Belsen",
+      "image": "/assets/AsscherChildren.jpg",
+      "title": "Eine Gruppe von Kindern sitzt vor einer Baracke",
+      "artist": "Louis Asscher"
+    },
+    "1": {
+      "topic": "Frauen in Bergen-Belsen",
+      "image": "/assets/AbadiFirewood.jpeg",
+      "title": "Frauen mit Brennholz",
+      "artist": "Ervin Abadi"
+    },
+    "2": {
+      "topic": "Wetter in Bergen-Belsen",
+      "image": "/assets/MerenyisBook.jpg",
+      "title": "Zsuzsa Merényis: Bildtagebuch aus Bergen-Belsen",
+      "artist": "Zsuzsa Merényis"
+    },
+    "3": {
+      "topic": "Befreiung",
+      "image": "/assets/AbadiUntitled.jpg",
+      "title": "Ohne Titel",
+      "artist": "Ervin Abadi"
     }
   }
 }

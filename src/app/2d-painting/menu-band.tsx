@@ -4,8 +4,7 @@ import { RefObject, useContext, useMemo, useRef } from "react";
 import { PaintingContext } from "./painting.context";
 import SplitSvg from "./split-svg";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
-import explorationData from "./explorationDataEn";
-import movieData from "./movieData";
+import explorationDataEn from "../locales/en/translation.json";
 import { InView } from "react-intersection-observer";
 import { Button } from "./ButtonRow";
 import { useTranslation } from "react-i18next";
@@ -17,11 +16,21 @@ export default function MenuBandprops() {
 
   const containerRef = useRef<HTMLElement>(null);
 
+  const [explorationData, movieData] = useMemo(() => {
+    return [explorationDataEn["detail-mode"], explorationDataEn["movies"]];
+  }, [explorationDataEn]);
+
   const sortedExplorationKeys = useMemo(() => {
     return Object.keys(explorationData).sort((a, b) => {
       return explorationData[a].sort - explorationData[b].sort;
     });
-  }, []);
+  }, [explorationData]);
+
+  const sortedMovieKeys = useMemo(() => {
+    return Object.keys(movieData).sort((a, b) => {
+      return parseInt(a) - parseInt(b);
+    });
+  }, [movieData]);
 
   const setInView = (inView: boolean, entry: IntersectionObserverEntry) => {
     //console.log(entry, itemRefs);
@@ -36,12 +45,13 @@ export default function MenuBandprops() {
     if (paintingContext?.mode === "default") {
       return (
         <div
-          className={`grid gap-2 h-full w-full grid-cols-[70%_1fr] grid-rows-4 absolute`}
+          className={`grid gap-2 h-full w-full grid-cols-[80%] grid-rows-4 absolute justify-center`}
         >
-          {movieData.map((e, i) => {
+          {sortedMovieKeys.map((k, i) => {
+            const e = movieData[k];
             return (
               <>
-                <div className="size-full relative">
+                <div className="size-full relative justify-center flex text-center">
                   <Image
                     key={`${i}-movie-link`}
                     alt={e.name}
@@ -51,7 +61,6 @@ export default function MenuBandprops() {
                     style={{
                       width: "100%",
                       height: "100%",
-                      margin: "-2px",
                       clipPath: "inset(4px 4px 4px 4px round 0px)",
                       objectFit: "cover",
                     }}
@@ -62,10 +71,25 @@ export default function MenuBandprops() {
                       paintingContext.updateImage(e.image);
                     }}
                   />
-                </div>
-                <div>
-                  <div className="flex items-bottom">
-                    {e.artist}: {e.title}
+                  <div className="absolute top-0 flex justify-center m-2 text-xl w-full text-white">
+                    <span
+                      style={{
+                        filter:
+                          "drop-shadow(0 1px 2px rgb(0 0 0 / 0.8)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.6))",
+                      }}
+                    >
+                      {t(`movies.${k}.topic`)}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-0 flex justify-center m-2 w-full text-white">
+                    <span
+                      style={{
+                        filter:
+                          "drop-shadow(0 1px 2px rgb(0 0 0 / 0.8)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.6))",
+                      }}
+                    >
+                      {t(`movies.${k}.artist`)}: {t(`movies.${k}.title`)}
+                    </span>
                   </div>
                 </div>
               </>
@@ -101,7 +125,7 @@ export default function MenuBandprops() {
               <div className="mb-3 text-xl font-bold">
                 <Button color="blue">{t("story-mode.title")}</Button>
               </div>
-              <div className="text-justify">{t("story-mode.text")}</div>
+              <div className="text-left">{t("story-mode.text")}</div>
               <div className="relative mt-3">
                 <div className="scroll-downs">
                   <div className="mousey">
@@ -125,7 +149,7 @@ export default function MenuBandprops() {
                             {t(`detail-mode.${e}.title`)}
                           </Button>
                         </div>
-                        <div className="text-justify">
+                        <div className="text-left">
                           {t(`detail-mode.${e}.text`)}
                         </div>
                       </div>
@@ -147,7 +171,7 @@ export default function MenuBandprops() {
                 {t(`${paintingContext?.mode}-mode.title`)}
               </Button>
             </div>
-            <div className="text-justify">
+            <div className="text-left">
               {t(`${paintingContext?.mode}-mode.text`)}
             </div>
           </div>
@@ -217,7 +241,7 @@ export default function MenuBandprops() {
                   )}
                 </Button>
               </div>
-              <div className="text-justify">
+              <div className="text-left">
                 {t(
                   `${paintingContext?.mode}-mode${
                     paintingContext?.storyElement != null
