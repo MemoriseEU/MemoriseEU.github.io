@@ -20,9 +20,9 @@ export default function LanguageSwitcher() {
             fontSize: "3em",
             lineHeight: "2em",
             opacity: 0.75,
-            "-webkit-user-select": "none",
-            "-ms-user-select": "none",
-            "user-select": "none",
+            WebkitUserSelect: "none",
+            msUserSelect: "none",
+            userSelect: "none",
           }}
           onClick={() => changeLanguage("en")}
           aria-label="United Kingdom"
@@ -36,9 +36,9 @@ export default function LanguageSwitcher() {
             fontSize: "3em",
             lineHeight: "2em",
             opacity: 0.75,
-            "-webkit-user-select": "none",
-            "-ms-user-select": "none",
-            "user-select": "none",
+            WebkitUserSelect: "none",
+            msUserSelect: "none",
+            userSelect: "none",
           }}
           onClick={() => changeLanguage("de")}
           aria-label="Germany"
