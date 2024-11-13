@@ -11,14 +11,18 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className="absolute right-4 z-[999] cursor-pointer">
+    <div className="z-[999] cursor-pointer">
       {i18n.language === "de" && (
         <ReactCountryFlag
           className="emojiFlag"
           countryCode="GB"
           style={{
-            fontSize: "2em",
+            fontSize: "3em",
             lineHeight: "2em",
+            opacity: 0.75,
+            "-webkit-user-select": "none",
+            "-ms-user-select": "none",
+            "user-select": "none",
           }}
           onClick={() => changeLanguage("en")}
           aria-label="United Kingdom"
@@ -29,8 +33,12 @@ export default function LanguageSwitcher() {
           className="emojiFlag"
           countryCode="DE"
           style={{
-            fontSize: "2em",
+            fontSize: "3em",
             lineHeight: "2em",
+            opacity: 0.75,
+            "-webkit-user-select": "none",
+            "-ms-user-select": "none",
+            "user-select": "none",
           }}
           onClick={() => changeLanguage("de")}
           aria-label="Germany"

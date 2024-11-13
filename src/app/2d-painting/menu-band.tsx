@@ -34,33 +34,45 @@ export default function MenuBandprops() {
 
   const content = useMemo(() => {
     if (paintingContext?.mode === "default") {
-      return movieData.map((e, i) => {
-        return (
-          <div
-            key={`${i}-movie-link`}
-            className="items-center flex justify-center relative w-full"
-          >
-            <Image
-              alt={e.name}
-              src={e.image}
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{
-                width: "auto",
-                height: "100%",
-                clipPath: "inset(4px 4px 4px 4px round 0px)",
-              }}
-              className="cursor-pointer"
-              onClick={() => {
-                paintingContext.updateMode("movie");
-                paintingContext.updateText(e.topic, e.title);
-                paintingContext.updateImage(e.image);
-              }}
-            />
-          </div>
-        );
-      });
+      return (
+        <div
+          className={`grid gap-2 h-full w-full grid-cols-[70%_1fr] grid-rows-4 absolute`}
+        >
+          {movieData.map((e, i) => {
+            return (
+              <>
+                <div className="size-full relative">
+                  <Image
+                    key={`${i}-movie-link`}
+                    alt={e.name}
+                    src={e.image}
+                    width={100}
+                    height={100}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      margin: "-2px",
+                      clipPath: "inset(4px 4px 4px 4px round 0px)",
+                      objectFit: "cover",
+                    }}
+                    className="cursor-pointer"
+                    onClick={() => {
+                      paintingContext.updateMode("movie");
+                      paintingContext.updateText(e.topic, e.title);
+                      paintingContext.updateImage(e.image);
+                    }}
+                  />
+                </div>
+                <div>
+                  <div className="flex items-bottom">
+                    {e.artist}: {e.title}
+                  </div>
+                </div>
+              </>
+            );
+          })}
+        </div>
+      );
     } else if (paintingContext?.mode === "movie") {
       return (
         <div className="items-center flex justify-center relative px-8 text-center">
@@ -221,9 +233,5 @@ export default function MenuBandprops() {
     }
   }, [movieData, paintingContext, t]);
 
-  return (
-    <div className="max-h-full grid grid-cols-1 grid-flow-rows gap-2 p-2 w-full z-[52] relative">
-      {content}
-    </div>
-  );
+  return <div className="max-h-full p-2 w-full z-[52] relative">{content}</div>;
 }

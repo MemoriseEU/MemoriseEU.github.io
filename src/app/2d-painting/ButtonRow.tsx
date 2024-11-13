@@ -35,7 +35,7 @@ export function Button(props: ButtonProps) {
         alt="orange brush smudge"
         src={buttonImages[imageIndex].replace("color", color)}
         fill={true}
-        className="z-[-1]"
+        className="z-[-1] opacity-80"
       />
       {children}
     </button>

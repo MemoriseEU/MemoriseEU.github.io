@@ -1,0 +1,26 @@
+<svg id="mySVG" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect
+      id="rectangle"
+      class="zoomable"
+      id="element1"
+      x="10"
+      y="10"
+      width="20"
+      height="20"
+      fill="blue"
+    />
+    <circle
+      class="zoomable"
+      id="element2"
+      cx="60"
+      cy="60"
+      r="15"
+      fill="green"
+    />
+    <polygon
+      class="zoomable"
+      id="element3"
+      points="70,20 80,40 60,40"
+      fill="orange"
+    />
+  </svg>
