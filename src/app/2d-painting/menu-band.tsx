@@ -17,7 +17,10 @@ export default function MenuBandprops() {
   const containerRef = useRef<HTMLElement>(null);
 
   const [explorationData, movieData] = useMemo(() => {
-    return [explorationDataEn["detail-mode"], explorationDataEn["movies"]];
+    return [
+      explorationDataEn["detail-mode"] as Record<string, any>,
+      explorationDataEn["movies"] as Record<string, any>,
+    ];
   }, [explorationDataEn]);
 
   const sortedExplorationKeys = useMemo(() => {
@@ -47,7 +50,7 @@ export default function MenuBandprops() {
         <div
           className={`grid gap-2 h-full w-full grid-cols-[80%] grid-rows-4 absolute justify-center`}
         >
-          {sortedMovieKeys.map((k, i) => {
+          {sortedMovieKeys.map((k: string, i) => {
             const e = movieData[k];
             return (
               <>

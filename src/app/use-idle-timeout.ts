@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useIdleTimer } from "react-idle-timer";
 /**
  * @param onIdle - function to notify user when idle timeout is close
