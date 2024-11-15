@@ -3,27 +3,16 @@
 import HomeButton from "@/components/home-button";
 import LanguageSwitcher from "@/components/language-switcher";
 
-const cards = [
-  {
-    image: "/assets/ErvinAbadiThumbnail.jpg",
-    text: "Erkunde Häftlings-Kunstwerke",
-    otherText: "Explore Prisoner Artwork",
-    path: "/2d-painting",
-  },
-  {
-    image: "/assets/stojkaThumbnail.jpeg",
-    text: "Ceija Stojkas Gemälde",
-    otherText: "Ceija Stojka's Paintings",
-    path: "/stojka",
-  },
-];
-
 export default function Stojka() {
   return (
-    <>
-      <div className="grid h-full max-h-full w-full grid-flow-row grid-rows-[auto,1fr,auto] gap-4 p-10"></div>
-      <HomeButton />
-      <LanguageSwitcher />
-    </>
+    <div className="relative size-full">
+      <div className="size-full flex items-center justify-center">
+        To be filled.
+      </div>
+      <div className="absolute top-0 left-0 w-full flex justify-between items-center px-4">
+        <HomeButton />
+        <LanguageSwitcher />
+      </div>
+    </div>
   );
 }

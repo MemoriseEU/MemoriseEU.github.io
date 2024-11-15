@@ -6,22 +6,30 @@ import { useIdleTimer } from "react-idle-timer";
  */
 interface IdleProps {
   onIdle: () => void;
+  onPrompt: () => void;
   idleTime: number;
 }
 
 const useIdleTimeout = (params: IdleProps) => {
-  const { onIdle, idleTime = 1 } = params;
+  const { onIdle, idleTime = 1, onPrompt } = params;
   const idleTimeout = 1000 * idleTime;
   const [isIdle, setIdle] = useState(false);
-  const handleIdle = () => {
+  const handlePrompt = () => {
+    onPrompt();
     setIdle(true);
+  };
+
+  const handleIdle = () => {
+    onIdle();
+    setIdle(false);
   };
   const idleTimer = useIdleTimer({
     timeout: idleTimeout,
-    promptTimeout: idleTimeout / 2,
-    onPrompt: onIdle,
+    promptBeforeIdle: idleTimeout / 2,
+    onPrompt: handlePrompt,
     onIdle: handleIdle,
-    debounce: 500,
+    debounce: 5,
+    stopOnIdle: true,
   });
   return {
     isIdle,

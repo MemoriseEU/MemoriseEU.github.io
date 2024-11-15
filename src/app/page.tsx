@@ -17,6 +17,12 @@ const cards = [
     otherText: "Ceija Stojka's Paintings",
     path: "/stojka",
   },
+  {
+    image: "/assets/unheardVoices.png",
+    text: "Ungehörte Stimmen",
+    otherText: "Unheared Voices",
+    path: "/unheard-voices",
+  },
 ];
 
 export default function Home() {
@@ -27,7 +33,7 @@ export default function Home() {
         <div className="text-center text-4xl ">Explore Visual Heritage</div>
       </div>
       <div className="flex justify-center items-center h-[80%] p-6 self-center w-full">
-        <div className="grid size-full grid-flow-row grid-cols-[1fr_min-content_1fr] p-2 gap-20 w-[90%]">
+        <div className="grid size-full grid-flow-row grid-cols-[1fr_min-content_1fr_min-content_1fr] p-2 gap-20 w-[90%]">
           {cards.map((e, i) => {
             return (
               <>
