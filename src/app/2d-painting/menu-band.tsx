@@ -260,5 +260,9 @@ export default function MenuBandprops() {
     }
   }, [movieData, paintingContext, t]);
 
-  return <div className="max-h-full p-2 w-full z-[52] relative">{content}</div>;
+  return (
+    <div className="max-h-full p-2 w-full z-[52] relative dark:text-black">
+      {content}
+    </div>
+  );
 }
