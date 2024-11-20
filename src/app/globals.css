@@ -16,6 +16,26 @@
   }
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 html {
   height: 100%;
 }
@@ -170,7 +190,7 @@ input:checked + .slider:before {
   fill: transparent;
 }
 
-.cls-1 {
+.cls-2 {
   fill: transparent;
   fill-rule: evenodd;
   cursor: pointer;
@@ -179,13 +199,13 @@ input:checked + .slider:before {
   transform-origin: center;
 }
 
-.cls-1:hover {
+.cls-2:hover {
   /* stroke-width: 1px; */
   stroke: #4f4f4f;
   stroke-width: 0.5px;
 }
 
-.cls-1 > path {
+.cls-2 > path {
   fill: transparent;
   fill-rule: evenodd;
   cursor: pointer;
@@ -194,7 +214,7 @@ input:checked + .slider:before {
   transform-origin: center;
 }
 
-.cls-1:hover > path {
+.cls-2:hover > path {
   /* stroke-width: 1px; */
   stroke: #4f4f4f;
   stroke-width: 0.5px;
@@ -284,16 +304,26 @@ input:checked + .slider:before {
   }
 }
 
-/* .cls-1 {
+/* .cls-2 {
   animation: moveLeftRightFront 3s ease-in-out infinite;
 } */
 
-.animated .cls-1 {
+.animated .cls-2 {
   animation: fillBreathing 4s ease-in-out infinite;
 }
 
-.animated .cls-1 > path {
+.animated .cls-2 > path {
   animation: fillBreathing 4s ease-in-out infinite;
+}
+
+.highlighted {
+  stroke: rgb(223, 164, 76);
+  stroke-width: 1;
+}
+
+.highlighted > path {
+  stroke: rgb(223, 164, 76);
+  stroke-width: 1;
 }
 
 /* .front {

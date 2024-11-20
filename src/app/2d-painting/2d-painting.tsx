@@ -8,51 +8,32 @@ import {
   useRef,
   useState,
 } from "react";
-import MySVG from "../../../public/assets/Ervin Abadi B-B View final2_70dpi.svg";
+import MySVG from "../../../public/assets/6000px Ervin Abadi Perpective view B-B all duplicated layers 2.svg";
 import explorationDataEn from "../locales/en/translation.json";
 import { PaintingContext } from "./painting.context";
 import shortid from "shortid";
 import { useTranslation } from "react-i18next";
 
-const pathMapping = [
-  "path34",
-  "path32",
-  "path30",
-  "path14",
-  "path22",
-  "path24",
-  "path26",
-  "path18",
-  "path20",
-  "path16",
-  "path36",
-  "path46",
-  "path40",
-  "path44",
-  "path42",
-  "path38",
-  "path12",
-  "path10",
-];
-
 const storyPathMapping = {
-  kitchen: "path239",
-  fences: "g231",
-  food: "path239",
-  watchtower: "path307",
-  guards: "path331",
-  barracks: "path139",
-  inmates: "g253",
+  kitchen: "g316",
+  fences: "g304",
+  food: "g330",
+  watchtower: "path358",
+  guards: "g763",
+  barracks: "path230",
+  inmates: "g339",
+  documentation: "writing_Image_copy",
 } as Record<string, string>;
 
 const pathStoryMapping = {
-  path239: "kitchen",
-  g231: "fences",
-  // food: "path10",
-  g790: "watchtower: ",
-  g798: "guards",
-  g151: "barracks",
-  g253: "inmates",
+  g316: "kitchen",
+  g304: "fences",
+  g330: "food",
+  guard_tower_centre_Image_copy: "watchtower",
+  g763: "guards",
+  g242: "barracks",
+  g339: "inmates",
+  writing_Image_copy: "documentation",
 } as Record<string, string>;
 
 export default function Painting() {
@@ -73,7 +54,14 @@ export default function Painting() {
       const svg = (svgRef.current as SVGGraphicsElement).querySelector("svg");
       const element = document.getElementById(elementId) as unknown;
 
+      const elems = document.querySelectorAll(".highlighted");
+
+      [].forEach.call(elems, function (el) {
+        (el as HTMLElement).classList.remove("highlighted");
+      });
+
       if (element != null && svg) {
+        (element as HTMLElement).classList.add("highlighted");
         const bbox = (element as SVGGraphicsElement).getBBox();
         const padding =
           (parseInt(svg.getAttribute("width") as string) / 100) * 15;
@@ -90,6 +78,11 @@ export default function Painting() {
 
   const resetView = () => {
     if (svgRef.current != null) {
+      const elems = document.querySelectorAll(".highlighted");
+      [].forEach.call(elems, function (el) {
+        (el as HTMLElement).classList.remove("highlighted");
+      });
+
       const svg = (svgRef.current as SVGGraphicsElement).querySelector("svg");
       if (svg != null) {
         const width = svg.getBBox().width;
@@ -135,7 +128,7 @@ export default function Painting() {
   useEffect(() => {
     if (svgRef.current) {
       const circleElements = (svgRef.current as SVGSVGElement).querySelectorAll(
-        ".cls-1"
+        ".cls-2"
       );
 
       const images = (svgRef.current as SVGSVGElement).querySelectorAll(
@@ -150,6 +143,7 @@ export default function Painting() {
         ) {
           if (e.target != null) {
             const clickedID = (e.target as HTMLElement).id;
+            console.log(e.target as HTMLElement);
             const groupID = (
               (e.target as HTMLElement).parentElement as HTMLElement
             ).id;

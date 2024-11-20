@@ -31,6 +31,8 @@ const cards = [
   },
 ];
 
+const girdClassString = `p-2 gap-10 w-full grid size-full grid-flow-col grid-cols-[repeat(4,_1fr_min-content)]`;
+
 export default function Home() {
   return (
     <div className="grid h-full max-h-full w-full grid-flow-row grid-rows-[auto,1fr,auto] gap-4 p-10">
@@ -39,7 +41,7 @@ export default function Home() {
         <div className="text-center text-4xl ">Explore Visual Heritage</div>
       </div>
       <div className="flex justify-center items-center h-[80%] p-6 self-center w-full">
-        <div className="grid size-full grid-flow-row grid-cols-[1fr_min-content_1fr_min-content_1fr_min-content_1fr] p-2 gap-20 w-[90%]">
+        <div className={girdClassString}>
           {cards.map((e, i) => {
             return (
               <>
@@ -77,9 +79,9 @@ export default function Home() {
       </div>
       <div>
         <div className="grid justify-center gap-1">
-          <div className="text-center text-4xl">Zum Starten antippen</div>
+          <div className="text-center text-4xl">Zum Starten auswählen</div>
           <div className="text-center text-3xl text-gray-700">
-            Touch to begin
+            Select to begin
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { cloneElement, useContext, useEffect, useRef } from "react";
-import MySVG from "../../../public/assets/Ervin Abadi B-B View final2_70dpi.svg";
+import MySVG from "../../../public/assets/6000px Ervin Abadi Perpective view B-B all duplicated layers 2.svg";
 import { PaintingContext } from "./painting.context";
 import SplitSvg from "./split-svg";
 

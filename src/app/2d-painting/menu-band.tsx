@@ -9,7 +9,7 @@ import { InView } from "react-intersection-observer";
 import { Button } from "./ButtonRow";
 import { useTranslation } from "react-i18next";
 
-export default function MenuBandprops() {
+export default function MenuBand() {
   const paintingContext = useContext(PaintingContext);
 
   const { t } = useTranslation();
@@ -53,49 +53,56 @@ export default function MenuBandprops() {
           {sortedMovieKeys.map((k: string, i) => {
             const e = movieData[k];
             return (
-              <>
-                <div className="size-full relative justify-center flex text-center">
-                  <Image
-                    key={`${i}-movie-link`}
-                    alt={e.name}
-                    src={e.image}
-                    width={100}
-                    height={100}
+              <div
+                key={`movie-link-${i}`}
+                className="size-full relative justify-center flex text-center"
+              >
+                <Image
+                  key={`${i}-image-link`}
+                  alt={`${e.name}-${i}`}
+                  src={e.image}
+                  width={100}
+                  height={100}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    clipPath: "inset(4px 4px 4px 4px round 0px)",
+                    objectFit: "cover",
+                  }}
+                  className="cursor-pointer"
+                  onClick={() => {
+                    paintingContext.updateMode("movie");
+                    paintingContext.updateText(e.topic, e.title);
+                    paintingContext.updateImage(e.image);
+                  }}
+                />
+                <div
+                  key={`movie-text-${i}`}
+                  className="absolute top-0 flex justify-center m-2 text-xl w-full text-white"
+                >
+                  <span
                     style={{
-                      width: "100%",
-                      height: "100%",
-                      clipPath: "inset(4px 4px 4px 4px round 0px)",
-                      objectFit: "cover",
+                      filter:
+                        "drop-shadow(0 1px 2px rgb(0 0 0 / 0.8)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.6))",
                     }}
-                    className="cursor-pointer"
-                    onClick={() => {
-                      paintingContext.updateMode("movie");
-                      paintingContext.updateText(e.topic, e.title);
-                      paintingContext.updateImage(e.image);
-                    }}
-                  />
-                  <div className="absolute top-0 flex justify-center m-2 text-xl w-full text-white">
-                    <span
-                      style={{
-                        filter:
-                          "drop-shadow(0 1px 2px rgb(0 0 0 / 0.8)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.6))",
-                      }}
-                    >
-                      {t(`movies.${k}.topic`)}
-                    </span>
-                  </div>
-                  <div className="absolute bottom-0 flex justify-center m-2 w-full text-white">
-                    <span
-                      style={{
-                        filter:
-                          "drop-shadow(0 1px 2px rgb(0 0 0 / 0.8)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.6))",
-                      }}
-                    >
-                      {t(`movies.${k}.artist`)}: {t(`movies.${k}.title`)}
-                    </span>
-                  </div>
+                  >
+                    {t(`movies.${k}.topic`)}
+                  </span>
                 </div>
-              </>
+                <div
+                  key={`movie-text-alternative-${i}`}
+                  className="absolute bottom-0 flex justify-center m-2 w-full text-white"
+                >
+                  <span
+                    style={{
+                      filter:
+                        "drop-shadow(0 1px 2px rgb(0 0 0 / 0.8)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.6))",
+                    }}
+                  >
+                    {t(`movies.${k}.artist`)}: {t(`movies.${k}.title`)}
+                  </span>
+                </div>
+              </div>
             );
           })}
         </div>
@@ -139,10 +146,15 @@ export default function MenuBandprops() {
             </div>
             {sortedExplorationKeys.map((e: string, i) => {
               return (
-                <InView onChange={setInView} threshold={0.5} key={e}>
+                <InView
+                  onChange={setInView}
+                  threshold={0.5}
+                  key={`${e}-element-${i}`}
+                >
                   {({ ref }) => {
                     return (
                       <div
+                        key={`in-view-item-${i}`}
                         className="flex justify-center items-center flex-col h-full w-full text-center px-8"
                         data-elementid={e}
                         ref={ref}
