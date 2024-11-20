@@ -12,7 +12,7 @@ const cards = [
     path: "/2d-painting",
   },
   {
-    image: "/assets/stojkaThumbnail.jpeg",
+    image: "/assets/dead.png",
     text: "Ceija Stojkas Gemälde",
     otherText: "Ceija Stojka's Paintings",
     path: "/stojka",

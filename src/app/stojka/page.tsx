@@ -13,6 +13,15 @@ export default function Stojka() {
 
   const [selectedPane, setSelectedPane] = useState<string | null>(null);
 
+  const data = {
+    dead: "Credit: Ceija Stojka, Bergen Belsen (Ink on paper, 2003). Courtesy: Stiftung Kai Dikhas. Photo: Diego Castellano.",
+    tree: "Credit: Ceija Stojka, Wer hat meinen Baum gefällt (Acrylic on cardboard, 1996). Courtesy: Stiftung Kai Dikhas. Photo: Diego Castellano.",
+    memories:
+      "Extract from: Unter den Brettern hellgrünes Gras / Regie: Karin Berger / Produktion: Navigator Film.",
+    april:
+      "Credit: Ceija Stojka, Der 15. April 1945. Noch wussten wir nicht, dass dieser Tag unser Freiheitstag war. So war es. (Mixed media on paper, 2004). Courtesy: Stiftung Kai Dikhas. Photo: Diego Castellano.",
+  };
+
   const content = useMemo(() => {
     switch (selectedPane) {
       case "words":
@@ -34,13 +43,17 @@ export default function Stojka() {
       case "memories":
       case "april":
         return (
-          <div className="size-full border relative">
-            <Image
-              src={`assets/${selectedPane}.png`}
-              alt={"Words"}
-              fill={true}
-              style={{ objectFit: "contain" }}
-            />
+          <div className="size-full border relative grid grid-rows-[min-content_1fr_min-content]">
+            <div className=""></div>
+            <div className="size-full relative">
+              <Image
+                src={`assets/${selectedPane}.png`}
+                alt={"Words"}
+                fill={true}
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+            <div className=" text-center p-2">{data[selectedPane]}</div>
           </div>
         );
 
