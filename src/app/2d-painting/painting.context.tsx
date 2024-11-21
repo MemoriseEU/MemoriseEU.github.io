@@ -11,6 +11,11 @@ export type Mode =
   | "story"
   | "movie";
 
+export interface VideoLinks {
+  offline: string;
+  online: string;
+}
+
 export interface PaintingContextType {
   mode: Mode | null;
   updateMode: (m: Mode | null) => void;
@@ -23,8 +28,8 @@ export interface PaintingContextType {
   updateCompositionLayers: (cL: Record<string, any>) => void;
   svgRef: Ref<HTMLElement>;
   updateSVGRef: (ref: Ref<HTMLElement>) => void;
-  storyElement: string | null;
-  updateStoryElement: (el: string | null) => void;
+  storyElement: string | VideoLinks | null;
+  updateStoryElement: (el: string | VideoLinks | null) => void;
 }
 
 interface PaintingProviderProps {
@@ -39,7 +44,9 @@ export function PaintingProvider(props: PaintingProviderProps): JSX.Element {
   const [text, setText] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [image, setImage] = useState<string | null>(null);
-  const [storyElement, setStoryElement] = useState<string | null>(null);
+  const [storyElement, setStoryElement] = useState<string | VideoLinks | null>(
+    null
+  );
   const [svgRef, setSVGRef] = useState<Ref<HTMLElement> | null>(null);
   const [compositionLayers, setCompositionLayers] = useState<
     Record<string, any>
@@ -64,7 +71,7 @@ export function PaintingProvider(props: PaintingProviderProps): JSX.Element {
       setSVGRef(ref);
     };
 
-    const updateStoryElement = (el: string | null) => {
+    const updateStoryElement = (el: string | VideoLinks | null) => {
       setStoryElement(el);
     };
 

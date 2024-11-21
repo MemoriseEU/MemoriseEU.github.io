@@ -6,6 +6,7 @@ import { useContext, useEffect, useMemo } from "react";
 import CompositionPainting from "./CompositionPainting";
 import MovieViewer from "./MovieViewer";
 import { PaintingContext } from "./painting.context";
+import { CursorArrowRippleIcon } from "@heroicons/react/24/outline";
 
 export default function MainContent() {
   const paintingContext = useContext(PaintingContext);

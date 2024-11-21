@@ -8,6 +8,7 @@ import explorationDataEn from "../locales/en/translation.json";
 import { InView } from "react-intersection-observer";
 import { Button } from "./ButtonRow";
 import { useTranslation } from "react-i18next";
+import { CursorArrowRaysIcon, FilmIcon } from "@heroicons/react/24/outline";
 
 export default function MenuBand() {
   const paintingContext = useContext(PaintingContext);
@@ -48,37 +49,18 @@ export default function MenuBand() {
     if (paintingContext?.mode === "default") {
       return (
         <div
-          className={`grid gap-2 h-full w-full grid-cols-[80%] grid-rows-4 absolute justify-center`}
+          className={`grid gap-2 h-full w-full grid-cols-[80%] grid-rows-[1fr_1fr] absolute justify-center`}
         >
           {sortedMovieKeys.map((k: string, i) => {
             const e = movieData[k];
             return (
               <div
                 key={`movie-link-${i}`}
-                className="size-full relative justify-center flex text-center"
+                className="size-full relative justify-center text-center grid"
               >
-                <Image
-                  key={`${i}-image-link`}
-                  alt={`${e.name}-${i}`}
-                  src={e.image}
-                  width={100}
-                  height={100}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    clipPath: "inset(4px 4px 4px 4px round 0px)",
-                    objectFit: "cover",
-                  }}
-                  className="cursor-pointer"
-                  onClick={() => {
-                    paintingContext.updateMode("movie");
-                    paintingContext.updateText(e.topic, e.title);
-                    paintingContext.updateImage(e.image);
-                  }}
-                />
                 <div
                   key={`movie-text-${i}`}
-                  className="absolute top-0 flex justify-center m-2 text-xl w-full text-white"
+                  className="flex justify-center text-xl w-full text-white items-end"
                 >
                   <span
                     style={{
@@ -89,9 +71,36 @@ export default function MenuBand() {
                     {t(`movies.${k}.topic`)}
                   </span>
                 </div>
+                <div className="size-full relative">
+                  <Image
+                    key={`${i}-image-link`}
+                    alt={`${e.name}-${i}`}
+                    src={e.image}
+                    width={100}
+                    height={100}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      clipPath: "inset(4px 4px 4px 4px round 0px)",
+                      objectFit: "cover",
+                    }}
+                    className="cursor-pointer"
+                    onClick={() => {
+                      paintingContext.updateMode("movie");
+                      paintingContext.updateText(k);
+                      paintingContext.updateImage(e.image);
+                      paintingContext.updateStoryElement(e.link);
+                    }}
+                  />
+                  <FilmIcon
+                    width={35}
+                    height={35}
+                    className="absolute bottom-4 right-4"
+                  />
+                </div>
                 <div
                   key={`movie-text-alternative-${i}`}
-                  className="absolute bottom-0 flex justify-center m-2 w-full text-white"
+                  className="flex justify-center w-full text-white"
                 >
                   <span
                     style={{
@@ -110,7 +119,6 @@ export default function MenuBand() {
     } else if (paintingContext?.mode === "movie") {
       return (
         <div className="items-center flex justify-center relative px-8 text-center">
-          {/* <div className="grid grid-flow-row grid-cols-2"> */}
           <div className="grid grid-rows-[auto_auto_auto] w-full p-5">
             {paintingContext.image && (
               <Image
@@ -121,9 +129,13 @@ export default function MenuBand() {
                 style={{ width: "100%", height: "auto", margin: "10px" }}
               />
             )}
-            <div className="mb-3 font-bold">{paintingContext?.title}</div>
-            <div>{paintingContext?.text}</div>
-            {/* </div> */}
+            <div className="mb-3 font-bold text-xl">
+              {t(`movies.${paintingContext?.text}.topic`)}
+            </div>
+            <div className="italic text-lg">
+              {t(`movies.${paintingContext?.text}.title`)}
+            </div>
+            <div>by {t(`movies.${paintingContext?.text}.artist`)}</div>
           </div>
         </div>
       );
@@ -264,6 +276,19 @@ export default function MenuBand() {
                       : ""
                   }.text`
                 )}
+              </div>
+              <div className="relative mt-3">
+                <Image
+                  src="/images/prisoner.png"
+                  alt="Guard"
+                  width={25}
+                  height={25}
+                />
+                <CursorArrowRaysIcon
+                  width={45}
+                  height={45}
+                  className="absolute top-1/4 left-[-8px]"
+                />
               </div>
             </div>
           </div>

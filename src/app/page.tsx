@@ -3,6 +3,7 @@
 import HomeButton from "@/components/home-button";
 import Image from "next/image";
 import Link from "next/link";
+import { Fragment } from "react";
 
 const cards = [
   {
@@ -44,7 +45,7 @@ export default function Home() {
         <div className={girdClassString}>
           {cards.map((e, i) => {
             return (
-              <>
+              <Fragment key={`menu-item=${i}`}>
                 <Link href={e.path}>
                   <div
                     key={`card-${i}-text`}
@@ -72,7 +73,7 @@ export default function Home() {
                 {i < cards.length - 1 && (
                   <div className="border border-slate-500 h-[105%]"></div>
                 )}
-              </>
+              </Fragment>
             );
           })}
         </div>

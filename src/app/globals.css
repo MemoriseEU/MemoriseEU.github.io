@@ -240,13 +240,13 @@ input:checked + .slider:before {
 
 @keyframes fillBreathing {
   0% {
-    fill: rgba(255, 255, 255, 0.4); /* White */
+    fill: rgba(255, 255, 255, 0); /* White */
   }
   50% {
-    fill: rgba(255, 255, 255, 0.1); /* Transparent */
+    fill: rgba(255, 255, 255, 0.6); /* Transparent */
   }
   100% {
-    fill: rgba(255, 255, 255, 0.4); /* White */
+    fill: rgba(255, 255, 255, 0); /* White */
   }
 }
 
@@ -318,8 +318,8 @@ input:checked + .slider:before {
 }
 
 .highlighted {
-  stroke: rgb(223, 164, 76);
-  stroke-width: 1;
+  stroke: rgb(223, 164, 76) !important;
+  stroke-width: 1 !important;
 }
 
 .highlighted > path {
@@ -549,4 +549,48 @@ input:checked + .slider:before {
     transform: translateY(15px);
     opacity: 0;
   }
+}
+
+/* Keyframes for fade-in and fade-out animation */
+@keyframes fadeStrokeInOut {
+  0% {
+    stroke-opacity: 0; /* Fully transparent */
+    stroke: rgb(223, 164, 76);
+    stroke-width: 1px;
+  }
+  50% {
+    stroke-opacity: 1; /* Fully visible */
+    stroke: rgb(223, 164, 76);
+    stroke-width: 1px;
+  }
+  100% {
+    stroke-opacity: 0; /* Fully transparent again */
+    stroke: rgb(223, 164, 76);
+    stroke-width: 1px;
+  }
+}
+
+/* Apply the animation to the path */
+.fade-stroke-animation {
+  /* stroke: rgb(223, 164, 76);
+  stroke-width: 1px; */
+  animation: fillBreathing 2s ease-in-out forwards;
+}
+
+.fade-stroke-animation > path {
+  /* stroke: rgb(223, 164, 76);
+  stroke-width: 1px; */
+  animation: fillBreathing 2s ease-in-out forwards;
+}
+
+.fade-stroke-animation-forever {
+  stroke: rgb(223, 164, 76);
+  stroke-width: 1px;
+  animation: fadeStrokeInOut 1s ease-in-out forwards infinite;
+}
+
+.fade-stroke-animation-forever > path {
+  stroke: rgb(223, 164, 76);
+  stroke-width: 1px;
+  animation: fadeStrokeInOut 1s ease-in-out forwards infinite;
 }

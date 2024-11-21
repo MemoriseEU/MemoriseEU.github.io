@@ -13,22 +13,24 @@ import explorationDataEn from "../locales/en/translation.json";
 import { PaintingContext } from "./painting.context";
 import shortid from "shortid";
 import { useTranslation } from "react-i18next";
+import { CursorArrowRippleIcon } from "@heroicons/react/24/outline";
+import { CursorArrowRaysIcon } from "@heroicons/react/24/outline";
 
 const storyPathMapping = {
-  kitchen: "g316",
+  kitchen: "path310",
   fences: "g304",
-  food: "g330",
+  food: "path319",
   watchtower: "path358",
   guards: "g763",
   barracks: "path230",
   inmates: "g339",
-  documentation: "writing_Image_copy",
+  documentation: "path224",
 } as Record<string, string>;
 
 const pathStoryMapping = {
-  g316: "kitchen",
+  path310: "kitchen",
   g304: "fences",
-  g330: "food",
+  path319: "food",
   guard_tower_centre_Image_copy: "watchtower",
   g763: "guards",
   g242: "barracks",
@@ -55,7 +57,6 @@ export default function Painting() {
       const element = document.getElementById(elementId) as unknown;
 
       const elems = document.querySelectorAll(".highlighted");
-
       [].forEach.call(elems, function (el) {
         (el as HTMLElement).classList.remove("highlighted");
       });
@@ -99,6 +100,45 @@ export default function Painting() {
     }
   };
 
+  const startBlinking = () => {
+    const elems = document.querySelectorAll(".cls-2");
+
+    elems.forEach((el, index) => {
+      setTimeout(() => {
+        (el as HTMLElement).classList.add("fade-stroke-animation");
+        setTimeout(() => {
+          (el as HTMLElement).classList.remove("fade-stroke-animation");
+        }, 1999);
+      }, index * 2000);
+    });
+  };
+
+  const blinkStrokes = () => {
+    const elems = document.querySelectorAll(".cls-2");
+    /*  console.log(
+      Array.from(elems).sort((a, b) => {
+        return (
+          (a as HTMLElement).getBoundingClientRect().x -
+          (b as HTMLElement).getBoundingClientRect().x
+        );
+      })
+    ); */
+
+    Array.from(elems)
+      .sort((a, b) => {
+        return (
+          (a as HTMLElement).getBoundingClientRect().x -
+          (b as HTMLElement).getBoundingClientRect().x
+        );
+      })
+      .forEach((el, index) => {
+        (el as HTMLElement).classList.remove("fade-stroke-animation");
+        setTimeout(function () {
+          (el as HTMLElement).classList.add("fade-stroke-animation");
+        }, index * 100);
+      });
+  };
+
   const animateViewBox = (
     svg: SVGSVGElement,
     startViewBox: any,
@@ -135,6 +175,12 @@ export default function Painting() {
         "image"
       );
 
+      /* startBlinking();
+      setInterval(
+        startBlinking,
+        document.querySelectorAll(".cls-2").length * 2000
+      );*/
+
       const clickHandler = (e: Event) => {
         e.stopImmediatePropagation();
         if (
@@ -143,7 +189,6 @@ export default function Painting() {
         ) {
           if (e.target != null) {
             const clickedID = (e.target as HTMLElement).id;
-            console.log(e.target as HTMLElement);
             const groupID = (
               (e.target as HTMLElement).parentElement as HTMLElement
             ).id;
@@ -249,13 +294,11 @@ export default function Painting() {
       className="size-full flex justify-center resize-none relative"
     >
       <MySVG
-        className={`absolute painting size-full ${
+        className={`painting size-full object-contain absolute ${
           paintingContext?.mode === "default"
             ? "cursor-pointer"
             : "cursor-default"
-        } ${
-          paintingContext?.mode === "composition" ? "" : "animated"
-        } object-contain`}
+        }`}
         onClick={() => {
           if (
             paintingContext?.mode === "default" ||
@@ -267,9 +310,17 @@ export default function Painting() {
               "Exploration Mode"
             );
           }
+          blinkStrokes();
         }}
       />
       {pointerLine}
+      {paintingContext?.mode === "default" && (
+        <CursorArrowRaysIcon
+          width={55}
+          height={55}
+          className="absolute top-1/4 left-1/2 pointer-events-none"
+        />
+      )}
     </div>
   );
 }
