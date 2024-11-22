@@ -277,19 +277,21 @@ export default function MenuBand() {
                   }.text`
                 )}
               </div>
-              <div className="relative mt-3">
-                <Image
-                  src="/images/prisoner.png"
-                  alt="Guard"
-                  width={25}
-                  height={25}
-                />
-                <CursorArrowRaysIcon
-                  width={45}
-                  height={45}
-                  className="absolute top-1/4 left-[-8px]"
-                />
-              </div>
+              {paintingContext?.mode === "exploration" && (
+                <div className="relative mt-3">
+                  <Image
+                    src="/images/prisoner.png"
+                    alt="Guard"
+                    width={25}
+                    height={25}
+                  />
+                  <CursorArrowRaysIcon
+                    width={45}
+                    height={45}
+                    className="absolute top-1/4 left-[-8px]"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
