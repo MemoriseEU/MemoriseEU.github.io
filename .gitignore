@@ -13,6 +13,11 @@
 /.next/
 /out/
 
+/dist panel 2/
+/out panel 2/
+/dist/
+/dist 2/
+
 # production
 /build
 

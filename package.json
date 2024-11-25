@@ -1,14 +1,21 @@
 {
-  "name": "memorise",
-  "version": "0.1.0",
+  "name": "memorise-panel-7",
+  "version": "1.0.0",
   "private": true,
+  "description": "The memorise panel 7 for the exhibition in Bergen-Belsen",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "electron-dev": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-pack": "npm run build && electron-builder"
+    "electron-pack": "npm run build && electron-builder",
+    "electron": "electron .",
+    "cors-server": "node server/cors-server.js",
+    "serv-latest": "npx serve@latest out",
+    "el-forge-start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "dependencies": {
     "@electron/remote": "^2.1.2",
@@ -17,12 +24,14 @@
     "@react-three/fiber": "^8.17.10",
     "@stefanprobst/assert": "^1.0.3",
     "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.0",
     "electron-is-dev": "^3.0.1",
     "i18next": "^23.16.5",
     "next": "^14.2.15",
     "react": "^18.3.1",
     "react-country-flag": "^3.1.0",
     "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
     "react-i18next": "^15.1.1",
     "react-idle-timer": "^5.7.2",
     "react-intersection-observer": "^9.13.1",
@@ -33,20 +42,29 @@
     "tailwindcss": "^3.4.14",
     "three": "^0.169.0",
     "three-stdlib": "^2.33.0",
-    "tween": "^0.9.0"
+    "tween": "^0.9.0",
+    "electron-squirrel-startup": "^1.0.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/shortid": "^2.2.0",
-    "electron": "^33.1.0",
     "electron-builder": "^25.1.8",
     "eslint": "^9.13.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "@electron-forge/cli": "^7.5.0",
+    "@electron-forge/maker-deb": "^7.5.0",
+    "@electron-forge/maker-rpm": "^7.5.0",
+    "@electron-forge/maker-squirrel": "^7.5.0",
+    "@electron-forge/maker-zip": "^7.5.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
+    "@electron-forge/plugin-fuses": "^7.5.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^33.2.0"
   },
   "main": "main.js",
   "build": {
-    "appId": "your.app.id",
+    "appId": "memorise.panel.7",
     "files": [
       "out",
       "main.js"

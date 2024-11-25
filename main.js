@@ -1,33 +1,64 @@
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let win;
+const { app, BrowserWindow, BrowserView, ipcMain } = require("electron");
 
-async function createWindow() {
-  // Create the browser window.
-  win = new BrowserWindow({
-    width: 800,
-    height: 600,
+let mainWindow;
+const reactApp = true;
+
+function createWindow() {
+  mainWindow = new BrowserWindow({
+    width: 1200,
+    height: 800,
     webPreferences: {
-      nodeIntegration: false, // is default value after Electron v5
-      contextIsolation: true, // protect against prototype pollution
-      enableRemoteModule: false, // turn off remote
-      preload: path.join(__dirname, "preload.js"), // use a preload script
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: __dirname + "/preload.js", // Preload script for IPC communication
     },
   });
 
-  // Load app
-  win.loadFile(path.join(__dirname, "dist/index.html"));
-
-  // rest of code..
+  // mainWindow.loadFile("index.html");
+  reactApp
+    ? mainWindow.loadURL("http://localhost:8083/")
+    : mainWindow.loadURL("http://localhost:8084/");
 }
 
-app.on("ready", createWindow);
-
-ipcMain.on("toMain", (event, args) => {
-  fs.readFile("path/to/file", (error, data) => {
-    // Do something with file contents
-
-    // Send result back to renderer process
-    win.webContents.send("fromMain", responseObj);
+// Helper function to create a BrowserView with a specified URL
+function createBrowserView(url) {
+  const view = new BrowserView({
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
   });
+  view.webContents.loadURL(url);
+  return view;
+}
+
+// Helper function to adjust the BrowserView to fit within the window below the menu
+function adjustViewBounds(view) {
+  const menuHeight = 50;
+  view.setBounds({ x: 0, y: menuHeight, width: 1200, height: 750 });
+  view.setAutoResize({ width: true, height: true });
+}
+
+app.whenReady().then(() => {
+  /* session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        "Content-Security-Policy": ["default-src 'self'"],
+      },
+    });
+  }); */
+  createWindow();
+});
+
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
+});
+
+app.on("activate", () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
 });

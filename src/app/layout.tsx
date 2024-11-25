@@ -1,10 +1,11 @@
 "use client";
+import type { Metadata } from "next";
 import { Lato } from "next/font/google";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import "./globals.css";
 import "./i18n";
 import useIdleTimeout from "./use-idle-timeout";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
 
 const lato = Lato({ weight: "400", subsets: ["latin"] });
 
