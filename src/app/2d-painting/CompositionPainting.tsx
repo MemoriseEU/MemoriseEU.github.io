@@ -53,6 +53,10 @@ export default function CompositionPainting() {
     }
   }, [paintingContext?.mode, paintingContext?.compositionLayers]);
 
+  useEffect(() => {
+    paintingContext?.updateCompositionLayers({});
+  }, []);
+
   return (
     <div
       ref={svgRef}

@@ -1,9 +1,7 @@
-/* const { exec } = require("child_process");
+/* const { contextBridge, ipcRenderer } = require("electron");
 
-console.log("PRELOAD");
-
-// All of the Node.js APIs are available in the preload process.
-window.addEventListener("DOMContentLoaded", () => {
-  exec(`npm run serv-latest`);
+contextBridge.exposeInMainWorld("electronAPI", {
+  selectTab: (tab) => ipcRenderer.send("select-tab", tab),
+  loadPreferences: () => ipcRenderer.invoke('load-prefs')
 });
  */

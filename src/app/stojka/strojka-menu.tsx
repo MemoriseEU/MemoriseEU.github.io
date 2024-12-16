@@ -1,8 +1,6 @@
 "use client";
 
-import HomeButton from "@/components/home-button";
-import LanguageSwitcher from "@/components/language-switcher";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { InView } from "react-intersection-observer";
 import { StrojkaContext } from "./StrojkaProvider";
@@ -19,6 +17,15 @@ export default function StojkaMenu(props: MenuProps) {
   interface ContentProps {
     pane: string;
   }
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [root, setRoot] = useState<Element | null>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      setRoot(scrollRef.current);
+    }
+  }, []);
 
   const Content = (props: ContentProps) => {
     const { pane = null } = props;
@@ -139,13 +146,18 @@ export default function StojkaMenu(props: MenuProps) {
   };
 
   return (
-    <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
-      <div className="relative h-full py-8">
+    // <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
+    <div
+      className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute"
+      ref={scrollRef}
+    >
+      <div className="flex flex-col p-6">
         {panes.map((e: string, i) => {
           return (
             <InView
+              root={root}
               onChange={setInView}
-              threshold={0.5}
+              threshold={0.3}
               key={`${e}-element-${i}`}
             >
               {({ ref }) => {
@@ -153,7 +165,7 @@ export default function StojkaMenu(props: MenuProps) {
                   <div
                     id={`${e}-content`}
                     key={`in-view-item-${i}`}
-                    className="flex justify-center items-center flex-col w-full px-8"
+                    className="flex" /* flex justify-center items-center flex-col w-full px-8 */
                     data-elementid={e}
                     ref={ref}
                   >

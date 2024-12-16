@@ -1,6 +1,5 @@
 "use client";
 
-import { Tube } from "@react-three/drei";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -46,6 +45,10 @@ const cards = [
 const girdClassString = reactApp
   ? `p-2 gap-10 w-full grid size-full grid-flow-col grid-cols-[repeat(2,_1fr_min-content)]`
   : `p-2 gap-10 w-full grid size-full grid-flow-col grid-cols-[repeat(3,_1fr_min-content)]`;
+
+const test = () => {
+  window.electronAPI.selectTab("tab1");
+};
 
 export default function Home() {
   return (

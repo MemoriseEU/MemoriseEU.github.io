@@ -9,7 +9,7 @@ export default [
     topic: "Weather in Bergen Belsen",
     image: "/assets/Picture 2.jpg",
     title: "Women with firewood",
-    artist: "Ervin Abadi",
+
   },
   {
     topic: "Weather in Bergen Belsen",

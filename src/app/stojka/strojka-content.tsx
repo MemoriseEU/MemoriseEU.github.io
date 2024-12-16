@@ -17,6 +17,7 @@ import {
   useControls,
 } from "react-zoom-pan-pinch";
 import { StrojkaContext } from "./StrojkaProvider";
+import StojkaMenuTest from "./strojka-menu-test";
 
 export type Pane = "start" | "dead" | "tree" | "memories" | "words" | "april";
 
@@ -73,7 +74,7 @@ export default function StojkaContent() {
     words: { text: "", title: "" },
   };
 
-  const isOffline = true;
+  const isOffline = false;
 
   const Controls = () => {
     const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -116,7 +117,7 @@ export default function StojkaContent() {
           return (
             <div className="size-full relative">
               <video
-                controls
+                loop
                 src="assets/ExtractCeijaStojkaGreenGreenGrass.mp4"
                 autoPlay={true}
                 // poster="https://user-images.githubusercontent.com/28612032/172026551-e5a96748-d724-4a08-b6b3-f44655d4ef39.png"
@@ -127,15 +128,14 @@ export default function StojkaContent() {
               </video>
             </div>
           );
-        } else {
-          return "We are sorry the video is not available in this online version.";
         }
-
       case "dead":
       case "tree":
       case "april":
       case "words":
         imgFile = sel;
+        console.log("sel", sel);
+
         if (sel === "words") {
           imgFile = "words2";
         }

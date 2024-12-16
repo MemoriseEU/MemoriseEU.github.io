@@ -49,7 +49,7 @@ export default function ButtonRow() {
   return (
     <div className="flex justify-center items-center h-full w-full">
       <div className="flex gap-6 p-2 flex-row">
-        {paintingContext?.mode !== "default" && (
+        {/* {paintingContext?.mode !== "default" && (
           <Button
             onClick={() => {
               paintingContext?.updateText("");
@@ -63,7 +63,7 @@ export default function ButtonRow() {
           >
             {t("reset")}
           </Button>
-        )}
+        )} */}
         <Button
           onClick={() => {
             paintingContext?.updateMode("exploration");

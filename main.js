@@ -1,4 +1,10 @@
-const { app, BrowserWindow, BrowserView, ipcMain } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  BrowserView,
+  ipcMain,
+  session,
+} = require("electron");
 
 let mainWindow;
 const reactApp = true;
@@ -8,10 +14,19 @@ function createWindow() {
     width: 1200,
     height: 800,
     webPreferences: {
+      enableTouchEmulation: true,
       nodeIntegration: false,
       contextIsolation: true,
       preload: __dirname + "/preload.js", // Preload script for IPC communication
     },
+  });
+
+  mainWindow.setFullScreen(true);
+
+  // Intercept requests and modify headers
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    delete details.responseHeaders["x-frame-options"];
+    callback({ responseHeaders: details.responseHeaders });
   });
 
   // mainWindow.loadFile("index.html");
@@ -29,6 +44,7 @@ function createBrowserView(url) {
     },
   });
   view.webContents.loadURL(url);
+
   return view;
 }
 

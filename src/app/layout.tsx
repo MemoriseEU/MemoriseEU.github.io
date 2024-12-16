@@ -6,6 +6,7 @@ import "./i18n";
 import useIdleTimeout from "./use-idle-timeout";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
+import "@fontsource/ubuntu-mono";
 
 const lato = Lato({ weight: "400", subsets: ["latin"] });
 
