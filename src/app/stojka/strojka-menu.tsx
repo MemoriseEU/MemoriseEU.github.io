@@ -27,12 +27,43 @@ export default function StojkaMenu(props: MenuProps) {
     }
   }, []);
 
+  // State to store dimensions of grid cells
+  const [dimensions, setDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
+
+  // Reference to the grid cell
+  const parentRef = useRef(null);
+
+  // Use effect to observe and set the dimensions dynamically
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (parentRef.current) {
+        const rect = parentRef.current.getBoundingClientRect();
+        setDimensions({
+          width: rect.width,
+          height: rect.height,
+        });
+      }
+    };
+
+    // Observe resize with ResizeObserver
+    const observer = new ResizeObserver(() => updateDimensions());
+    if (parentRef.current) observer.observe(parentRef.current);
+
+    // Cleanup observer
+    return () => {
+      if (parentRef.current) observer.unobserve(parentRef.current);
+    };
+  }, [parentRef]);
+
   const Content = (props: ContentProps) => {
     const { pane = null } = props;
 
     if (pane === "start" || pane === null) {
       return (
-        <div className="flex justify-center items-center flex-col h-full w-full px-8 min-h-[100vh] border-b border-b-black">
+        <div className="flex justify-center items-center flex-col border-b border-b-black">
           <div key={`title-${pane}`} className="mb-3 text-xl font-bold">
             {t("stojka.start.title")}
           </div>
@@ -52,7 +83,7 @@ export default function StojkaMenu(props: MenuProps) {
       const title = t(`stojka.${pane}.title`);
       const text = t(`stojka.${pane}.text`);
       return (
-        <div className="p-8 border-b border-b-black py-32 min-h-[100vh]">
+        <div className="flex justify-center flex-col border-b border-b-black py-28">
           <div key={`title-${pane}`} className="text-2xl py-2">
             {title}
           </div>
@@ -147,17 +178,22 @@ export default function StojkaMenu(props: MenuProps) {
 
   return (
     // <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
-    <div
-      className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute"
-      ref={scrollRef}
-    >
-      <div className="flex flex-col p-6">
+    <div className="relative flex flex-colsize-full border p-6" ref={parentRef}>
+      <div
+        className="overflow-hidden overflow-y-scroll"
+        style={{
+          maxWidth: `${Math.round(dimensions.width)}px`,
+          width: `${Math.round(dimensions.width - 50)}px`,
+          maxHeight: `${Math.round(dimensions.height)}px`,
+          height: `${Math.round(dimensions.height - 50)}px`,
+        }}
+      >
         {panes.map((e: string, i) => {
           return (
             <InView
               root={root}
               onChange={setInView}
-              threshold={0.3}
+              threshold={0.1}
               key={`${e}-element-${i}`}
             >
               {({ ref }) => {
@@ -165,7 +201,7 @@ export default function StojkaMenu(props: MenuProps) {
                   <div
                     id={`${e}-content`}
                     key={`in-view-item-${i}`}
-                    className="flex" /* flex justify-center items-center flex-col w-full px-8 */
+                    className="flex min-h-[101%]"
                     data-elementid={e}
                     ref={ref}
                   >

@@ -595,3 +595,15 @@ input:checked + .slider:before {
   stroke-width: 1px;
   animation: fadeStrokeInOut 1s ease-in-out forwards infinite;
 }
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in-image {
+  animation: fadeInOpacity 1s;
+}

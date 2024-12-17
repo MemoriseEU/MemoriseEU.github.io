@@ -48,7 +48,7 @@ const SplitSvg = (props: SplitSVGProps) => {
     );
 
     // Copy the width, height, and viewBox from the original SVG
-    newSvg.setAttribute("width", "auto");
+    newSvg.setAttribute("width", "100%");
     newSvg.setAttribute("height", "100%");
     newSvg.setAttribute(
       "viewBox",

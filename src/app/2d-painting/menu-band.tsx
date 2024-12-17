@@ -203,7 +203,7 @@ export default function MenuBand() {
             </div>
           </div>
           <div className="size-full">
-            <div className="h-full max-h-full py-8 w-full relative">
+            <div className="h-full max-h-full py-8 w-full relative flex justify-center">
               <div className="overflow-hidden overflow-y-scroll h-full max-h-full absolute">
                 {Object.keys(layers).map((k, i) => {
                   const element = layers[k];

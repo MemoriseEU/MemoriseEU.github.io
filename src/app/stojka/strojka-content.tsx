@@ -7,7 +7,7 @@ import {
   CursorArrowRaysIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import StojkaMenu from "./strojka-menu";
 
@@ -17,7 +17,6 @@ import {
   useControls,
 } from "react-zoom-pan-pinch";
 import { StrojkaContext } from "./StrojkaProvider";
-import StojkaMenuTest from "./strojka-menu-test";
 
 export type Pane = "start" | "dead" | "tree" | "memories" | "words" | "april";
 
@@ -25,6 +24,37 @@ export default function StojkaContent() {
   const { t } = useTranslation();
 
   const stojkaContext = useContext(StrojkaContext);
+
+  // State to store dimensions of grid cells
+  const [dimensions, setDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
+
+  // Reference to the grid cell
+  const parentRef = useRef(null);
+
+  // Use effect to observe and set the dimensions dynamically
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (parentRef.current) {
+        const rect = parentRef.current.getBoundingClientRect();
+        setDimensions({
+          width: rect.width,
+          height: rect.height,
+        });
+      }
+    };
+
+    // Observe resize with ResizeObserver
+    const observer = new ResizeObserver(() => updateDimensions());
+    if (parentRef.current) observer.observe(parentRef.current);
+
+    // Cleanup observer
+    return () => {
+      if (parentRef.current) observer.unobserve(parentRef.current);
+    };
+  }, []);
 
   function ImageLink(props: { sel: Pane }): JSX.Element {
     const { sel } = props;
@@ -42,6 +72,7 @@ export default function StojkaContent() {
           alt={"Apruk"}
           fill={true}
           style={{ objectFit: "cover" }}
+          className="fade-in-image"
         />
         <CursorArrowRaysIcon
           width={35}
@@ -115,7 +146,7 @@ export default function StojkaContent() {
       case "memories":
         if (isOffline) {
           return (
-            <div className="size-full relative">
+            <div className="size-full relative m-fadeIn">
               <video
                 loop
                 src="assets/ExtractCeijaStojkaGreenGreenGrass.mp4"
@@ -134,13 +165,12 @@ export default function StojkaContent() {
       case "april":
       case "words":
         imgFile = sel;
-        console.log("sel", sel);
 
         if (sel === "words") {
           imgFile = "words2";
         }
         return (
-          <div className="size-full border relative grid grid-rows-[1fr_auto]">
+          <div className="size-full border relative grid grid-rows-[1fr_auto] fade-in-image">
             <div className="size-full grid grid-rows-[min-content_min-content_1fr] grid-cols-[1fr] justify-center">
               <TransformWrapper
                 initialScale={1}
@@ -199,33 +229,70 @@ export default function StojkaContent() {
   };
 
   return (
-    <div className="relative size-full p-4">
-      <div className="size-full grid grid-cols-[1fr] grid-rows-[min-content_1fr]">
-        <div className="w-full flex justify-between items-center mb-2">
-          {stojkaContext?.pane != null && stojkaContext?.pane != "start" ? (
-            <div
-              className="grid grid-flow-row border-2 border-black rounded-full grid-rows-1 grid-cols-[min-content_min-content] items-center hover:shadow-xl cursor-pointer bg-white shadow-md dark:text-black"
-              onClick={(e) => {
-                stojkaContext.updatePane("start");
-                const element = document.getElementById(`start-content`);
-                element?.scrollIntoView();
-              }}
-            >
-              <ChevronLeftIcon width={32} height={32} />
-              <div className="pr-4 font-bold text-lg">{t("reset")}</div>
-            </div>
-          ) : (
-            <HomeButton />
-          )}
-          <div className="text-3xl font-bold">{t("strojka-title")}</div>
-          <LanguageSwitcher />
-        </div>
-        <div className="size-full grid grid-cols-[75%_auto] grid-rows-[1fr] gap-4">
-          <Element sel={stojkaContext?.pane} />
-          <div className="size-full border relative">
-            <StojkaMenu />
+    <div className="h-screen max-h-screen bg-gray-100 p-4 md:p-8 grid grid-rows-[min-content_1fr]">
+      <div className="w-full flex justify-between items-center mb-2">
+        {stojkaContext?.pane != null && stojkaContext?.pane != "start" ? (
+          <div
+            className="grid grid-flow-row border-2 border-black rounded-full grid-rows-1 grid-cols-[min-content_min-content] items-center hover:shadow-xl cursor-pointer bg-white shadow-md dark:text-black"
+            onClick={(e) => {
+              stojkaContext.updatePane("start");
+              const element = document.getElementById(`start-content`);
+              element?.scrollIntoView();
+            }}
+          >
+            <ChevronLeftIcon width={32} height={32} />
+            <div className="pr-4 font-bold text-lg">{t("reset")}</div>
           </div>
+        ) : (
+          <HomeButton />
+        )}
+        <div className="text-3xl font-bold">{t("strojka-title")}</div>
+        <LanguageSwitcher />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[75%_25%] grid-rows-[60%_40%] lg:grid-rows-1 gap-4 size-full">
+        {/* <div className="size-full grid grid-cols-[75%_auto] grid-rows-[1fr] gap-4"> */}
+        <Element sel={stojkaContext?.pane} />
+        <StojkaMenu />
+        {/* </div> */}
+        {/* <div className="lg:col-span-2 grid grid-cols-2 gap-2">
+          <img
+            src="https://via.placeholder.com/600x400" // Replace with actual images
+            alt="Ceija Stojka"
+            className="w-full h-auto object-cover rounded-lg shadow-md"
+          />
+          <img
+            src="https://via.placeholder.com/600x400"
+            alt="Painting 1"
+            className="w-full h-auto object-cover rounded-lg shadow-md"
+          />
+          <img
+            src="https://via.placeholder.com/600x400"
+            alt="Painting 2"
+            className="w-full h-auto object-cover rounded-lg shadow-md"
+          />
+          <img
+            src="https://via.placeholder.com/600x400"
+            alt="Ceija Stojka's Painting"
+            className="w-full h-auto object-cover rounded-lg shadow-md"
+          />
         </div>
+
+        <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center text-center lg:text-left">
+          <h2 className="text-xl font-semibold mb-2">
+            Ceija Stojka's Paintings
+          </h2>
+          <p className="text-gray-600 text-sm">
+            Click on one of the images to discover the story of Ceija Stojka
+            through her paintings and testimony. Alternatively, you can scroll
+            up in this area.
+          </p>
+          <div className="mt-4">
+            <span className="block text-gray-400 text-xs">
+              (Scroll Indicator or Arrow Icon Here)
+            </span>
+          </div>
+        </div> */}
       </div>
     </div>
   );
