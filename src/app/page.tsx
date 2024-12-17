@@ -73,7 +73,7 @@ export default function Home() {
                 >
                   <div
                     key={`card-${i}-image`}
-                    className="w-full h-48 md:h-80 object-cover relative"
+                    className="w-full h-40 md:h-80 object-cover relative"
                   >
                     <Image
                       src={e.image}
