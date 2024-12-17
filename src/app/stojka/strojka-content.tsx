@@ -221,7 +221,7 @@ export default function StojkaContent() {
         <LanguageSwitcher />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[75%_25%] grid-rows-[60%_40%] lg:grid-rows-1 gap-4 size-full">
+      <div className="grid grid-cols-1 lg:grid-cols-[75%_25%] grid-rows-[50%_50%] lg:grid-rows-1 gap-4 size-full">
         {/* <div className="size-full grid grid-cols-[75%_auto] grid-rows-[1fr] gap-4"> */}
         <Element sel={stojkaContext?.pane} />
         <StojkaMenu />
