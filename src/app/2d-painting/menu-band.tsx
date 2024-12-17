@@ -292,7 +292,10 @@ export default function MenuBand() {
       );
     } else {
       return (
-        <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
+        <div
+          key={`menu-band-item-${paintingContext?.mode}`}
+          className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute"
+        >
           <div className="relative h-full md:py-8">
             <div className="flex justify-center items-center flex-col h-full w-full text-center px-8">
               <div className="mb-3 md:text-xl font-bold">

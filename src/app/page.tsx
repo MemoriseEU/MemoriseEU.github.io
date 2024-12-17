@@ -73,19 +73,16 @@ export default function Home() {
                 >
                   <div
                     key={`card-${i}-image`}
-                    className="w-full h-40 md:h-80 object-cover relative"
+                    className="w-full h-36 md:h-80 object-cover relative"
                   >
                     <Image
                       src={e.image}
                       alt=""
                       fill={true}
-                      style={{
-                        padding: "20px",
-                        objectFit: "cover",
-                      }}
+                      className="md:p-5 object-cover"
                     />
                   </div>
-                  <div className="grid justify-center gap-1 p-5">
+                  <div className="grid justify-center gap-1 md:p-5">
                     <div className="text-center text-xl">{e.text}</div>
                     <div className="text-center text-lg text-gray-700">
                       {e.otherText}

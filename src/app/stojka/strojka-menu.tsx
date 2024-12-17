@@ -186,9 +186,9 @@ export default function StojkaMenu(props: MenuProps) {
         className="overflow-hidden overflow-y-scroll"
         style={{
           maxWidth: `${Math.round(dimensions.width)}px`,
-          width: `${Math.round(dimensions.width - 50)}px`,
+          width: `${Math.round(dimensions.width) - 50}px`,
           maxHeight: `${Math.round(dimensions.height)}px`,
-          height: `${Math.round(dimensions.height)}px`,
+          height: `${Math.round(dimensions.height) - 2}px`,
         }}
       >
         {panes.map((e: string, i) => {
