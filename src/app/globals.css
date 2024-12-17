@@ -499,7 +499,7 @@ input:checked + .slider:before {
 
 @-webkit-keyframes dude-vertical {
   0% {
-    transform: rotate(90deg) translateX(100%);
+    transform: rotate(90deg) translateX(200%);
   }
   100% {
     transform: rotate(90deg) translateX(50%);
@@ -507,7 +507,7 @@ input:checked + .slider:before {
 }
 @keyframes dude-vertical {
   0% {
-    transform: rotate(90deg) translateX(100%);
+    transform: rotate(90deg) translateX(200%);
   }
   100% {
     transform: rotate(90deg) translateX(50%);

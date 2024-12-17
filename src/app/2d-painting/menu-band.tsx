@@ -210,12 +210,12 @@ export default function MenuBand() {
                       data-elementid={e}
                       ref={ref}
                     >
-                      <div className="mb-3 text-xl font-bold">
+                      <div className="mb-3 md:text-xl font-bold">
                         <Button color="blue" imageIndex={i % 2}>
                           {t(`detail-mode.${e}.title`)}
                         </Button>
                       </div>
-                      <div className="text-left">
+                      <div className="text-left text-sm md:text-base">
                         {t(`detail-mode.${e}.text`)}
                       </div>
                     </div>
@@ -338,13 +338,13 @@ export default function MenuBand() {
   }, [movieData, paintingContext, t]);
 
   return (
-    <div className="relative flex flex-col size-full md:px-6" ref={parentRef}>
+    <div className="relative flex flex-col size-full" ref={parentRef}>
       <div
         style={{
-          maxWidth: `${Math.round(dimensions.width) - 2}px`,
-          width: `${Math.round(dimensions.width) - 50}px`,
-          maxHeight: `${Math.round(dimensions.height) - 2}px`,
-          height: `${Math.round(dimensions.height) - 2}px`,
+          maxWidth: `${Math.round(dimensions.width)}px`,
+          width: `${Math.round(dimensions.width)}px`,
+          maxHeight: `${Math.round(dimensions.height)}px`,
+          height: `${Math.round(dimensions.height)}px`,
         }}
       >
         {content}
