@@ -80,7 +80,7 @@ export default function StojkaContent() {
     const { zoomIn, zoomOut, resetTransform } = useControls();
 
     return (
-      <div className="tools flex justify-center p-2 gap-2">
+      <div className="tools flex justify-center p-2 gap-2 text-sm md:text-base">
         <button
           className="rounded-md bg-white px-2 border border-black"
           onClick={() => zoomIn()}
@@ -148,7 +148,7 @@ export default function StojkaContent() {
               >
                 {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                   <>
-                    <div className="text-2xl text-center p-2 pb-0 font-bold">
+                    <div className="lg:text-2xl text-center p-2 pb-0 font-bold">
                       {data[sel]?.title}
                     </div>
                     <Controls />
@@ -209,13 +209,15 @@ export default function StojkaContent() {
               element?.scrollIntoView();
             }}
           >
-            <ChevronLeftIcon width={32} height={32} />
-            <div className="pr-4 font-bold text-lg">{t("reset")}</div>
+            <ChevronLeftIcon className="lg:h-8 lg:w-8 w-4 h-4" />
+            <div className="pr-2 lg:pr-4 font-bold lg:text-lg">
+              {t("reset")}
+            </div>
           </div>
         ) : (
           <HomeButton />
         )}
-        <div className="text-3xl font-bold">{t("strojka-title")}</div>
+        <div className="md:text-3xl font-bold">{t("strojka-title")}</div>
         <LanguageSwitcher />
       </div>
 

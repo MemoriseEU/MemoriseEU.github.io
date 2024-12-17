@@ -9,8 +9,8 @@ export default function HomeButton() {
   return (
     <Link href="/" className="">
       <div className="grid grid-flow-row border-2 border-black rounded-full grid-rows-1 grid-cols-[min-content_min-content] items-center hover:shadow-xl cursor-pointer bg-white shadow-md dark:text-black">
-        <ChevronLeftIcon width={32} height={32} />
-        <div className="pr-4 font-bold text-lg">{t("home")}</div>
+        <ChevronLeftIcon className="lg:h-8 lg:w-8 w-4 h-4" />
+        <div className="pr-2 md:pr-4 font-bold md:text-lg">{t("home")}</div>
       </div>
     </Link>
   );

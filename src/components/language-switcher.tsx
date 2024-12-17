@@ -15,7 +15,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div
-      className="flex z-[999] cursor-pointer"
+      className="flex z-[999] cursor-pointer origin-right scale-50 lg:scale-100"
       onClick={() => changeLanguage()}
     >
       <ReactCountryFlag
