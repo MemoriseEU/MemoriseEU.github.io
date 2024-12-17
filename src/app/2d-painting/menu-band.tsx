@@ -1,6 +1,13 @@
 import { Navbar } from "@/components/ui/Navbar";
 import Image from "next/image";
-import { RefObject, useContext, useMemo, useRef } from "react";
+import {
+  RefObject,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { PaintingContext } from "./painting.context";
 import SplitSvg from "./split-svg";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
@@ -16,6 +23,37 @@ export default function MenuBand() {
   const { t } = useTranslation();
 
   const containerRef = useRef<HTMLElement>(null);
+
+  // State to store dimensions of grid cells
+  const [dimensions, setDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
+
+  // Reference to the grid cell
+  const parentRef = useRef(null);
+
+  // Use effect to observe and set the dimensions dynamically
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (parentRef.current) {
+        const rect = (parentRef.current as HTMLElement).getBoundingClientRect();
+        setDimensions({
+          width: rect.width,
+          height: rect.height,
+        });
+      }
+    };
+
+    // Observe resize with ResizeObserver
+    const observer = new ResizeObserver(() => updateDimensions());
+    if (parentRef.current) observer.observe(parentRef.current);
+
+    // Cleanup observer
+    return () => {
+      if (parentRef.current) observer.unobserve(parentRef.current);
+    };
+  }, []);
 
   const [explorationData, movieData] = useMemo(() => {
     return [
@@ -141,69 +179,67 @@ export default function MenuBand() {
       );
     } else if (paintingContext?.mode === "story") {
       return (
-        <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
-          <div className="relative h-[100vh] py-8">
-            <div className="flex justify-center items-center flex-col h-full w-full text-center px-8">
-              <div className="mb-3 text-xl font-bold">
-                <Button color="blue">{t("story-mode.title")}</Button>
-              </div>
-              <div className="text-left">{t("story-mode.text")}</div>
-              <div className="relative mt-3">
-                <div className="scroll-downs">
-                  <div className="mousey">
-                    <div className="scroller"></div>
-                  </div>
+        <div className="flex size-full flex-wrap overflow-hidden overflow-y-scroll">
+          <div className="flex justify-center items-center flex-col min-h-[101%] h-fit w-full text-center px-8">
+            <div className="mb-3 text-xl font-bold">
+              <Button color="blue">{t("story-mode.title")}</Button>
+            </div>
+            <div className="text-left">{t("story-mode.text")}</div>
+            <div className="relative mt-3">
+              <div className="scroll-downs">
+                <div className="mousey">
+                  <div className="scroller"></div>
                 </div>
               </div>
             </div>
-            {sortedExplorationKeys.map((e: string, i) => {
-              return (
-                <InView
-                  onChange={setInView}
-                  threshold={0.5}
-                  key={`${e}-element-${i}`}
-                >
-                  {({ ref }) => {
-                    return (
-                      <div
-                        key={`in-view-item-${i}`}
-                        className="flex justify-center items-center flex-col h-full w-full text-center px-8"
-                        data-elementid={e}
-                        ref={ref}
-                      >
-                        <div className="mb-3 text-xl font-bold">
-                          <Button color="blue" imageIndex={i % 2}>
-                            {t(`detail-mode.${e}.title`)}
-                          </Button>
-                        </div>
-                        <div className="text-left">
-                          {t(`detail-mode.${e}.text`)}
-                        </div>
-                      </div>
-                    );
-                  }}
-                </InView>
-              );
-            })}
           </div>
+          {sortedExplorationKeys.map((e: string, i) => {
+            return (
+              <InView
+                onChange={setInView}
+                threshold={0}
+                key={`${e}-element-${i}`}
+              >
+                {({ ref }) => {
+                  return (
+                    <div
+                      key={`in-view-item-${i}`}
+                      className="flex justify-center items-center flex-col min-h-[101%] h-fit w-full text-center px-8 py-28"
+                      data-elementid={e}
+                      ref={ref}
+                    >
+                      <div className="mb-3 text-xl font-bold">
+                        <Button color="blue" imageIndex={i % 2}>
+                          {t(`detail-mode.${e}.title`)}
+                        </Button>
+                      </div>
+                      <div className="text-left">
+                        {t(`detail-mode.${e}.text`)}
+                      </div>
+                    </div>
+                  );
+                }}
+              </InView>
+            );
+          })}
         </div>
       );
     } else if (paintingContext?.mode === "composition") {
       const layers = paintingContext.compositionLayers;
       return (
         <div className="grid grid-rows-[auto_1fr] h-full max-h-full w-full">
-          <div className="grid grid-rows-[min_content_auto] text-center px-8 z-[800]">
-            <div className="mb-3 text-xl font-bold ">
+          <div className="grid grid-rows-[min_content_auto] text-center lg:px-8 z-[800]">
+            <div className="mb-3 lg:text-xl font-bold ">
               <Button color="blue">
                 {t(`${paintingContext?.mode}-mode.title`)}
               </Button>
             </div>
-            <div className="text-left">
+            <div className="text-left text-sm lg:text-base">
               {t(`${paintingContext?.mode}-mode.text`)}
             </div>
           </div>
           <div className="size-full">
-            <div className="h-full max-h-full py-8 w-full relative flex justify-center">
+            <div className="h-full max-h-full md:py-8 w-full relative flex justify-center">
               <div className="overflow-hidden overflow-y-scroll h-full max-h-full absolute">
                 {Object.keys(layers).map((k, i) => {
                   const element = layers[k];
@@ -255,7 +291,7 @@ export default function MenuBand() {
     } else {
       return (
         <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
-          <div className="relative h-full py-8">
+          <div className="relative h-full md:py-8">
             <div className="flex justify-center items-center flex-col h-full w-full text-center px-8">
               <div className="mb-3 text-xl font-bold">
                 <Button color="blue">
@@ -300,8 +336,20 @@ export default function MenuBand() {
   }, [movieData, paintingContext, t]);
 
   return (
-    <div className="max-h-full p-2 w-full z-[52] relative dark:text-black">
-      {content}
+    <div
+      className="relative flex flex-col size-full px-6 border"
+      ref={parentRef}
+    >
+      <div
+        style={{
+          maxWidth: `${Math.round(dimensions.width) - 2}px`,
+          width: `${Math.round(dimensions.width) - 50}px`,
+          maxHeight: `${Math.round(dimensions.height) - 2}px`,
+          height: `${Math.round(dimensions.height) - 2}px`,
+        }}
+      >
+        {content}
+      </div>
     </div>
   );
 }

@@ -28,14 +28,14 @@ export default function PaintingTop() {
         }}
         className="grid grid-flow-row border-2 border-black rounded-full grid-rows-1 grid-cols-[min-content_min-content] items-center hover:shadow-xl cursor-pointer bg-white shadow-md dark:text-black"
       >
-        <ChevronLeftIcon width={32} height={32} />
-        <div className="pr-4 font-bold text-lg">{t("reset")}</div>
+        <ChevronLeftIcon className="lg:h-8 lg:w-8 w-4 h-4" />
+        <div className="pr-2 lg:pr-4 font-bold lg:text-lg">{t("reset")}</div>
       </div>
     );
   }, [paintingContext]);
 
   return (
-    <div className="flex items-center p-6 pt-10">
+    <div className="flex items-center p-6 pt-10 w-full justify-between">
       {buttonContent}
       <ButtonRow />
       <LanguageSwitcher />

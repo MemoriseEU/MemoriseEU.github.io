@@ -28,7 +28,7 @@ export function Button(props: ButtonProps) {
 
   return (
     <button
-      className="strokeButton p-2 px-6 rounded-md relative text-[#3d322b] stroke-animation text-lg"
+      className="strokeButton p-2 md:px-6 rounded-md relative text-[#3d322b] stroke-animation"
       onClick={onClick}
     >
       <Image
@@ -47,8 +47,8 @@ export default function ButtonRow() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex justify-center items-center h-full w-full">
-      <div className="flex gap-6 p-2 flex-row">
+    <>
+      <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 md:grid-rows-1 gap-1 lg:gap-6 p-2 flex-row text-xs md:text-md lg:text-lg">
         {/* {paintingContext?.mode !== "default" && (
           <Button
             onClick={() => {
@@ -108,7 +108,7 @@ export default function ButtonRow() {
         </Button>
       </div>
       <svg
-        className="svg-filters hidden"
+        className="svg-filters hidden absolute"
         width="0"
         height="0"
         viewBox="0 0 0 0"
@@ -131,6 +131,6 @@ export default function ButtonRow() {
           </filter>
         </defs>
       </svg>
-    </div>
+    </>
   );
 }

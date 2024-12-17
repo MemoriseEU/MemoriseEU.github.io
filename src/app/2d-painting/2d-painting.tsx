@@ -250,14 +250,15 @@ export default function Painting() {
       return (
         <div
           key={`pointer-${getId()}-story`}
-          className="absolute h-[5px] w-1/2 top-1/2 z-50 translate-x-[200%] reveal"
+          className="absolute h-[5px] w-1/2 top-1/2 z-50 reveal"
+          // className="absolute h-[5px] w-1/2 top-1/2 z-50 translate-x-[200%] reveal"
         ></div>
       );
     } else if (paintingContext?.mode === "detail") {
       return (
         <div
           key={`pointer-${getId()}-detail`}
-          className="absolute h-[5px] w-1/2 top-1/2 z-50 translate-x-[50%] reveal"
+          className="absolute h-[5px] w-1/2 top-1/2 z-50 reveal"
         ></div>
       );
     } else {

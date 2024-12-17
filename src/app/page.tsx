@@ -48,7 +48,7 @@ const girdClassString = reactApp
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 md:gap-8">
+    <div className="min-h-[100svh] bg-gray-100 flex flex-col items-center justify-center p-4 md:gap-8">
       <h1 className="text-2xl md:text-4xl font-bold text-center mb-6">
         {reactApp
           ? "Entdecke Visuelles Erbe"

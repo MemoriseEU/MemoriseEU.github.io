@@ -148,7 +148,7 @@ export default function StojkaContent() {
               >
                 {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                   <>
-                    <div className="lg:text-2xl text-center p-2 pb-0 font-bold">
+                    <div className="text-base md:text-xl lg:text-2xl text-center p-2 pb-0 font-bold">
                       {data[sel]?.title}
                     </div>
                     <Controls />

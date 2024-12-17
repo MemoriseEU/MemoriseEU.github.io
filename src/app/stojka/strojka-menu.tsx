@@ -179,7 +179,7 @@ export default function StojkaMenu(props: MenuProps) {
   return (
     // <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
     <div
-      className="relative flex flex-colsize-full border px-6"
+      className="relative flex flex-col size-full border px-6"
       ref={parentRef}
     >
       <div
