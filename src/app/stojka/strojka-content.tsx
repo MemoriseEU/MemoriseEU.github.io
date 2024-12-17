@@ -25,37 +25,6 @@ export default function StojkaContent() {
 
   const stojkaContext = useContext(StrojkaContext);
 
-  // State to store dimensions of grid cells
-  const [dimensions, setDimensions] = useState({
-    width: 0,
-    height: 0,
-  });
-
-  // Reference to the grid cell
-  const parentRef = useRef(null);
-
-  // Use effect to observe and set the dimensions dynamically
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (parentRef.current) {
-        const rect = (parentRef.current as HTMLElement).getBoundingClientRect();
-        setDimensions({
-          width: rect.width,
-          height: rect.height,
-        });
-      }
-    };
-
-    // Observe resize with ResizeObserver
-    const observer = new ResizeObserver(() => updateDimensions());
-    if (parentRef.current) observer.observe(parentRef.current);
-
-    // Cleanup observer
-    return () => {
-      if (parentRef.current) observer.unobserve(parentRef.current);
-    };
-  }, []);
-
   function ImageLink(props: { sel: Pane }): JSX.Element {
     const { sel } = props;
     return (

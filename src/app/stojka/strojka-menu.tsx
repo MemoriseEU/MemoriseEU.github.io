@@ -40,7 +40,7 @@ export default function StojkaMenu(props: MenuProps) {
   useEffect(() => {
     const updateDimensions = () => {
       if (parentRef.current) {
-        const rect = parentRef.current.getBoundingClientRect();
+        const rect = (parentRef.current as HTMLElement).getBoundingClientRect();
         setDimensions({
           width: rect.width,
           height: rect.height,
