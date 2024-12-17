@@ -178,7 +178,9 @@ export default function StojkaContent() {
                 )}
               </TransformWrapper>
             </div>
-            <div className="text-sm text-center p-2">{data[sel]?.text}</div>
+            <div className="text-xs md:text-sm text-center p-2">
+              {data[sel]?.text}
+            </div>
           </div>
         );
 
@@ -198,7 +200,7 @@ export default function StojkaContent() {
   };
 
   return (
-    <div className="h-screen max-h-screen bg-gray-100 p-4 md:p-8 grid grid-rows-[min-content_1fr]">
+    <div className="h-[100svh] max-h-[100svh] bg-gray-100 p-4 md:p-8 grid grid-rows-[min-content_1fr]">
       <div className="w-full flex justify-between items-center mb-2">
         {stojkaContext?.pane != null && stojkaContext?.pane != "start" ? (
           <div

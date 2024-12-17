@@ -178,14 +178,17 @@ export default function StojkaMenu(props: MenuProps) {
 
   return (
     // <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
-    <div className="relative flex flex-colsize-full border p-6" ref={parentRef}>
+    <div
+      className="relative flex flex-colsize-full border px-6"
+      ref={parentRef}
+    >
       <div
         className="overflow-hidden overflow-y-scroll"
         style={{
           maxWidth: `${Math.round(dimensions.width)}px`,
           width: `${Math.round(dimensions.width - 50)}px`,
           maxHeight: `${Math.round(dimensions.height)}px`,
-          height: `${Math.round(dimensions.height - 50)}px`,
+          height: `${Math.round(dimensions.height)}px`,
         }}
       >
         {panes.map((e: string, i) => {
