@@ -87,7 +87,7 @@ export default function MenuBand() {
     if (paintingContext?.mode === "default") {
       return (
         <div
-          className={`grid gap-2 h-full w-full grid-cols-[80%] grid-rows-[1fr_1fr] absolute justify-center`}
+          className={`grid gap-2 h-full w-full grid-cols-2 md:grid-cols-[80%] grid-rows-1 md:grid-rows-[1fr_1fr] absolute justify-center`}
         >
           {sortedMovieKeys.map((k: string, i) => {
             const e = movieData[k];
@@ -181,10 +181,12 @@ export default function MenuBand() {
       return (
         <div className="flex size-full flex-wrap overflow-hidden overflow-y-scroll">
           <div className="flex justify-center items-center flex-col min-h-[101%] h-fit w-full text-center px-8">
-            <div className="mb-3 text-xl font-bold">
+            <div className="mb-3 md:text-xl font-bold">
               <Button color="blue">{t("story-mode.title")}</Button>
             </div>
-            <div className="text-left">{t("story-mode.text")}</div>
+            <div className="text-left text-sm md:text-base">
+              {t("story-mode.text")}
+            </div>
             <div className="relative mt-3">
               <div className="scroll-downs">
                 <div className="mousey">
@@ -229,12 +231,12 @@ export default function MenuBand() {
       return (
         <div className="grid grid-rows-[auto_1fr] h-full max-h-full w-full">
           <div className="grid grid-rows-[min_content_auto] text-center lg:px-8 z-[800]">
-            <div className="mb-3 lg:text-xl font-bold ">
+            <div className="mb-3 md:text-xl font-bold ">
               <Button color="blue">
                 {t(`${paintingContext?.mode}-mode.title`)}
               </Button>
             </div>
-            <div className="text-left text-sm lg:text-base">
+            <div className="text-left text-sm md:text-base">
               {t(`${paintingContext?.mode}-mode.text`)}
             </div>
           </div>
@@ -293,7 +295,7 @@ export default function MenuBand() {
         <div className="grid grid-rows-[1fr] h-full max-h-full overflow-hidden overflow-y-scroll absolute">
           <div className="relative h-full md:py-8">
             <div className="flex justify-center items-center flex-col h-full w-full text-center px-8">
-              <div className="mb-3 text-xl font-bold">
+              <div className="mb-3 md:text-xl font-bold">
                 <Button color="blue">
                   {t(
                     `${paintingContext?.mode}-mode${
@@ -304,7 +306,7 @@ export default function MenuBand() {
                   )}
                 </Button>
               </div>
-              <div className="text-left">
+              <div className="text-left text-sm md:text-base">
                 {t(
                   `${paintingContext?.mode}-mode${
                     paintingContext?.storyElement != null
@@ -336,10 +338,7 @@ export default function MenuBand() {
   }, [movieData, paintingContext, t]);
 
   return (
-    <div
-      className="relative flex flex-col size-full px-6 border"
-      ref={parentRef}
-    >
+    <div className="relative flex flex-col size-full md:px-6" ref={parentRef}>
       <div
         style={{
           maxWidth: `${Math.round(dimensions.width) - 2}px`,
