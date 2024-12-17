@@ -193,7 +193,7 @@ export default function StojkaMenu(props: MenuProps) {
             <InView
               root={root}
               onChange={setInView}
-              threshold={0.1}
+              threshold={0}
               key={`${e}-element-${i}`}
             >
               {({ ref }) => {
