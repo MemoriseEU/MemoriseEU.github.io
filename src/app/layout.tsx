@@ -7,6 +7,7 @@ import useIdleTimeout from "./use-idle-timeout";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import "@fontsource/ubuntu-mono";
+import PlausibleProvider from 'next-plausible'
 
 const lato = Lato({ weight: "400", subsets: ["latin"] });
 
@@ -42,6 +43,7 @@ export default function RootLayout({
 
   return (
     <html className={lato.className} lang="en">
+      <PlausibleProvider domain="memoriseeu.github.io" enabled={true}>
       <body className="grid min-h-screen max-h-screen max-w-screen min-w-screen">
         {children}
         {isIdleOverlay && (
@@ -54,6 +56,7 @@ export default function RootLayout({
           ></div>
         )}
       </body>
+      </PlausibleProvider>
     </html>
   );
 }
