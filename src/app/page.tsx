@@ -48,7 +48,6 @@ const girdClassString = reactApp
   : `p-2 gap-10 w-full grid size-full grid-flow-col grid-cols-[repeat(3,_1fr_min-content)]`;
 
 export default function Home() {
-  const plausible = usePlausible();
   return (
     <div className="min-h-[100svh] bg-gray-100 flex flex-col items-center justify-center p-4 md:gap-8">
       <h1 className="text-2xl md:text-4xl font-bold text-center mb-6">
@@ -98,7 +97,6 @@ export default function Home() {
             </Fragment>
           );
         })}
-        <button onClick={(e)=>{console.log("Test Log!");plausible('testbutton', {props: {"test-props": "value1"}})}}>Test Log</button>
       </div>
 
       {/* Start Text */}
