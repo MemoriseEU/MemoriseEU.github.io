@@ -1,6 +1,7 @@
 import { assert } from "@stefanprobst/assert";
 import type { ReactNode, Ref } from "react";
 import { createContext, useContext, useMemo, useState } from "react";
+import type { JSX } from "react";
 
 export type Mode =
   | "exploration"

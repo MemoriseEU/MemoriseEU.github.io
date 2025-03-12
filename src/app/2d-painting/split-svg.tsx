@@ -1,11 +1,4 @@
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  Ref,
-  MutableRefObject,
-  RefObject,
-} from "react";
+import React, { RefObject, useEffect, useState } from "react";
 
 interface SplitSVGProps {
   svgContainerRef: RefObject<HTMLDivElement>;

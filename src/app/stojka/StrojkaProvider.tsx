@@ -2,6 +2,7 @@ import { assert } from "@stefanprobst/assert";
 import type { ReactNode, Ref } from "react";
 import { createContext, useContext, useMemo, useState } from "react";
 import { Pane } from "./strojka-content";
+import type { JSX } from "react";
 
 export interface StrojkaContextType {
   pane: Pane | null;
