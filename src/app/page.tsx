@@ -1,6 +1,5 @@
 "use client";
 
-import { usePlausible } from "next-plausible";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";

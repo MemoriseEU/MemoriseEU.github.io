@@ -4,7 +4,6 @@ import { ReactNode, useContext } from "react";
 import { PaintingContext } from "./painting.context";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-import { usePlausible } from "next-plausible";
 
 export interface ButtonProps {
   children: ReactNode;
@@ -46,7 +45,6 @@ export function Button(props: ButtonProps) {
 export default function ButtonRow() {
   const paintingContext = useContext(PaintingContext);
   const { t } = useTranslation();
-  const plausible = usePlausible();
 
   return (
     <>
@@ -69,7 +67,6 @@ export default function ButtonRow() {
         <Button
           onClick={() => {
             paintingContext?.updateMode("exploration");
-            plausible('modeChange', {props: {"mode": "exploration"} });
           }}
           imageIndex={0}
           color={
@@ -84,7 +81,6 @@ export default function ButtonRow() {
         <Button
           onClick={() => {
             paintingContext?.updateMode("composition");
-            plausible('modeChange', {props: {"mode": "composition"} });
           }}
           imageIndex={1}
           color={paintingContext?.mode === "composition" ? "blue" : "orange"}
@@ -95,7 +91,6 @@ export default function ButtonRow() {
           onClick={() => {
             paintingContext?.updateText("Scroll!", "Story Mode");
             paintingContext?.updateMode("story");
-            plausible('modeChange', {props: {"mode": "story"} });
           }}
           imageIndex={0}
           color={paintingContext?.mode === "story" ? "blue" : "orange"}
@@ -107,7 +102,6 @@ export default function ButtonRow() {
           color={paintingContext?.mode === "about" ? "blue" : "orange"}
           onClick={() => {
             paintingContext?.updateMode("about");
-            plausible('modeChange', {props: {"mode": "about"} });
           }}
         >
           {t("about")}

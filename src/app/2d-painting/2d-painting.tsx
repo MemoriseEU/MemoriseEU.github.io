@@ -14,7 +14,6 @@ import { PaintingContext } from "./painting.context";
 import shortid from "shortid";
 import { useTranslation } from "react-i18next";
 import { CursorArrowRaysIcon } from "@heroicons/react/24/outline";
-import { usePlausible } from "next-plausible";
 
 const storyPathMapping = {
   kitchen: "path310",
@@ -40,7 +39,6 @@ const pathStoryMapping = {
 
 export default function Painting() {
   const svgRef = useRef(null);
-  const plausible = usePlausible();
   const paintingContext = useContext(PaintingContext);
   const [paintingSizeByWidth, setPaintingSizeByWidth] =
     useState<boolean>(false);
@@ -90,7 +88,6 @@ export default function Painting() {
         const width = svg.getBBox().width;
         const height = svg.getBBox().height;
         animateViewBox(svg, getViewBoxArray(svg), [0, 0, width, height], 500);
-        plausible('paintingResetView', {props: {"time": new Date().toISOString()}});
       }
     }
   };
@@ -200,13 +197,9 @@ export default function Painting() {
 
             if (Object.keys(pathStoryMapping).includes(clickedID)) {
               paintingContext!.updateStoryElement(pathStoryMapping[clickedID]);
-              plausible('zoomToPaintingElement', {props: {"element": pathStoryMapping[clickedID], "time": new Date().toISOString()}});
-            }
-            else if (Object.keys(pathStoryMapping).includes(groupID)) {
+            } else if (Object.keys(pathStoryMapping).includes(groupID)) {
               paintingContext!.updateStoryElement(pathStoryMapping[groupID]);
-              plausible('zoomToPaintingElement', {props: {"element": pathStoryMapping[groupID], "time": new Date().toISOString()}});
             }
-
           }
         } else if (paintingContext?.mode === "default") {
           paintingContext.updateMode("exploration");
@@ -238,8 +231,6 @@ export default function Painting() {
       paintingContext?.storyElement != null
     ) {
       zoomToElement(storyPathMapping[paintingContext?.storyElement as string]);
-      
-      plausible('zoomToPaintingElement', {props: {"element": paintingContext?.storyElement as string, "time": new Date().toISOString()}});
     }
   }, [paintingContext?.storyElement, paintingContext?.mode]);
 

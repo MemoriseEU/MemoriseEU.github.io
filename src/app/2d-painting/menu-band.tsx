@@ -16,11 +16,9 @@ import { InView } from "react-intersection-observer";
 import { Button } from "./ButtonRow";
 import { useTranslation } from "react-i18next";
 import { CursorArrowRaysIcon, FilmIcon } from "@heroicons/react/24/outline";
-import { usePlausible } from "next-plausible";
 
 export default function MenuBand() {
   const paintingContext = useContext(PaintingContext);
-  const plausible = usePlausible();
 
   const { t } = useTranslation();
 
@@ -262,7 +260,6 @@ export default function MenuBand() {
                             visible: !element.visible,
                           };
                           paintingContext.updateCompositionLayers(newLayers);
-                          plausible('updateCompositionLayers', {props: {"element": element.element, "visible": !element.visible} });
                         }}
                         className={`w-fit cursor-pointer relative ${
                           element.visible ? "opacity-100" : "opacity-50"
