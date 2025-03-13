@@ -2,10 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@screen sm {
+  .reveal {
+    -webkit-animation: dude-vertical 1.5s 1 forwards;
+    animation: dude-vertical 1.5s 1 forwards;
+    background: rgb(224, 160, 67);
+    background: linear-gradient(
+      90deg,
+      rgba(8, 8, 9, 0) 0%,
+      rgba(223, 164, 76, 1) 11%,
+      rgba(223, 164, 76, 1) 100%
+    );
+  }
+}
+
+@screen md {
+  .reveal {
+    -webkit-animation: dude 1.5s 1 forwards;
+    animation: dude 1.5s 1 forwards;
+    background: rgb(224, 160, 67);
+    background: linear-gradient(
+      90deg,
+      rgba(8, 8, 9, 0) 0%,
+      rgba(223, 164, 76, 1) 11%,
+      rgba(223, 164, 76, 1) 100%
+    );
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --my-animation: dude-vertical 1.5s 1 forwards;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -427,12 +456,8 @@ input:checked + .slider:before {
 }
 
 .reveal {
-  -webkit-animation: dude-vertical 1.5s 1 forwards;
-  animation: dude-vertical 1.5s 1 forwards;
-  @media (min-width: 768px) {
-    -webkit-animation: dude 1.5s 1 forwards;
-    animation: dude 1.5s 1 forwards;
-  }
+  /* -webkit-animation: dude 1.5s 1 forwards;
+  animation: dude 1.5s 1 forwards; */
   background: rgb(224, 160, 67);
   background: linear-gradient(
     90deg,
@@ -443,8 +468,8 @@ input:checked + .slider:before {
 }
 
 .reveal-vertical {
-  -webkit-animation: dude-vertical 1.5s 1 forwards;
-  animation: dude-vertical 1.5s 1 forwards;
+  /* -webkit-animation: dude-vertical 1.5s 1 forwards;
+  animation: dude-vertical 1.5s 1 forwards; */
   background: rgb(224, 160, 67);
   background: linear-gradient(
     90deg,
