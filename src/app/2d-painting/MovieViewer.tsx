@@ -11,7 +11,7 @@ export interface MovieViewerProps {
 export default function MovieViewer(props: MovieViewerProps) {
   const { selected = null } = props;
 
-  const isOffline = true;
+  const isOffline = false;
 
   const paintingContext = useContext(PaintingContext);
 

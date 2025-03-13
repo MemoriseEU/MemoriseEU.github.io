@@ -40,6 +40,10 @@ export default function RootLayout({
 
   return (
     <html className={lato.className} lang="en">
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+      ></meta>
       <body className="grid min-h-screen max-h-screen max-w-screen min-w-screen">
         {children}
         {isIdleOverlay && (
